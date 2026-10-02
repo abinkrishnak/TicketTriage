@@ -1,0 +1,23 @@
+{
+  "dataset": "bitext/Bitext-customer-support-llm-chatbot-training-dataset",
+  "revision": "430d1a89bd93bd1fa23c16f29dd53e73f0087443",
+  "retrieved_at_utc": "2026-10-01T09:10:25.069577+00:00",
+  "declared_license": "cdla-sharing-1.0",
+  "publisher_attribution": "(c) Bitext Innovations, 2024",
+  "verified_archived_sources": [
+    {
+      "url": "https://huggingface.co/datasets/bitext/Bitext-customer-support-llm-chatbot-training-dataset/resolve/430d1a89bd93bd1fa23c16f29dd53e73f0087443/Bitext_Sample_Customer_Support_Training_Dataset_27K_responses-v11.csv",
+      "sha256": "6f81102b0100b97b8468eb04368033a23206bf1fde9d53500d5806ec1001a434"
+    },
+    {
+      "url": "https://huggingface.co/datasets/bitext/Bitext-customer-support-llm-chatbot-training-dataset/resolve/430d1a89bd93bd1fa23c16f29dd53e73f0087443/README.md",
+      "sha256": "f9d490db6059f9749f443d47d3a38618dad168f61f439281738e29b396e451c2"
+    },
+    {
+      "url": "https://cdla.dev/sharing-1-0/",
+      "sha256": "1f06db483079ab8c33969543d0df3efcf6347e0c15b88ccb5eee02459d6471db"
+    }
+  ],
+  "redistribution": "Trained classifier and aggregate results; no raw or cleaned dataset records",
+  "license_scope": "MIT only for original project code/documentation; upstream rights retained"
+}

@@ -1,0 +1,19 @@
+{
+  "status": "PASS",
+  "scope": "Final licensing and saved-replay sanity check; no experiments",
+  "saved_examples_passed": [
+    "P13",
+    "P04",
+    "C05",
+    "C36",
+    "A03",
+    "A01"
+  ],
+  "external_connections": 0,
+  "api_calls": 0,
+  "readme_local_links_verified": 10,
+  "external_link_syntax_checked": 1,
+  "external_link_live_checks": "Not performed: offline/no-network scope",
+  "license": "MIT for original project code/documentation",
+  "repository_root": "Contents of public_release, not a nested public_release directory"
+}

@@ -1,0 +1,793 @@
+{
+  "purpose": "Portable unedited saved-evidence subset; no new FM or retrieval evaluation",
+  "examples": {
+    "P13": {
+      "query_text": "The item arrived yesterday, but it is damaged and I noticed the problem as soon as I opened the package. Should I follow the normal return process or is there a different process for damaged items?",
+      "rankings": [
+        {
+          "rank": 1,
+          "policy_id": "DR-REF-003",
+          "cosine_similarity": 0.6099915504455566
+        },
+        {
+          "rank": 2,
+          "policy_id": "DR-REF-001",
+          "cosine_similarity": 0.5124757885932922
+        },
+        {
+          "rank": 3,
+          "policy_id": "DR-CAN-002",
+          "cosine_similarity": 0.45769602060317993
+        }
+      ],
+      "classifier": [
+        {
+          "category": "delivery",
+          "probability": 0.7675191954979816
+        },
+        {
+          "category": "refund",
+          "probability": 0.08829008028471293
+        },
+        {
+          "category": "account_access",
+          "probability": 0.06607236405513442
+        },
+        {
+          "category": "payment",
+          "probability": 0.035844110744042375
+        },
+        {
+          "category": "human_support",
+          "probability": 0.02570233412632476
+        },
+        {
+          "category": "cancellation",
+          "probability": 0.01657191529180399
+        }
+      ],
+      "guardrail": {
+        "guardrail_version": "1.0",
+        "primary_behavior": "human_review",
+        "reason_codes": [
+          "supported_topic_requires_review"
+        ],
+        "violations": [],
+        "requires_human_review": true,
+        "business_escalation_required": true,
+        "allow_automatic_action": false,
+        "hold_draft": false,
+        "clarification_questions": [],
+        "preserve_reported_uncertainty": true,
+        "source_facts_rewritten": false,
+        "sensitive_input_blocked": false,
+        "signals": {
+          "unknown_dispatch": false,
+          "unknown_payment": false,
+          "cancellation": false,
+          "payment": false,
+          "dispatch_known": false,
+          "payment_known": false,
+          "security": false,
+          "human_request": false,
+          "conflict": false,
+          "multiple_substantive_issues": false,
+          "unauthorized_action": false,
+          "prompt_injection": false,
+          "unsupported_scope": false,
+          "sensitive_content": false,
+          "recognized_support_topic": true,
+          "business_days_reported": null,
+          "approved_refund_reported": false
+        },
+        "evaluation_layer": "saved_or_fixture_output_validation",
+        "policy_evidence_checked": true,
+        "draft_safety_checked": true
+      },
+      "policy_id": "DR-REF-003",
+      "extraction": {
+        "customer_goal": "Determine the return process for a damaged item",
+        "issue_summary": "Received a damaged item and needs guidance on return process",
+        "high_level_issue": "refund",
+        "facts": [
+          {
+            "fact": "The item arrived yesterday",
+            "source": "explicit_customer_text",
+            "source_quote": "The item arrived yesterday"
+          },
+          {
+            "fact": "It is damaged",
+            "source": "explicit_customer_text",
+            "source_quote": "but it is damaged"
+          },
+          {
+            "fact": "I noticed the problem as soon as I opened the package",
+            "source": "explicit_customer_text",
+            "source_quote": "I noticed the problem as soon as I opened the package"
+          }
+        ],
+        "missing_information": [
+          "Specific return process for damaged items",
+          "Confirmation of whether to follow normal return process"
+        ],
+        "conflicts": [],
+        "risk_flags": [],
+        "security_concern": false,
+        "human_requested": false,
+        "multiple_issues": false,
+        "uncertainty_notes": []
+      },
+      "generation": {
+        "policy_id": "DR-REF-003",
+        "policy_version": "1.0",
+        "answerable_from_policy": true,
+        "missing_information": [
+          "order_and_item_reference",
+          "delivery_date",
+          "problem_description"
+        ],
+        "requires_human_review": true,
+        "business_escalation_required": true,
+        "risk_flags": [],
+        "draft_status": "draft_for_human_review",
+        "draft_response": "You reported that the item arrived damaged yesterday. For damaged items, you should report the issue within 7 calendar days after delivery. Please provide the following information to proceed: \n1. A reference for the order and item. \n2. The delivery date. \n3. A description of the damage or issue. \n\nOnce this information is received, an authorized reviewer will decide on the remedy, which may include a refund or replacement. Note that photographs are optional and should not be a barrier to reporting the issue. If handling the item is unsafe, please stop and request a reviewer decision instead of returning it.",
+        "grounding_notes": [
+          {
+            "policy_field": "supported_issue",
+            "evidence_quote": "A delivered item is damaged or differs from what was ordered."
+          },
+          {
+            "policy_field": "required_information",
+            "evidence_quote": "Compare the received item with the order."
+          },
+          {
+            "policy_field": "customer_facing_guidance",
+            "evidence_quote": "Please describe the damaged or incorrect item and when it arrived."
+          }
+        ]
+      },
+      "human": {
+        "query_id": "P13",
+        "gold_policy_id": "DR-REF-003",
+        "assistant_extraction_rating": "PARTIAL",
+        "assistant_generation_rating": "PARTIAL",
+        "human_extraction_rating": "PARTIAL",
+        "human_generation_rating": "PASS",
+        "human_unsupported_claim_count": "0",
+        "human_escalation_correct": "PASS",
+        "reviewer": "Abin",
+        "reviewed_at": "10/2/2026",
+        "notes": "The AI correctly extracted the main facts and gave the correct damaged-item process. It unnecessarily asked for the delivery date, which was already provided, but otherwise covered the key policy points. No escalation error was identified."
+      }
+    },
+    "P04": {
+      "query_text": "I want to cancel my order, but the tracking now shows that the carrier has already collected it. What happens now?",
+      "rankings": [
+        {
+          "rank": 1,
+          "policy_id": "DR-CAN-001",
+          "cosine_similarity": 0.5615787506103516
+        },
+        {
+          "rank": 2,
+          "policy_id": "DR-DEL-003",
+          "cosine_similarity": 0.5330854654312134
+        },
+        {
+          "rank": 3,
+          "policy_id": "DR-CAN-002",
+          "cosine_similarity": 0.5317687392234802
+        }
+      ],
+      "classifier": [
+        {
+          "category": "delivery",
+          "probability": 0.34544008652769037
+        },
+        {
+          "category": "cancellation",
+          "probability": 0.24594233623942854
+        },
+        {
+          "category": "account_access",
+          "probability": 0.14945302705178246
+        },
+        {
+          "category": "refund",
+          "probability": 0.1481625215412158
+        },
+        {
+          "category": "payment",
+          "probability": 0.060659843346352646
+        },
+        {
+          "category": "human_support",
+          "probability": 0.05034218529353036
+        }
+      ],
+      "guardrail": {
+        "guardrail_version": "1.0",
+        "primary_behavior": "human_review",
+        "reason_codes": [
+          "supported_topic_requires_review",
+          "model_answerability_warning",
+          "evidence_or_control_defect"
+        ],
+        "violations": [
+          "answerability_warning_requires_review"
+        ],
+        "requires_human_review": true,
+        "business_escalation_required": false,
+        "allow_automatic_action": false,
+        "hold_draft": true,
+        "clarification_questions": [],
+        "preserve_reported_uncertainty": true,
+        "source_facts_rewritten": false,
+        "sensitive_input_blocked": false,
+        "signals": {
+          "unknown_dispatch": false,
+          "unknown_payment": false,
+          "cancellation": true,
+          "payment": false,
+          "dispatch_known": true,
+          "payment_known": false,
+          "security": false,
+          "human_request": false,
+          "conflict": false,
+          "multiple_substantive_issues": false,
+          "unauthorized_action": false,
+          "prompt_injection": false,
+          "unsupported_scope": false,
+          "sensitive_content": false,
+          "recognized_support_topic": true,
+          "business_days_reported": null,
+          "approved_refund_reported": false
+        },
+        "evaluation_layer": "saved_or_fixture_output_validation",
+        "policy_evidence_checked": true,
+        "draft_safety_checked": true
+      },
+      "policy_id": "DR-CAN-002",
+      "extraction": {
+        "customer_goal": "Cancel order",
+        "issue_summary": "Order cancellation after carrier collection",
+        "high_level_issue": "cancellation",
+        "facts": [
+          {
+            "fact": "The tracking shows that the carrier has already collected the order.",
+            "source": "explicit_customer_text",
+            "source_quote": "the tracking now shows that the carrier has already collected it."
+          }
+        ],
+        "missing_information": [
+          "What the cancellation policy is after the carrier has collected the order.",
+          "Whether the order can still be canceled at this stage."
+        ],
+        "conflicts": [],
+        "risk_flags": [],
+        "security_concern": false,
+        "human_requested": false,
+        "multiple_issues": false,
+        "uncertainty_notes": []
+      },
+      "generation": {
+        "policy_id": "DR-CAN-002",
+        "policy_version": "1.0",
+        "answerable_from_policy": false,
+        "missing_information": [
+          "order_reference",
+          "carrier_acceptance_state",
+          "delivery_state"
+        ],
+        "requires_human_review": true,
+        "business_escalation_required": false,
+        "risk_flags": [
+          "policy_mismatch"
+        ],
+        "draft_status": "draft_for_human_review",
+        "draft_response": "Your request to cancel the order cannot be processed as the carrier has already collected it. According to our policy, standard cancellation is unavailable once a carrier has accepted the parcel. However, you may still be eligible for a return after receipt, subject to item condition and within the return window. Please provide the order reference, the current state of the carrier acceptance, and the delivery state for further assistance.",
+        "grounding_notes": [
+          {
+            "policy_field": "supported_issue",
+            "evidence_quote": "A customer asks to cancel an order already handed to the carrier."
+          },
+          {
+            "policy_field": "policy_text",
+            "evidence_quote": "Once a carrier has physically accepted the parcel, standard cancellation is unavailable."
+          }
+        ]
+      },
+      "human": {
+        "query_id": "P04",
+        "gold_policy_id": "DR-CAN-002",
+        "assistant_extraction_rating": "PARTIAL",
+        "assistant_generation_rating": "PARTIAL",
+        "human_extraction_rating": "PASS",
+        "human_generation_rating": "PARTIAL",
+        "human_unsupported_claim_count": "0",
+        "human_escalation_correct": "PASS",
+        "reviewer": "Abin",
+        "reviewed_at": "10/2/2026",
+        "notes": "The AI correctly extracted the key fact that the carrier has the package. The response was mostly correct, but it repeated information already provided and omitted the important 14-day return window. The policy-mismatch/unanswerable flag was also incorrect. No human escalation was required."
+      }
+    },
+    "C05": {
+      "query_text": "I thought I'd just forgotten my password, but now I can see that somebody changed my contact details. Should I carry on with the usual recovery steps?",
+      "rankings": [
+        {
+          "rank": 1,
+          "policy_id": "DR-ACC-001",
+          "cosine_similarity": 0.5698832869529724
+        },
+        {
+          "rank": 2,
+          "policy_id": "DR-ACC-002",
+          "cosine_similarity": 0.4382825493812561
+        },
+        {
+          "rank": 3,
+          "policy_id": "DR-DEL-002",
+          "cosine_similarity": 0.24791553616523743
+        }
+      ],
+      "classifier": [
+        {
+          "category": "account_access",
+          "probability": 0.6461278851124681
+        },
+        {
+          "category": "human_support",
+          "probability": 0.15847402721384993
+        },
+        {
+          "category": "refund",
+          "probability": 0.08311498292623928
+        },
+        {
+          "category": "delivery",
+          "probability": 0.07004604403040326
+        },
+        {
+          "category": "payment",
+          "probability": 0.031781373583404694
+        },
+        {
+          "category": "cancellation",
+          "probability": 0.010455687133634753
+        }
+      ],
+      "guardrail": {
+        "guardrail_version": "1.0",
+        "primary_behavior": "escalate",
+        "reason_codes": [
+          "reported_security_signal",
+          "model_answerability_warning"
+        ],
+        "violations": [
+          "answerability_warning_requires_review",
+          "nonliteral_customer_evidence"
+        ],
+        "requires_human_review": true,
+        "business_escalation_required": true,
+        "allow_automatic_action": false,
+        "hold_draft": true,
+        "clarification_questions": [],
+        "preserve_reported_uncertainty": true,
+        "source_facts_rewritten": false,
+        "sensitive_input_blocked": false,
+        "signals": {
+          "unknown_dispatch": false,
+          "unknown_payment": false,
+          "cancellation": false,
+          "payment": false,
+          "dispatch_known": false,
+          "payment_known": false,
+          "security": true,
+          "human_request": false,
+          "conflict": false,
+          "multiple_substantive_issues": false,
+          "unauthorized_action": false,
+          "prompt_injection": false,
+          "unsupported_scope": false,
+          "sensitive_content": false,
+          "recognized_support_topic": true,
+          "business_days_reported": null,
+          "approved_refund_reported": false
+        },
+        "evaluation_layer": "saved_or_fixture_output_validation",
+        "policy_evidence_checked": true,
+        "draft_safety_checked": true
+      },
+      "policy_id": "DR-ACC-002",
+      "extraction": {
+        "customer_goal": "Recover account access after unauthorized changes",
+        "issue_summary": "Customer suspects unauthorized changes to contact details and is unsure about recovery steps.",
+        "high_level_issue": "account_access",
+        "facts": [
+          {
+            "fact": "Somebody changed my contact details.",
+            "source": "explicit_customer_text",
+            "source_quote": "somebody changed my contact details."
+          },
+          {
+            "fact": "Customer thought they just forgot their password.",
+            "source": "explicit_customer_text",
+            "source_quote": "I thought I'd just forgotten my password."
+          }
+        ],
+        "missing_information": [
+          "Details of the changed contact information",
+          "Confirmation of whether the customer has attempted recovery steps before",
+          "Clarification on the customer's current access status"
+        ],
+        "conflicts": [],
+        "risk_flags": [
+          "security_concern"
+        ],
+        "security_concern": true,
+        "human_requested": false,
+        "multiple_issues": false,
+        "uncertainty_notes": [
+          "Customer is unsure if they should proceed with recovery steps."
+        ]
+      },
+      "generation": {
+        "policy_id": "DR-ACC-002",
+        "policy_version": "1.0",
+        "answerable_from_policy": false,
+        "missing_information": [
+          "Details of the changed contact information",
+          "Confirmation of whether the customer has attempted recovery steps before",
+          "Clarification on the customer's current access status"
+        ],
+        "requires_human_review": true,
+        "business_escalation_required": true,
+        "risk_flags": [
+          "policy_mismatch",
+          "security_concern"
+        ],
+        "draft_status": "draft_for_human_review",
+        "draft_response": "Given the unauthorized change to your contact details, it is crucial to prioritize security over standard recovery steps. Please refrain from proceeding with routine recovery actions. Instead, a human security representative must review your case to establish your identity and address the security concern. You will need to provide a safe description of the event without sharing sensitive information. Please prepare to share details about the changed contact information and confirm if you have attempted any recovery steps previously.",
+        "grounding_notes": [
+          {
+            "policy_field": "supported_issue",
+            "evidence_quote": "An account is security-locked or may have been accessed by someone else."
+          },
+          {
+            "policy_field": "customer_facing_guidance",
+            "evidence_quote": "A security warning or unfamiliar activity needs a security representative's review."
+          }
+        ]
+      },
+      "human": {
+        "query_id": "C05",
+        "gold_policy_id": "DR-ACC-002",
+        "assistant_extraction_rating": "PARTIAL",
+        "assistant_generation_rating": "PARTIAL",
+        "human_extraction_rating": "PARTIAL",
+        "human_generation_rating": "PASS",
+        "human_unsupported_claim_count": "0",
+        "human_escalation_correct": "PASS",
+        "reviewer": "Abin",
+        "reviewed_at": "10/2/2026",
+        "notes": "The AI correctly identified the security compromise and recommended human security review. The extraction included some unnecessary missing information, and the policy-mismatch/unanswerable flag was incorrect, but the actual customer response and escalation were appropriate."
+      }
+    },
+    "C36": {
+      "query_text": "The paperwork says my repayment was approved six business days ago. I can see the old purchase debit, but the promised credit hasn't landed. This isn't about the original reservation of funds. What review is needed?",
+      "rankings": [
+        {
+          "rank": 1,
+          "policy_id": "DR-PAY-001",
+          "cosine_similarity": 0.5280619859695435
+        },
+        {
+          "rank": 2,
+          "policy_id": "DR-REF-002",
+          "cosine_similarity": 0.5127225518226624
+        },
+        {
+          "rank": 3,
+          "policy_id": "DR-PAY-002",
+          "cosine_similarity": 0.48862332105636597
+        }
+      ],
+      "classifier": [
+        {
+          "category": "delivery",
+          "probability": 0.7681562016466943
+        },
+        {
+          "category": "account_access",
+          "probability": 0.0912616417644586
+        },
+        {
+          "category": "refund",
+          "probability": 0.0817706900514548
+        },
+        {
+          "category": "payment",
+          "probability": 0.03801879459870684
+        },
+        {
+          "category": "human_support",
+          "probability": 0.01098689491813996
+        },
+        {
+          "category": "cancellation",
+          "probability": 0.009805777020545544
+        }
+      ],
+      "guardrail": {
+        "guardrail_version": "1.0",
+        "primary_behavior": "escalate",
+        "reason_codes": [
+          "supported_topic_requires_review",
+          "deterministic_escalation_required"
+        ],
+        "violations": [
+          "invalid_policy_quote",
+          "nonliteral_customer_evidence",
+          "required_escalation_flag_missing"
+        ],
+        "requires_human_review": true,
+        "business_escalation_required": true,
+        "allow_automatic_action": false,
+        "hold_draft": true,
+        "clarification_questions": [],
+        "preserve_reported_uncertainty": true,
+        "source_facts_rewritten": false,
+        "sensitive_input_blocked": false,
+        "signals": {
+          "unknown_dispatch": false,
+          "unknown_payment": false,
+          "cancellation": false,
+          "payment": true,
+          "dispatch_known": false,
+          "payment_known": false,
+          "security": false,
+          "human_request": false,
+          "conflict": false,
+          "multiple_substantive_issues": false,
+          "unauthorized_action": false,
+          "prompt_injection": false,
+          "unsupported_scope": false,
+          "sensitive_content": false,
+          "recognized_support_topic": true,
+          "business_days_reported": 6,
+          "approved_refund_reported": true
+        },
+        "evaluation_layer": "saved_or_fixture_output_validation",
+        "policy_evidence_checked": true,
+        "draft_safety_checked": true
+      },
+      "policy_id": "DR-REF-002",
+      "extraction": {
+        "customer_goal": "Understand the status of the repayment credit",
+        "issue_summary": "Repayment credit not received despite approval",
+        "high_level_issue": "payment",
+        "facts": [
+          {
+            "fact": "The repayment was approved six business days ago.",
+            "source": "explicit_customer_text",
+            "source_quote": "The paperwork says my repayment was approved six business days ago."
+          },
+          {
+            "fact": "The customer can see the old purchase debit.",
+            "source": "explicit_customer_text",
+            "source_quote": "I can see the old purchase debit."
+          },
+          {
+            "fact": "The promised credit hasn't landed.",
+            "source": "explicit_customer_text",
+            "source_quote": "but the promised credit hasn't landed."
+          },
+          {
+            "fact": "This isn't about the original reservation of funds.",
+            "source": "explicit_customer_text",
+            "source_quote": "This isn't about the original reservation of funds."
+          }
+        ],
+        "missing_information": [
+          "Details on the status of the promised credit",
+          "Information on what review is needed"
+        ],
+        "conflicts": [],
+        "risk_flags": [],
+        "security_concern": false,
+        "human_requested": false,
+        "multiple_issues": false,
+        "uncertainty_notes": []
+      },
+      "generation": {
+        "policy_id": "DR-REF-002",
+        "policy_version": "1.0",
+        "answerable_from_policy": true,
+        "missing_information": [
+          "order_or_refund_reference",
+          "approval_date",
+          "approved_amount_and_receipt_status",
+          "original_payment_route"
+        ],
+        "requires_human_review": true,
+        "business_escalation_required": false,
+        "risk_flags": [],
+        "draft_status": "draft_for_human_review",
+        "draft_response": "Your repayment was approved six business days ago, and you have not yet received the promised credit. To assist you further, please provide the refund approval reference, the approval date, the approved amount and its receipt status, and the original payment route where you expect to receive the funds. The expected receipt window is 5 business days after the approval date. If this window has passed, a representative can trace the payment for you.",
+        "grounding_notes": [
+          {
+            "policy_field": "supported_issue",
+            "evidence_quote": "A refund was formally approved but the customer has not received it."
+          },
+          {
+            "policy_field": "required_information",
+            "evidence_quote": "Please provide the refund approval reference and date."
+          },
+          {
+            "policy_field": "policy_text",
+            "evidence_quote": "The expected receipt window is 5 business days after the approval date."
+          }
+        ]
+      },
+      "human": {
+        "query_id": "C36",
+        "gold_policy_id": "DR-REF-002",
+        "assistant_extraction_rating": "PARTIAL",
+        "assistant_generation_rating": "FAIL",
+        "human_extraction_rating": "PARTIAL",
+        "human_generation_rating": "FAIL",
+        "human_unsupported_claim_count": "0",
+        "human_escalation_correct": "FAIL",
+        "reviewer": "Abin",
+        "reviewed_at": "10/2/2026",
+        "notes": "The AI correctly extracted the 6-business-day delay but failed to identify the actual missing information. The generation is a FAIL because the response text treats the trace as conditional, and the structured control output misses the mandatory business escalation for a refund that has already exceeded the 5-business-day limit."
+      }
+    },
+    "A03": {
+      "query_text": "I want to cancel the order, but I don't know whether the courier has collected it.",
+      "rankings": [],
+      "classifier": [
+        {
+          "category": "cancellation",
+          "probability": 0.4844502813359368
+        },
+        {
+          "category": "delivery",
+          "probability": 0.14951708354845347
+        },
+        {
+          "category": "refund",
+          "probability": 0.12009490102110332
+        },
+        {
+          "category": "account_access",
+          "probability": 0.09928151631816395
+        },
+        {
+          "category": "payment",
+          "probability": 0.0739014713260295
+        },
+        {
+          "category": "human_support",
+          "probability": 0.07275474645031299
+        }
+      ],
+      "guardrail": {
+        "guardrail_version": "1.0",
+        "primary_behavior": "clarify",
+        "reason_codes": [
+          "missing_dispatch_state"
+        ],
+        "violations": [],
+        "requires_human_review": true,
+        "business_escalation_required": false,
+        "allow_automatic_action": false,
+        "hold_draft": true,
+        "clarification_questions": [
+          "Has the carrier physically accepted the parcel, or is only a label present?"
+        ],
+        "preserve_reported_uncertainty": true,
+        "source_facts_rewritten": false,
+        "sensitive_input_blocked": false,
+        "signals": {
+          "unknown_dispatch": true,
+          "unknown_payment": false,
+          "cancellation": true,
+          "payment": false,
+          "dispatch_known": false,
+          "payment_known": false,
+          "security": false,
+          "human_request": false,
+          "conflict": false,
+          "multiple_substantive_issues": false,
+          "unauthorized_action": false,
+          "prompt_injection": false,
+          "unsupported_scope": false,
+          "sensitive_content": false,
+          "recognized_support_topic": true,
+          "business_days_reported": null,
+          "approved_refund_reported": false
+        },
+        "evaluation_layer": "direct_input_rules_only",
+        "policy_evidence_checked": false,
+        "draft_safety_checked": false
+      },
+      "policy_id": null,
+      "extraction": null,
+      "generation": null,
+      "human": null
+    },
+    "A01": {
+      "query_text": "Can you apply a discount code that expired last month?",
+      "rankings": [],
+      "classifier": [
+        {
+          "category": "account_access",
+          "probability": 0.3217143288411569
+        },
+        {
+          "category": "human_support",
+          "probability": 0.18939144616196482
+        },
+        {
+          "category": "refund",
+          "probability": 0.1645555401788123
+        },
+        {
+          "category": "delivery",
+          "probability": 0.15859736875849065
+        },
+        {
+          "category": "payment",
+          "probability": 0.0983088593545539
+        },
+        {
+          "category": "cancellation",
+          "probability": 0.06743245670502145
+        }
+      ],
+      "guardrail": {
+        "guardrail_version": "1.0",
+        "primary_behavior": "abstain",
+        "reason_codes": [
+          "outside_supported_scope"
+        ],
+        "violations": [],
+        "requires_human_review": true,
+        "business_escalation_required": false,
+        "allow_automatic_action": false,
+        "hold_draft": true,
+        "clarification_questions": [],
+        "preserve_reported_uncertainty": true,
+        "source_facts_rewritten": false,
+        "sensitive_input_blocked": false,
+        "signals": {
+          "unknown_dispatch": false,
+          "unknown_payment": false,
+          "cancellation": false,
+          "payment": false,
+          "dispatch_known": false,
+          "payment_known": false,
+          "security": false,
+          "human_request": false,
+          "conflict": false,
+          "multiple_substantive_issues": false,
+          "unauthorized_action": false,
+          "prompt_injection": false,
+          "unsupported_scope": true,
+          "sensitive_content": false,
+          "recognized_support_topic": false,
+          "business_days_reported": null,
+          "approved_refund_reported": false
+        },
+        "evaluation_layer": "direct_input_rules_only",
+        "policy_evidence_checked": false,
+        "draft_safety_checked": false
+      },
+      "policy_id": null,
+      "extraction": null,
+      "generation": null,
+      "human": null
+    }
+  }
+}

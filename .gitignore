@@ -1,0 +1,22 @@
+# Only the allowlisted public copy should be committed.
+.env
+.env.*
+!.env.example
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ipynb_checkpoints/
+.local_runtime/
+.cache/
+.streamlit/secrets.toml
+.streamlit/credentials.toml
+data/raw/
+data/processed/
+*.log
+*.zip
+# The small verified classifier is intentional; large model caches are not.
+models/*
+!models/intent_tfidf_logreg.joblib
+!models/README.md

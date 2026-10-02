@@ -1,0 +1,4 @@
+scenario,measured_fm_usd_per_ticket,assumed_local_runtime_usd_per_ticket,assumed_review_minutes,assumed_hourly_labor_usd,assumed_escalation_probability,assumed_incremental_escalation_usd,derived_review_cost_usd,derived_expected_escalation_cost_usd,derived_total_usd_per_ticket,derived_total_usd_per_1000_tickets
+low_review,0.00064629,0.002,1,18,0.05,2,0.3,0.10,0.40264629,402.64629000
+moderate_review,0.00064629,0.010,3,24,0.15,6,1.2,0.90,2.11064629,2110.64629000
+high_review,0.00064629,0.030,6,30,0.30,12,3,3.60,6.63064629,6630.64629000

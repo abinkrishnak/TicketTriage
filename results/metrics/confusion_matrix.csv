@@ -1,0 +1,7 @@
+true_category,account_access,cancellation,delivery,human_support,payment,refund
+account_access,396,0,0,0,0,0
+cancellation,0,87,0,0,0,0
+delivery,1,1,484,0,0,0
+human_support,0,0,0,393,0,0
+payment,6,0,0,0,392,0
+refund,0,0,0,0,0,515

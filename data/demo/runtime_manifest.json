@@ -1,0 +1,12 @@
+{
+  "purpose": "Portable runtime integrity; separate from frozen evaluation manifests",
+  "model_revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+  "sha256": {
+    "data/demo/saved_examples.json": "dc609b09872923be04a9c00121eac51b1f7658739e41796a6f3f1e6ad10c1a63",
+    "data/demo/semantic_model_assets.json": "c3e19248901a1312c69aaa63663ce414940668ba7a73b9c6cc8be5fe1dff69d1",
+    "data/playbook/demoretail_policies.v1.1.json": "aec6e23fa1975c0a11e39b92fb4ed1eae83454b457011072356fbd9ae1d04ac4",
+    "models/intent_tfidf_logreg.joblib": "70a5b6816b249c3a490c94cf8b3d108c423089936a6af2a5f31770e8c8cef55c",
+    "results/retrieval/semantic_embeddings_v1.0.npz": "b8dc3616b6b2f988582ea606cf5bcc3392aecc56540ddd1730e663e22c3332ce",
+    "src/guardrails/engine.py": "f8eb90f51043867d91947992c270c341d8a7a498ac1cd9f4e310479fd223b380"
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "model": "openai/gpt-4o-mini",
+  "provider": "OpenAI",
+  "temperature": 0,
+  "max_output_tokens": {
+    "extraction": 900,
+    "generation": 1100
+  },
+  "timeout_seconds": 60,
+  "automatic_retries": 0,
+  "structured_output": "strict JSON Schema plus local validation",
+  "component_cases": 15,
+  "personal_cases": 5,
+  "controlled_cases": 10,
+  "gold_policy_supplied": true,
+  "extraction_ratings": {
+    "PASS": 4,
+    "PARTIAL": 11,
+    "FAIL": 0
+  },
+  "generation_ratings": {
+    "PASS": 2,
+    "PARTIAL": 6,
+    "FAIL": 7
+  },
+  "component_escalation": {
+    "PASS": 9,
+    "FAIL": 5,
+    "AMBIGUOUS": 1
+  },
+  "component_unsupported_policy_claim_count": 1,
+  "component_schema_valid_calls": 30,
+  "mandatory_human_review_flags": 15,
+  "mean_cost_per_ticket_usd": {
+    "extraction_cost_usd": 0.00021268,
+    "generation_cost_usd": 0.00043360999999999996,
+    "combined_cost_usd": 0.00064629
+  },
+  "component_total_cost_usd": 0.00969435,
+  "latency_seconds": {
+    "extraction_latency_seconds": {
+      "mean": 2.150229726654167,
+      "median": 2.1005544000072405,
+      "p95_linear": 3.0461498000193377
+    },
+    "generation_latency_seconds": {
+      "mean": 2.511542906674246,
+      "median": 2.4435310000553727,
+      "p95_linear": 2.969267559971194
+    },
+    "combined_latency_seconds": {
+      "mean": 4.661772633328413,
+      "median": 4.612682800041512,
+      "p95_linear": 6.092710980004631
+    }
+  },
+  "final_interpretation": "GPT-4o-mini reliably produced schema-valid structured outputs and generally preserved customer facts, but final human review found generation quality mixed, with incomplete guidance and missed escalation/control decisions as important weaknesses. This supports keeping verified policy and mandatory human review as control points rather than treating the LLM as policy authority.",
+  "status": "COMPLETE",
+  "reviewer": "Abin",
+  "review_date": "2026-10-02",
+  "source_summary_sha256": "6c7aeb1006dad4b12e4e45a06b577f7322815bcbeb3323c5a33d8bed39073a42",
+  "human_review_source_sha256": "cca069924e3edfe5eecd7cb79edf7a0db6b0734bb46dfa27bdef8fe25bcfff76",
+  "publication_note": "Derived final-human-metric view; unchanged source remains local. No raw API transport logs or authentication history."
+}

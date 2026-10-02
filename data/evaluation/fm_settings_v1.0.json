@@ -1,0 +1,30 @@
+{
+  "model": "openai/gpt-4o-mini",
+  "model_version_policy": "OpenRouter alias; record returned model/provider per call. Stop if unavailable or materially changed; no silent substitution.",
+  "temperature": 0,
+  "extraction_max_output_tokens": 900,
+  "generation_max_output_tokens": 1100,
+  "structured_output_mode": "response_format.type=json_schema; json_schema.strict=true; client-side JSON Schema validation",
+  "timeout_seconds": 60,
+  "automatic_retries": 0,
+  "retry_policy": "Stop on timeout, HTTP/provider error, refusal, incomplete output or schema failure. Preserve raw response and any usage; no paid retry or repair without separate approval.",
+  "provider": {
+    "only": [
+      "OpenAI"
+    ],
+    "allow_fallbacks": false,
+    "require_parameters": true,
+    "max_price": {
+      "prompt": 0.15,
+      "completion": 0.6
+    }
+  },
+  "endpoint": "https://openrouter.ai/api/v1/chat/completions",
+  "stream": false,
+  "max_input_tokens_per_call_planned_guard": 12000,
+  "paid_calls_authorized": false,
+  "component_case_count": 15,
+  "component_call_count": 30,
+  "paid_execution_status": "WAITING_FOR_USER_APPROVAL",
+  "temperature_caveat": "Temperature zero reduces sampling variation but does not guarantee identical responses or pin provider weights."
+}

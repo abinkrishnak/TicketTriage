@@ -1,0 +1,14 @@
+measure,result
+Baseline accuracy,0.22637362637362637
+Baseline macro F1,0.06152927120669056
+LR accuracy,0.9964835164835165
+LR macro F1,0.9959779951196274
+LR weighted F1,0.996487329145592
+Highest F1 classes,"human_support, refund"
+Lowest F1 classes,account_access
+Misclassified requests,8
+Batch inference seconds (median),0.028434299980290234
+Single-ticket median milliseconds,0.547999981790781
+Normalized overlap,0
+Known cross-split near-duplicate candidate pairs,19
+Key limitation,"Synthetic short requests, residual template similarity, no unsupported-input evaluation"

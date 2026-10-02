@@ -1,0 +1,1229 @@
+{
+  "provenance": "Unedited parsed outputs and final human labels; transport envelopes omitted",
+  "cases": [
+    {
+      "query_id": "P01",
+      "query_text": "I can’t log in to my account. I tried the password reset about 20 minutes ago but I still haven’t received the email. I can access my registered email and I haven’t seen any security warning. What should I do next?",
+      "gold_policy_id": "DR-ACC-001",
+      "extraction": {
+        "customer_goal": "Regain access to account",
+        "issue_summary": "Unable to log in and not receiving password reset email",
+        "high_level_issue": "account_access",
+        "facts": [
+          {
+            "fact": "The customer cannot log in to their account.",
+            "source": "explicit_customer_text",
+            "source_quote": "I can’t log in to my account."
+          },
+          {
+            "fact": "The customer tried the password reset 20 minutes ago.",
+            "source": "explicit_customer_text",
+            "source_quote": "I tried the password reset about 20 minutes ago."
+          },
+          {
+            "fact": "The customer has not received the password reset email.",
+            "source": "explicit_customer_text",
+            "source_quote": "but I still haven’t received the email."
+          },
+          {
+            "fact": "The customer can access their registered email.",
+            "source": "explicit_customer_text",
+            "source_quote": "I can access my registered email."
+          },
+          {
+            "fact": "The customer has not seen any security warning.",
+            "source": "explicit_customer_text",
+            "source_quote": "and I haven’t seen any security warning."
+          }
+        ],
+        "missing_information": [
+          "Confirmation of whether the password reset email was sent or not.",
+          "Details on any potential issues with the email service provider."
+        ],
+        "conflicts": [],
+        "risk_flags": [],
+        "security_concern": false,
+        "human_requested": false,
+        "multiple_issues": false,
+        "uncertainty_notes": []
+      },
+      "generation": {
+        "policy_id": "DR-ACC-001",
+        "policy_version": "1.0",
+        "answerable_from_policy": true,
+        "missing_information": [
+          "error_description",
+          "registered_channel_accessible",
+          "security_concern"
+        ],
+        "requires_human_review": true,
+        "business_escalation_required": false,
+        "risk_flags": [],
+        "draft_status": "draft_for_human_review",
+        "draft_response": "To regain access to your account, please use the password recovery option on the DemoRetail sign-in page. Since you mentioned you can access your registered email, ensure to check your filtered mail for the password reset email. If you still do not receive it after checking, we will need to review your access further. \n\nTo assist you better, could you please provide the following information:\n1. A description of any error messages you encountered during login.\n2. Confirmation that your registered email is accessible for receiving recovery messages.\n3. Any security concerns or warnings you may have noticed.\n\nThis information will help us guide you appropriately.",
+        "grounding_notes": [
+          {
+            "policy_field": "supported_issue",
+            "evidence_quote": "Unable to sign in or reset a forgotten password."
+          },
+          {
+            "policy_field": "customer_facing_guidance",
+            "evidence_quote": "If this is an ordinary sign-in problem and you can access your registered contact channel, use the recovery option on the DemoRetail sign-in page."
+          },
+          {
+            "policy_field": "required_information",
+            "evidence_quote": "Distinguish ordinary login failure from a security restriction."
+          }
+        ]
+      },
+      "final_human_review": {
+        "query_id": "P01",
+        "gold_policy_id": "DR-ACC-001",
+        "human_extraction_rating": "PARTIAL",
+        "human_generation_rating": "PARTIAL",
+        "human_unsupported_claim_count": "0",
+        "human_escalation_correct": "PASS",
+        "reviewer": "Abin",
+        "reviewed_at": "10/2/2026",
+        "notes": "The AI correctly extracted the main customer facts and gave the correct spam/filtered-folder advice. However, it identified irrelevant missing information and repeated questions the customer had already answered. No unnecessary escalation was needed."
+      },
+      "extraction_cost_usd": 0.00025035,
+      "generation_cost_usd": 0.00048135,
+      "extraction_latency_seconds": 2.46033669996541,
+      "generation_latency_seconds": 2.878511199960485
+    },
+    {
+      "query_id": "C05",
+      "query_text": "I thought I'd just forgotten my password, but now I can see that somebody changed my contact details. Should I carry on with the usual recovery steps?",
+      "gold_policy_id": "DR-ACC-002",
+      "extraction": {
+        "customer_goal": "Recover account access after unauthorized changes",
+        "issue_summary": "Customer suspects unauthorized changes to contact details and is unsure about recovery steps.",
+        "high_level_issue": "account_access",
+        "facts": [
+          {
+            "fact": "Somebody changed my contact details.",
+            "source": "explicit_customer_text",
+            "source_quote": "somebody changed my contact details."
+          },
+          {
+            "fact": "Customer thought they just forgot their password.",
+            "source": "explicit_customer_text",
+            "source_quote": "I thought I'd just forgotten my password."
+          }
+        ],
+        "missing_information": [
+          "Details of the changed contact information",
+          "Confirmation of whether the customer has attempted recovery steps before",
+          "Clarification on the customer's current access status"
+        ],
+        "conflicts": [],
+        "risk_flags": [
+          "security_concern"
+        ],
+        "security_concern": true,
+        "human_requested": false,
+        "multiple_issues": false,
+        "uncertainty_notes": [
+          "Customer is unsure if they should proceed with recovery steps."
+        ]
+      },
+      "generation": {
+        "policy_id": "DR-ACC-002",
+        "policy_version": "1.0",
+        "answerable_from_policy": false,
+        "missing_information": [
+          "Details of the changed contact information",
+          "Confirmation of whether the customer has attempted recovery steps before",
+          "Clarification on the customer's current access status"
+        ],
+        "requires_human_review": true,
+        "business_escalation_required": true,
+        "risk_flags": [
+          "policy_mismatch",
+          "security_concern"
+        ],
+        "draft_status": "draft_for_human_review",
+        "draft_response": "Given the unauthorized change to your contact details, it is crucial to prioritize security over standard recovery steps. Please refrain from proceeding with routine recovery actions. Instead, a human security representative must review your case to establish your identity and address the security concern. You will need to provide a safe description of the event without sharing sensitive information. Please prepare to share details about the changed contact information and confirm if you have attempted any recovery steps previously.",
+        "grounding_notes": [
+          {
+            "policy_field": "supported_issue",
+            "evidence_quote": "An account is security-locked or may have been accessed by someone else."
+          },
+          {
+            "policy_field": "customer_facing_guidance",
+            "evidence_quote": "A security warning or unfamiliar activity needs a security representative's review."
+          }
+        ]
+      },
+      "final_human_review": {
+        "query_id": "C05",
+        "gold_policy_id": "DR-ACC-002",
+        "human_extraction_rating": "PARTIAL",
+        "human_generation_rating": "PASS",
+        "human_unsupported_claim_count": "0",
+        "human_escalation_correct": "PASS",
+        "reviewer": "Abin",
+        "reviewed_at": "10/2/2026",
+        "notes": "The AI correctly identified the security compromise and recommended human security review. The extraction included some unnecessary missing information, and the policy-mismatch/unanswerable flag was incorrect, but the actual customer response and escalation were appropriate."
+      },
+      "extraction_cost_usd": 0.0002031,
+      "generation_cost_usd": 0.0004194,
+      "extraction_latency_seconds": 1.6272513999138027,
+      "generation_latency_seconds": 2.732317400048487
+    },
+    {
+      "query_id": "C09",
+      "query_text": "Want to cancle this before it leaves. Staff say the box is still with them, although my card payment has gone through. Can they check if it can be stopped?",
+      "gold_policy_id": "DR-CAN-001",
+      "extraction": {
+        "customer_goal": "Cancel an order before it ships",
+        "issue_summary": "Customer wants to cancel an order that has been paid for but not yet shipped.",
+        "high_level_issue": "cancellation",
+        "facts": [
+          {
+            "fact": "The customer wants to cancel the order before it leaves.",
+            "source": "explicit_customer_text",
+            "source_quote": "Want to cancle this before it leaves."
+          },
+          {
+            "fact": "The staff say the box is still with them.",
+            "source": "explicit_customer_text",
+            "source_quote": "Staff say the box is still with them."
+          },
+          {
+            "fact": "The customer's card payment has gone through.",
+            "source": "explicit_customer_text",
+            "source_quote": "my card payment has gone through."
+          },
+          {
+            "fact": "The customer is asking if the order can be stopped.",
+            "source": "explicit_customer_text",
+            "source_quote": "Can they check if it can be stopped?"
+          }
+        ],
+        "missing_information": [
+          "Confirmation of whether the order can be canceled at this stage.",
+          "Details on the order status and shipping process."
+        ],
+        "conflicts": [],
+        "risk_flags": [],
+        "security_concern": false,
+        "human_requested": false,
+        "multiple_issues": false,
+        "uncertainty_notes": []
+      },
+      "generation": {
+        "policy_id": "DR-CAN-001",
+        "policy_version": "1.0",
+        "answerable_from_policy": true,
+        "missing_information": [
+          "order_reference",
+          "reported_dispatch_state",
+          "payment_state"
+        ],
+        "requires_human_review": true,
+        "business_escalation_required": false,
+        "risk_flags": [],
+        "draft_status": "draft_for_human_review",
+        "draft_response": "To proceed with your cancellation request, we need to verify a few details. Please provide the order reference, the current dispatch state (to confirm if the order has been accepted by a carrier), and the payment state (to distinguish between captured funds and pending holds). Once we have this information, a representative can check if cancellation is still possible before dispatch.",
+        "grounding_notes": [
+          {
+            "policy_field": "supported_issue",
+            "evidence_quote": "A customer wants to stop an order before it leaves the retailer."
+          },
+          {
+            "policy_field": "required_information",
+            "evidence_quote": "Locate the order through an authorized representative."
+          },
+          {
+            "policy_field": "customer_facing_guidance",
+            "evidence_quote": "If the carrier has not accepted the parcel, a representative can check whether cancellation is still possible."
+          }
+        ]
+      },
+      "final_human_review": {
+        "query_id": "C09",
+        "gold_policy_id": "DR-CAN-001",
+        "human_extraction_rating": "PASS",
+        "human_generation_rating": "FAIL",
+        "human_unsupported_claim_count": "0",
+        "human_escalation_correct": "FAIL",
+        "reviewer": "Abin",
+        "reviewed_at": "10/2/2026",
+        "notes": "The AI extracted the key facts correctly, but it asked for information the customer had already provided. The generation is a FAIL because the structured control output missed the mandatory business escalation required for reviewing and executing a captured-payment cancellation."
+      },
+      "extraction_cost_usd": 0.00023265,
+      "generation_cost_usd": 0.00042075,
+      "extraction_latency_seconds": 2.2588462999556214,
+      "generation_latency_seconds": 2.4435310000553727
+    },
+    {
+      "query_id": "P04",
+      "query_text": "I want to cancel my order, but the tracking now shows that the carrier has already collected it. What happens now?",
+      "gold_policy_id": "DR-CAN-002",
+      "extraction": {
+        "customer_goal": "Cancel order",
+        "issue_summary": "Order cancellation after carrier collection",
+        "high_level_issue": "cancellation",
+        "facts": [
+          {
+            "fact": "The tracking shows that the carrier has already collected the order.",
+            "source": "explicit_customer_text",
+            "source_quote": "the tracking now shows that the carrier has already collected it."
+          }
+        ],
+        "missing_information": [
+          "What the cancellation policy is after the carrier has collected the order.",
+          "Whether the order can still be canceled at this stage."
+        ],
+        "conflicts": [],
+        "risk_flags": [],
+        "security_concern": false,
+        "human_requested": false,
+        "multiple_issues": false,
+        "uncertainty_notes": []
+      },
+      "generation": {
+        "policy_id": "DR-CAN-002",
+        "policy_version": "1.0",
+        "answerable_from_policy": false,
+        "missing_information": [
+          "order_reference",
+          "carrier_acceptance_state",
+          "delivery_state"
+        ],
+        "requires_human_review": true,
+        "business_escalation_required": false,
+        "risk_flags": [
+          "policy_mismatch"
+        ],
+        "draft_status": "draft_for_human_review",
+        "draft_response": "Your request to cancel the order cannot be processed as the carrier has already collected it. According to our policy, standard cancellation is unavailable once a carrier has accepted the parcel. However, you may still be eligible for a return after receipt, subject to item condition and within the return window. Please provide the order reference, the current state of the carrier acceptance, and the delivery state for further assistance.",
+        "grounding_notes": [
+          {
+            "policy_field": "supported_issue",
+            "evidence_quote": "A customer asks to cancel an order already handed to the carrier."
+          },
+          {
+            "policy_field": "policy_text",
+            "evidence_quote": "Once a carrier has physically accepted the parcel, standard cancellation is unavailable."
+          }
+        ]
+      },
+      "final_human_review": {
+        "query_id": "P04",
+        "gold_policy_id": "DR-CAN-002",
+        "human_extraction_rating": "PASS",
+        "human_generation_rating": "PARTIAL",
+        "human_unsupported_claim_count": "0",
+        "human_escalation_correct": "PASS",
+        "reviewer": "Abin",
+        "reviewed_at": "10/2/2026",
+        "notes": "The AI correctly extracted the key fact that the carrier has the package. The response was mostly correct, but it repeated information already provided and omitted the important 14-day return window. The policy-mismatch/unanswerable flag was also incorrect. No human escalation was required."
+      },
+      "extraction_cost_usd": 0.00017279999999999997,
+      "generation_cost_usd": 0.00039329999999999996,
+      "extraction_latency_seconds": 1.80760270007886,
+      "generation_latency_seconds": 1.9829624999547377
+    },
+    {
+      "query_id": "C14",
+      "query_text": "There have been no new scans, and the last date they promised for arrival has now passed. It still says travelling, not delivered or lost. Is this only a tracking problem?",
+      "gold_policy_id": "DR-DEL-001",
+      "extraction": {
+        "customer_goal": "Determine the status of a shipment",
+        "issue_summary": "Tracking status unclear for a shipment that has not arrived",
+        "high_level_issue": "delivery",
+        "facts": [
+          {
+            "fact": "The last date they promised for arrival has now passed.",
+            "source": "explicit_customer_text",
+            "source_quote": "the last date they promised for arrival has now passed."
+          },
+          {
+            "fact": "It still says travelling, not delivered or lost.",
+            "source": "explicit_customer_text",
+            "source_quote": "It still says travelling, not delivered or lost."
+          },
+          {
+            "fact": "There have been no new scans.",
+            "source": "explicit_customer_text",
+            "source_quote": "There have been no new scans."
+          }
+        ],
+        "missing_information": [
+          "Current status of the shipment (delivered, lost, etc.)",
+          "Reason for the lack of new scans",
+          "Expected resolution time for the tracking issue"
+        ],
+        "conflicts": [],
+        "risk_flags": [],
+        "security_concern": false,
+        "human_requested": false,
+        "multiple_issues": false,
+        "uncertainty_notes": [
+          "Unclear if the issue is solely a tracking problem."
+        ]
+      },
+      "generation": {
+        "policy_id": "DR-DEL-001",
+        "policy_version": "1.0",
+        "answerable_from_policy": true,
+        "missing_information": [
+          "order_reference",
+          "promised_window_end",
+          "latest_tracking_state",
+          "receipt_status"
+        ],
+        "requires_human_review": true,
+        "business_escalation_required": true,
+        "risk_flags": [],
+        "draft_status": "draft_for_human_review",
+        "draft_response": "It appears that your shipment has not arrived by the promised delivery window, and there have been no new scans. To assist you further, please provide the following information: \n1. Order reference to identify the shipment.\n2. The end date of the promised delivery window.\n3. The latest tracking state of your shipment.\n4. Confirmation on whether any parcel has arrived.\n\nOnce we have this information, a representative can check the delay. If there is still no delivery after 3 business days from the promised window, we will escalate for a delivery investigation.",
+        "grounding_notes": [
+          {
+            "policy_field": "supported_issue",
+            "evidence_quote": "A parcel has not arrived by the end of its promised delivery window."
+          },
+          {
+            "policy_field": "required_information",
+            "evidence_quote": "Identify the shipment."
+          },
+          {
+            "policy_field": "escalation_conditions",
+            "evidence_quote": "No delivery after the 3-business-day threshold."
+          }
+        ]
+      },
+      "final_human_review": {
+        "query_id": "C14",
+        "gold_policy_id": "DR-DEL-001",
+        "human_extraction_rating": "PARTIAL",
+        "human_generation_rating": "PARTIAL",
+        "human_unsupported_claim_count": "0",
+        "human_escalation_correct": "AMBIGUOUS",
+        "reviewer": "Abin",
+        "reviewed_at": "10/2/2026",
+        "notes": "The AI correctly recognized that the parcel is delayed but not automatically lost. It missed the exact promised delivery date and repeated provided information. Escalation is AMBIGUOUS because a representative may check the delay now, but a formal missing-parcel investigation is only required after the 3-business-day threshold is proven."
+      },
+      "extraction_cost_usd": 0.0002238,
+      "generation_cost_usd": 0.0004518,
+      "extraction_latency_seconds": 2.199631099938415,
+      "generation_latency_seconds": 2.4130517001030967
+    },
+    {
+      "query_id": "C18",
+      "query_text": "It has been ticked off as dropped off. I've looked in the agreed safe spot and checked with the people I live with: no box. Can someone look into the mismatch?",
+      "gold_policy_id": "DR-DEL-002",
+      "extraction": {
+        "customer_goal": "Resolve the issue of a missing package",
+        "issue_summary": "Package marked as dropped off but not found",
+        "high_level_issue": "delivery",
+        "facts": [
+          {
+            "fact": "The package has been ticked off as dropped off.",
+            "source": "explicit_customer_text",
+            "source_quote": "It has been ticked off as dropped off."
+          },
+          {
+            "fact": "The customer looked in the agreed safe spot and checked with the people they live with.",
+            "source": "explicit_customer_text",
+            "source_quote": "I've looked in the agreed safe spot and checked with the people I live with."
+          },
+          {
+            "fact": "The customer did not find the box.",
+            "source": "explicit_customer_text",
+            "source_quote": "no box."
+          },
+          {
+            "fact": "The customer is requesting someone to look into the mismatch.",
+            "source": "explicit_customer_text",
+            "source_quote": "Can someone look into the mismatch?"
+          }
+        ],
+        "missing_information": [
+          "Details about the delivery confirmation process",
+          "Information on how to escalate the issue if unresolved"
+        ],
+        "conflicts": [],
+        "risk_flags": [],
+        "security_concern": false,
+        "human_requested": true,
+        "multiple_issues": false,
+        "uncertainty_notes": []
+      },
+      "generation": {
+        "policy_id": "DR-DEL-002",
+        "policy_version": "1.0",
+        "answerable_from_policy": false,
+        "missing_information": [
+          "order_reference",
+          "tracking_outcome",
+          "receipt_discrepancy"
+        ],
+        "requires_human_review": true,
+        "business_escalation_required": true,
+        "risk_flags": [
+          "policy_mismatch"
+        ],
+        "draft_status": "draft_for_human_review",
+        "draft_response": "Your package is marked as dropped off, but you cannot find it. To proceed with a missing-parcel investigation, we need specific details: your order reference, the tracking outcome, and a description of what you did or did not receive. Please provide this information so we can summarize the discrepancy for a representative. Note that no waiting period is required before opening this review, and the investigation will determine any potential remedies.",
+        "grounding_notes": [
+          {
+            "policy_field": "supported_issue",
+            "evidence_quote": "A parcel is reported lost or shows delivered although the recipient has not received it."
+          },
+          {
+            "policy_field": "required_information",
+            "evidence_quote": "Identify the shipment."
+          },
+          {
+            "policy_field": "required_information",
+            "evidence_quote": "Record reported loss or delivered scan and its date if available."
+          },
+          {
+            "policy_field": "required_information",
+            "evidence_quote": "Describe what the recipient did or did not receive."
+          }
+        ]
+      },
+      "final_human_review": {
+        "query_id": "C18",
+        "gold_policy_id": "DR-DEL-002",
+        "human_extraction_rating": "PARTIAL",
+        "human_generation_rating": "PARTIAL",
+        "human_unsupported_claim_count": "0",
+        "human_escalation_correct": "PASS",
+        "reviewer": "Abin",
+        "reviewed_at": "10/2/2026",
+        "notes": "The AI correctly identified the delivered-but-not-received situation and correctly recommended an immediate investigation. However, it missed the actual missing detail (order reference), repeated information already provided, and incorrectly flagged the policy as insufficient."
+      },
+      "extraction_cost_usd": 0.0002316,
+      "generation_cost_usd": 0.00044879999999999996,
+      "extraction_latency_seconds": 2.741789299994707,
+      "generation_latency_seconds": 3.181032399996184
+    },
+    {
+      "query_id": "P07",
+      "query_text": "My parcel has a tracking number, but the tracking information has not updated for a couple of days. The promised delivery date has not passed yet. Is this already a delayed-delivery issue?",
+      "gold_policy_id": "DR-DEL-003",
+      "extraction": {
+        "customer_goal": "Determine if there is a delayed delivery issue with the parcel.",
+        "issue_summary": "Tracking information has not updated for a couple of days.",
+        "high_level_issue": "delivery",
+        "facts": [
+          {
+            "fact": "The parcel has a tracking number.",
+            "source": "explicit_customer_text",
+            "source_quote": "My parcel has a tracking number"
+          },
+          {
+            "fact": "The tracking information has not updated for a couple of days.",
+            "source": "explicit_customer_text",
+            "source_quote": "the tracking information has not updated for a couple of days"
+          },
+          {
+            "fact": "The promised delivery date has not passed yet.",
+            "source": "explicit_customer_text",
+            "source_quote": "The promised delivery date has not passed yet"
+          }
+        ],
+        "missing_information": [
+          "Current status of the parcel's tracking information",
+          "Expected delivery timeframe after the promised date"
+        ],
+        "conflicts": [],
+        "risk_flags": [],
+        "security_concern": false,
+        "human_requested": false,
+        "multiple_issues": false,
+        "uncertainty_notes": [
+          "Uncertainty about whether the situation qualifies as a delayed delivery issue."
+        ]
+      },
+      "generation": {
+        "policy_id": "DR-DEL-003",
+        "policy_version": "1.0",
+        "answerable_from_policy": true,
+        "missing_information": [
+          "reference_type",
+          "acceptance_or_last_scan",
+          "promised_window_end",
+          "tracking_problem"
+        ],
+        "requires_human_review": true,
+        "business_escalation_required": false,
+        "risk_flags": [],
+        "draft_status": "draft_for_human_review",
+        "draft_response": "Your parcel has a tracking number, but the tracking information has not updated for a couple of days, and the promised delivery date has not passed yet. To determine if this qualifies as a delayed delivery issue, we need more information. Please provide the type of reference (order number or tracking information), the last acceptance or movement scan details, the end of the promised delivery window, and a description of the tracking problem. Once we have this information, we can proceed with the appropriate review.",
+        "grounding_notes": [
+          {
+            "policy_field": "required_information",
+            "evidence_quote": "Distinguish an order number from tracking information."
+          },
+          {
+            "policy_field": "required_information",
+            "evidence_quote": "Apply the 2-business-day tracking review threshold."
+          },
+          {
+            "policy_field": "required_information",
+            "evidence_quote": "Check whether delivery is already late."
+          },
+          {
+            "policy_field": "required_information",
+            "evidence_quote": "Record invalid, unavailable or unchanged status."
+          }
+        ]
+      },
+      "final_human_review": {
+        "query_id": "P07",
+        "gold_policy_id": "DR-DEL-003",
+        "human_extraction_rating": "PARTIAL",
+        "human_generation_rating": "FAIL",
+        "human_unsupported_claim_count": "0",
+        "human_escalation_correct": "PASS",
+        "reviewer": "Abin",
+        "reviewed_at": "10/2/2026",
+        "notes": "The AI extracted the basic facts but missed the critical missing information—the date of the last scan. The generation is a FAIL because it failed to answer the customer's main question and omitted the 2-business-day tracking review rule. Escalation is a PASS because the exact last-scan timing is missing, so mandatory escalation isn't strictly required yet."
+      },
+      "extraction_cost_usd": 0.0002187,
+      "generation_cost_usd": 0.00045,
+      "extraction_latency_seconds": 2.127224399941042,
+      "generation_latency_seconds": 2.640250200056471
+    },
+    {
+      "query_id": "C23",
+      "query_text": "The pay button ended with an error. My bank shows nothing at all for the attempt and the store hasn't confirmed a purchase. What should I check before trying once more?",
+      "gold_policy_id": "DR-PAY-001",
+      "extraction": {
+        "customer_goal": "Check payment status before retrying",
+        "issue_summary": "Payment attempt resulted in an error with no confirmation from the store or bank.",
+        "high_level_issue": "payment",
+        "facts": [
+          {
+            "fact": "The pay button ended with an error.",
+            "source": "explicit_customer_text",
+            "source_quote": "The pay button ended with an error."
+          },
+          {
+            "fact": "My bank shows nothing at all for the attempt.",
+            "source": "explicit_customer_text",
+            "source_quote": "My bank shows nothing at all for the attempt."
+          },
+          {
+            "fact": "The store hasn't confirmed a purchase.",
+            "source": "explicit_customer_text",
+            "source_quote": "the store hasn't confirmed a purchase."
+          }
+        ],
+        "missing_information": [
+          "Confirmation of whether the payment was processed or not",
+          "Details on the error encountered with the pay button"
+        ],
+        "conflicts": [],
+        "risk_flags": [],
+        "security_concern": false,
+        "human_requested": false,
+        "multiple_issues": false,
+        "uncertainty_notes": []
+      },
+      "generation": {
+        "policy_id": "DR-PAY-001",
+        "policy_version": "1.0",
+        "answerable_from_policy": true,
+        "missing_information": [
+          "checkout_error",
+          "payment_state",
+          "order_confirmation_present"
+        ],
+        "requires_human_review": true,
+        "business_escalation_required": false,
+        "risk_flags": [],
+        "draft_status": "draft_for_human_review",
+        "draft_response": "It appears your payment attempt resulted in an error, and your bank shows no record of the transaction. Before trying again, please clarify the following:\n1. What specific error message did you encounter when the pay button was pressed?\n2. Can you confirm whether there are any pending or posted funds related to this transaction?\n3. Is there any order confirmation from the store?\n\nThis information will help determine the next steps regarding your payment attempt.",
+        "grounding_notes": [
+          {
+            "policy_field": "required_information",
+            "evidence_quote": "mandatory_for_specific_guidance"
+          },
+          {
+            "policy_field": "customer_facing_guidance",
+            "evidence_quote": "A failed checkout can still leave a pending authorization."
+          }
+        ]
+      },
+      "final_human_review": {
+        "query_id": "C23",
+        "gold_policy_id": "DR-PAY-001",
+        "human_extraction_rating": "PASS",
+        "human_generation_rating": "FAIL",
+        "human_unsupported_claim_count": "0",
+        "human_escalation_correct": "PASS",
+        "reviewer": "Abin",
+        "reviewed_at": "10/2/2026",
+        "notes": "The AI extracted the customer’s facts correctly and did not need escalation. The generation is a FAIL because it repeated information already provided and completely omitted the actual requested guidance: basic billing checks and one additional checkout attempt."
+      },
+      "extraction_cost_usd": 0.0002091,
+      "generation_cost_usd": 0.0004005,
+      "extraction_latency_seconds": 1.702741999994032,
+      "generation_latency_seconds": 2.050070199999027
+    },
+    {
+      "query_id": "C27",
+      "query_text": "The reserved amount from my attempted purchase is still pending after six business days. I never requested a return and the shop hasn't approved any money back. What happens next?",
+      "gold_policy_id": "DR-PAY-002",
+      "extraction": {
+        "customer_goal": "Understand the status of a pending charge after a purchase attempt.",
+        "issue_summary": "Pending charge from an attempted purchase without a return request.",
+        "high_level_issue": "payment",
+        "facts": [
+          {
+            "fact": "The reserved amount from my attempted purchase is still pending after six business days.",
+            "source": "explicit_customer_text",
+            "source_quote": "The reserved amount from my attempted purchase is still pending after six business days."
+          },
+          {
+            "fact": "I never requested a return.",
+            "source": "explicit_customer_text",
+            "source_quote": "I never requested a return."
+          },
+          {
+            "fact": "The shop hasn't approved any money back.",
+            "source": "explicit_customer_text",
+            "source_quote": "the shop hasn't approved any money back."
+          }
+        ],
+        "missing_information": [
+          "Details on the purchase attempt and the shop's policies regarding pending charges.",
+          "Information on the expected timeline for resolving pending charges."
+        ],
+        "conflicts": [],
+        "risk_flags": [],
+        "security_concern": false,
+        "human_requested": false,
+        "multiple_issues": false,
+        "uncertainty_notes": [
+          "Unclear what the next steps are regarding the pending charge."
+        ]
+      },
+      "generation": {
+        "policy_id": "DR-PAY-002",
+        "policy_version": "1.1",
+        "answerable_from_policy": true,
+        "missing_information": [
+          "transaction_state",
+          "authorization_date",
+          "order_reference_or_confirmation",
+          "other_transaction_states"
+        ],
+        "requires_human_review": true,
+        "business_escalation_required": true,
+        "risk_flags": [
+          "insufficient_information"
+        ],
+        "draft_status": "draft_for_human_review",
+        "draft_response": "The reserved amount from your attempted purchase is still pending after six business days. According to our policy, a pending authorization is expected to clear or update within 5 business days. If it remains pending beyond that, a representative should investigate. However, I need some additional information to assist you further: \n1. What is the transaction state of the pending charge? \n2. What was the authorization date? \n3. Can you provide the order reference or confirmation? \n4. Are there any other transaction states related to this purchase? \nPlease provide these details so we can proceed with the review.",
+        "grounding_notes": [
+          {
+            "policy_field": "supported_issue",
+            "evidence_quote": "A payment is pending or a temporary authorization is still visible."
+          },
+          {
+            "policy_field": "customer_facing_guidance",
+            "evidence_quote": "if it remains pending after that, a representative should investigate."
+          },
+          {
+            "policy_field": "required_information",
+            "evidence_quote": "Verify the distinction from a captured payment."
+          }
+        ]
+      },
+      "final_human_review": {
+        "query_id": "C27",
+        "gold_policy_id": "DR-PAY-002",
+        "human_extraction_rating": "PASS",
+        "human_generation_rating": "PARTIAL",
+        "human_unsupported_claim_count": "0",
+        "human_escalation_correct": "PASS",
+        "reviewer": "Abin",
+        "reviewed_at": "10/2/2026",
+        "notes": "The AI correctly extracted the key facts and recognized that the 5-business-day threshold was exceeded, so escalation was required. However, it repeated information already provided and failed to explain that the payment provider controls the release of the funds."
+      },
+      "extraction_cost_usd": 0.00022455,
+      "generation_cost_usd": 0.0004623,
+      "extraction_latency_seconds": 1.9389827999984846,
+      "generation_latency_seconds": 2.741882300004363
+    },
+    {
+      "query_id": "P10",
+      "query_text": "I bought one item but I can see two separate completed charges for the same amount on my card. They both look posted rather than pending. What should happen next?",
+      "gold_policy_id": "DR-PAY-003",
+      "extraction": {
+        "customer_goal": "Clarify duplicate charges on card",
+        "issue_summary": "Customer sees two completed charges for one item",
+        "high_level_issue": "payment",
+        "facts": [
+          {
+            "fact": "Customer bought one item",
+            "source": "explicit_customer_text",
+            "source_quote": "I bought one item"
+          },
+          {
+            "fact": "Customer sees two separate completed charges for the same amount on their card",
+            "source": "explicit_customer_text",
+            "source_quote": "I can see two separate completed charges for the same amount on my card"
+          },
+          {
+            "fact": "Both charges look posted rather than pending",
+            "source": "explicit_customer_text",
+            "source_quote": "They both look posted rather than pending"
+          }
+        ],
+        "missing_information": [
+          "Details about the item purchased",
+          "Confirmation of the charges from the payment processor",
+          "Information on the customer's account status"
+        ],
+        "conflicts": [],
+        "risk_flags": [
+          "insufficient_information"
+        ],
+        "security_concern": false,
+        "human_requested": false,
+        "multiple_issues": false,
+        "uncertainty_notes": []
+      },
+      "generation": {
+        "policy_id": "DR-PAY-003",
+        "policy_version": "1.0",
+        "answerable_from_policy": true,
+        "missing_information": [
+          "Details about the item purchased",
+          "Confirmation of the charges from the payment processor",
+          "Information on the customer's account status"
+        ],
+        "requires_human_review": true,
+        "business_escalation_required": false,
+        "risk_flags": [
+          "insufficient_information"
+        ],
+        "draft_status": "draft_for_human_review",
+        "draft_response": "You reported seeing two completed charges for one item on your card. To proceed, we need to verify if these charges are indeed duplicates. Please provide the following information:\n1. Order reference to identify the purchase.\n2. Entry dates and amounts of the charges.\n3. Status of each entry to confirm they are both posted.\n\nAn authorized representative will review this information to determine if a reversal of the extra charge is warranted. Please note that a verification process is required before any refund can be approved.",
+        "grounding_notes": [
+          {
+            "policy_field": "supported_issue",
+            "evidence_quote": "Two posted payments appear to relate to one order."
+          },
+          {
+            "policy_field": "required_information",
+            "evidence_quote": "Identify whether there is one order or two."
+          }
+        ]
+      },
+      "final_human_review": {
+        "query_id": "P10",
+        "gold_policy_id": "DR-PAY-003",
+        "human_extraction_rating": "PARTIAL",
+        "human_generation_rating": "FAIL",
+        "human_unsupported_claim_count": "0",
+        "human_escalation_correct": "FAIL",
+        "reviewer": "Abin",
+        "reviewed_at": "10/2/2026",
+        "notes": "The AI mostly extracted the facts correctly but changed the customer's uncertain wording and requested irrelevant information. The generation is a FAIL because, despite sensible prose, the structured output explicitly missed the mandatory business escalation required to verify duplicate captured payments."
+      },
+      "extraction_cost_usd": 0.00021014999999999999,
+      "generation_cost_usd": 0.00043035,
+      "extraction_latency_seconds": 2.1005544000072405,
+      "generation_latency_seconds": 2.4244124999968335
+    },
+    {
+      "query_id": "C32",
+      "query_text": "Nothing is broken and the item is exactly what I ordered. I just don't need it; it arrived nine days ago and is still unused with everything included. What are the return conditions?",
+      "gold_policy_id": "DR-REF-001",
+      "extraction": {
+        "customer_goal": "Understand return conditions for an unused item",
+        "issue_summary": "Customer wants to know about return conditions for an item they no longer need.",
+        "high_level_issue": "refund",
+        "facts": [
+          {
+            "fact": "The item is exactly what I ordered.",
+            "source": "explicit_customer_text",
+            "source_quote": "the item is exactly what I ordered."
+          },
+          {
+            "fact": "The item arrived nine days ago.",
+            "source": "explicit_customer_text",
+            "source_quote": "it arrived nine days ago"
+          },
+          {
+            "fact": "The item is still unused with everything included.",
+            "source": "explicit_customer_text",
+            "source_quote": "is still unused with everything included."
+          }
+        ],
+        "missing_information": [
+          "Specific return conditions for the item",
+          "Deadline for returns",
+          "Any restocking fees or conditions"
+        ],
+        "conflicts": [],
+        "risk_flags": [],
+        "security_concern": false,
+        "human_requested": false,
+        "multiple_issues": false,
+        "uncertainty_notes": []
+      },
+      "generation": {
+        "policy_id": "DR-REF-001",
+        "policy_version": "1.0",
+        "answerable_from_policy": true,
+        "missing_information": [
+          "order_and_item_reference",
+          "delivery_date",
+          "item_condition_and_completeness"
+        ],
+        "requires_human_review": true,
+        "business_escalation_required": false,
+        "risk_flags": [],
+        "draft_status": "draft_for_human_review",
+        "draft_response": "To return your item, it must be unused, unaltered, and complete with original packaging and accessories. You can request a return within 14 calendar days after delivery. After authorization, you must dispatch the item within 7 calendar days. Standard return postage is your responsibility. Please provide the order and item reference, the delivery date, and confirm the item's condition to proceed with your return request.",
+        "grounding_notes": [
+          {
+            "policy_field": "supported_issue",
+            "evidence_quote": "A customer wants to know whether an ordinary delivered item can be returned for a refund."
+          },
+          {
+            "policy_field": "customer_facing_guidance",
+            "evidence_quote": "For an ordinary return, the request must be within 14 calendar days after delivery and the item unused, unaltered and complete."
+          }
+        ]
+      },
+      "final_human_review": {
+        "query_id": "C32",
+        "gold_policy_id": "DR-REF-001",
+        "human_extraction_rating": "PARTIAL",
+        "human_generation_rating": "PARTIAL",
+        "human_unsupported_claim_count": "0",
+        "human_escalation_correct": "PASS",
+        "reviewer": "Abin",
+        "reviewed_at": "10/2/2026",
+        "notes": "The AI captured most key facts but missed the customer's statement that the item was not broken and identified policy rules as missing information. The response was mostly correct but repeated information already provided and omitted the item-price-only refund and warehouse inspection requirements. No escalation was needed."
+      },
+      "extraction_cost_usd": 0.00020534999999999998,
+      "generation_cost_usd": 0.00044070000000000003,
+      "extraction_latency_seconds": 1.7737652999348938,
+      "generation_latency_seconds": 2.49994369992055
+    },
+    {
+      "query_id": "C36",
+      "query_text": "The paperwork says my repayment was approved six business days ago. I can see the old purchase debit, but the promised credit hasn't landed. This isn't about the original reservation of funds. What review is needed?",
+      "gold_policy_id": "DR-REF-002",
+      "extraction": {
+        "customer_goal": "Understand the status of the repayment credit",
+        "issue_summary": "Repayment credit not received despite approval",
+        "high_level_issue": "payment",
+        "facts": [
+          {
+            "fact": "The repayment was approved six business days ago.",
+            "source": "explicit_customer_text",
+            "source_quote": "The paperwork says my repayment was approved six business days ago."
+          },
+          {
+            "fact": "The customer can see the old purchase debit.",
+            "source": "explicit_customer_text",
+            "source_quote": "I can see the old purchase debit."
+          },
+          {
+            "fact": "The promised credit hasn't landed.",
+            "source": "explicit_customer_text",
+            "source_quote": "but the promised credit hasn't landed."
+          },
+          {
+            "fact": "This isn't about the original reservation of funds.",
+            "source": "explicit_customer_text",
+            "source_quote": "This isn't about the original reservation of funds."
+          }
+        ],
+        "missing_information": [
+          "Details on the status of the promised credit",
+          "Information on what review is needed"
+        ],
+        "conflicts": [],
+        "risk_flags": [],
+        "security_concern": false,
+        "human_requested": false,
+        "multiple_issues": false,
+        "uncertainty_notes": []
+      },
+      "generation": {
+        "policy_id": "DR-REF-002",
+        "policy_version": "1.0",
+        "answerable_from_policy": true,
+        "missing_information": [
+          "order_or_refund_reference",
+          "approval_date",
+          "approved_amount_and_receipt_status",
+          "original_payment_route"
+        ],
+        "requires_human_review": true,
+        "business_escalation_required": false,
+        "risk_flags": [],
+        "draft_status": "draft_for_human_review",
+        "draft_response": "Your repayment was approved six business days ago, and you have not yet received the promised credit. To assist you further, please provide the refund approval reference, the approval date, the approved amount and its receipt status, and the original payment route where you expect to receive the funds. The expected receipt window is 5 business days after the approval date. If this window has passed, a representative can trace the payment for you.",
+        "grounding_notes": [
+          {
+            "policy_field": "supported_issue",
+            "evidence_quote": "A refund was formally approved but the customer has not received it."
+          },
+          {
+            "policy_field": "required_information",
+            "evidence_quote": "Please provide the refund approval reference and date."
+          },
+          {
+            "policy_field": "policy_text",
+            "evidence_quote": "The expected receipt window is 5 business days after the approval date."
+          }
+        ]
+      },
+      "final_human_review": {
+        "query_id": "C36",
+        "gold_policy_id": "DR-REF-002",
+        "human_extraction_rating": "PARTIAL",
+        "human_generation_rating": "FAIL",
+        "human_unsupported_claim_count": "0",
+        "human_escalation_correct": "FAIL",
+        "reviewer": "Abin",
+        "reviewed_at": "10/2/2026",
+        "notes": "The AI correctly extracted the 6-business-day delay but failed to identify the actual missing information. The generation is a FAIL because the response text treats the trace as conditional, and the structured control output misses the mandatory business escalation for a refund that has already exceeded the 5-business-day limit."
+      },
+      "extraction_cost_usd": 0.00022274999999999997,
+      "generation_cost_usd": 0.00044114999999999996,
+      "extraction_latency_seconds": 2.2263863999396563,
+      "generation_latency_seconds": 2.4314768000040203
+    },
+    {
+      "query_id": "P13",
+      "query_text": "The item arrived yesterday, but it is damaged and I noticed the problem as soon as I opened the package. Should I follow the normal return process or is there a different process for damaged items?",
+      "gold_policy_id": "DR-REF-003",
+      "extraction": {
+        "customer_goal": "Determine the return process for a damaged item",
+        "issue_summary": "Received a damaged item and needs guidance on return process",
+        "high_level_issue": "refund",
+        "facts": [
+          {
+            "fact": "The item arrived yesterday",
+            "source": "explicit_customer_text",
+            "source_quote": "The item arrived yesterday"
+          },
+          {
+            "fact": "It is damaged",
+            "source": "explicit_customer_text",
+            "source_quote": "but it is damaged"
+          },
+          {
+            "fact": "I noticed the problem as soon as I opened the package",
+            "source": "explicit_customer_text",
+            "source_quote": "I noticed the problem as soon as I opened the package"
+          }
+        ],
+        "missing_information": [
+          "Specific return process for damaged items",
+          "Confirmation of whether to follow normal return process"
+        ],
+        "conflicts": [],
+        "risk_flags": [],
+        "security_concern": false,
+        "human_requested": false,
+        "multiple_issues": false,
+        "uncertainty_notes": []
+      },
+      "generation": {
+        "policy_id": "DR-REF-003",
+        "policy_version": "1.0",
+        "answerable_from_policy": true,
+        "missing_information": [
+          "order_and_item_reference",
+          "delivery_date",
+          "problem_description"
+        ],
+        "requires_human_review": true,
+        "business_escalation_required": true,
+        "risk_flags": [],
+        "draft_status": "draft_for_human_review",
+        "draft_response": "You reported that the item arrived damaged yesterday. For damaged items, you should report the issue within 7 calendar days after delivery. Please provide the following information to proceed: \n1. A reference for the order and item. \n2. The delivery date. \n3. A description of the damage or issue. \n\nOnce this information is received, an authorized reviewer will decide on the remedy, which may include a refund or replacement. Note that photographs are optional and should not be a barrier to reporting the issue. If handling the item is unsafe, please stop and request a reviewer decision instead of returning it.",
+        "grounding_notes": [
+          {
+            "policy_field": "supported_issue",
+            "evidence_quote": "A delivered item is damaged or differs from what was ordered."
+          },
+          {
+            "policy_field": "required_information",
+            "evidence_quote": "Compare the received item with the order."
+          },
+          {
+            "policy_field": "customer_facing_guidance",
+            "evidence_quote": "Please describe the damaged or incorrect item and when it arrived."
+          }
+        ]
+      },
+      "final_human_review": {
+        "query_id": "P13",
+        "gold_policy_id": "DR-REF-003",
+        "human_extraction_rating": "PARTIAL",
+        "human_generation_rating": "PASS",
+        "human_unsupported_claim_count": "0",
+        "human_escalation_correct": "PASS",
+        "reviewer": "Abin",
+        "reviewed_at": "10/2/2026",
+        "notes": "The AI correctly extracted the main facts and gave the correct damaged-item process. It unnecessarily asked for the delivery date, which was already provided, but otherwise covered the key policy points. No escalation error was identified."
+      },
+      "extraction_cost_usd": 0.00020025,
+      "generation_cost_usd": 0.00047145,
+      "extraction_latency_seconds": 3.7563243000768125,
+      "generation_latency_seconds": 2.7327949999598786
+    },
+    {
+      "query_id": "C41",
+      "query_text": "Your explanation makes sense and nothing is disputed, but I'd be more comfortable discussing it with a staff member. How can I do that?",
+      "gold_policy_id": "DR-HUM-001",
+      "extraction": {
+        "customer_goal": "Discuss with a staff member",
+        "issue_summary": "Request for human support",
+        "high_level_issue": "human_support",
+        "facts": [
+          {
+            "fact": "The customer wants to discuss with a staff member.",
+            "source": "explicit_customer_text",
+            "source_quote": "I'd be more comfortable discussing it with a staff member."
+          },
+          {
+            "fact": "The customer is seeking guidance on how to discuss with a staff member.",
+            "source": "explicit_customer_text",
+            "source_quote": "How can I do that?"
+          }
+        ],
+        "missing_information": [
+          "Contact methods for reaching a staff member",
+          "Availability of staff members for discussion"
+        ],
+        "conflicts": [],
+        "risk_flags": [],
+        "security_concern": false,
+        "human_requested": true,
+        "multiple_issues": false,
+        "uncertainty_notes": []
+      },
+      "generation": {
+        "policy_id": "DR-HUM-001",
+        "policy_version": "1.0",
+        "answerable_from_policy": true,
+        "missing_information": [
+          "Contact methods for reaching a staff member",
+          "Availability of staff members for discussion"
+        ],
+        "requires_human_review": true,
+        "business_escalation_required": false,
+        "risk_flags": [],
+        "draft_status": "draft_for_human_review",
+        "draft_response": "To discuss your concerns with a staff member, please use the existing DemoRetail support channel. I can help prepare a short summary for the representative. However, I need to know how you prefer to be contacted and the availability of staff members for discussion. Please provide this information so I can assist you further.",
+        "grounding_notes": [
+          {
+            "policy_field": "customer_facing_guidance",
+            "evidence_quote": "Use the DemoRetail support channel already available to you."
+          },
+          {
+            "policy_field": "supported_issue",
+            "evidence_quote": "The customer explicitly asks to speak with a representative."
+          }
+        ]
+      },
+      "final_human_review": {
+        "query_id": "C41",
+        "gold_policy_id": "DR-HUM-001",
+        "human_extraction_rating": "PARTIAL",
+        "human_generation_rating": "FAIL",
+        "human_unsupported_claim_count": "1",
+        "human_escalation_correct": "FAIL",
+        "reviewer": "Abin",
+        "reviewed_at": "10/2/2026",
+        "notes": "The AI correctly identified the explicit request for a human, but missed relevant context and asked for unnecessary information. The response was inappropriate because it asked the customer for staff availability, and it failed to trigger the mandatory human escalation."
+      },
+      "extraction_cost_usd": 0.00018645,
+      "generation_cost_usd": 0.00038789999999999994,
+      "extraction_latency_seconds": 1.8191640001023188,
+      "generation_latency_seconds": 2.1316250000381842
+    },
+    {
+      "query_id": "C45",
+      "query_text": "Support has established that two outstanding issues on this purchase need a joint decision. I don't want separate guesses about each one. What should the coordinated case summary contain?",
+      "gold_policy_id": "DR-HUM-002",
+      "extraction": {
+        "customer_goal": "Obtain a coordinated case summary for two issues",
+        "issue_summary": "Request for a joint decision on two outstanding issues",
+        "high_level_issue": "multiple",
+        "facts": [
+          {
+            "fact": "There are two outstanding issues on this purchase that need a joint decision.",
+            "source": "explicit_customer_text",
+            "source_quote": "Support has established that two outstanding issues on this purchase need a joint decision."
+          },
+          {
+            "fact": "The customer does not want separate guesses about each issue.",
+            "source": "explicit_customer_text",
+            "source_quote": "I don't want separate guesses about each one."
+          }
+        ],
+        "missing_information": [
+          "Details of the two outstanding issues",
+          "Specifics on what the coordinated case summary should contain"
+        ],
+        "conflicts": [],
+        "risk_flags": [],
+        "security_concern": false,
+        "human_requested": false,
+        "multiple_issues": true,
+        "uncertainty_notes": []
+      },
+      "generation": {
+        "policy_id": "DR-HUM-002",
+        "policy_version": "1.0",
+        "answerable_from_policy": true,
+        "missing_information": [
+          "Details of the two outstanding issues",
+          "Specifics on what the coordinated case summary should contain"
+        ],
+        "requires_human_review": true,
+        "business_escalation_required": false,
+        "risk_flags": [],
+        "draft_status": "draft_for_human_review",
+        "draft_response": "To obtain a coordinated case summary for the two outstanding issues, please provide the following missing information:\n1. Details of the two outstanding issues.\n2. Specifics on what the coordinated case summary should contain.\n\nThis information is necessary to prepare a structured handoff for an unresolved case, as per the established procedures.",
+        "grounding_notes": [
+          {
+            "policy_field": "supported_issue",
+            "evidence_quote": "A reviewer needs a structured handoff for an unresolved case."
+          },
+          {
+            "policy_field": "required_information",
+            "evidence_quote": "Name the established procedural reason for handoff."
+          }
+        ]
+      },
+      "final_human_review": {
+        "query_id": "C45",
+        "gold_policy_id": "DR-HUM-002",
+        "human_extraction_rating": "PARTIAL",
+        "human_generation_rating": "FAIL",
+        "human_unsupported_claim_count": "0",
+        "human_escalation_correct": "FAIL",
+        "reviewer": "Abin",
+        "reviewed_at": "10/2/2026",
+        "notes": "The AI recognized that there were multiple issues but incorrectly treated the customer's question as missing information. It failed to explain the required case-summary structure and incorrectly avoided the mandatory reviewer escalation for complex unresolved issues."
+      },
+      "extraction_cost_usd": 0.0001986,
+      "generation_cost_usd": 0.00040439999999999996,
+      "extraction_latency_seconds": 1.712844799971208,
+      "generation_latency_seconds": 2.3892817000159994
+    }
+  ]
+}

@@ -1,0 +1,105 @@
+{
+  "type": "object",
+  "properties": {
+    "customer_goal": {
+      "type": "string"
+    },
+    "issue_summary": {
+      "type": "string"
+    },
+    "high_level_issue": {
+      "type": "string",
+      "enum": [
+        "account_access",
+        "cancellation",
+        "delivery",
+        "payment",
+        "refund",
+        "human_support",
+        "multiple",
+        "unknown"
+      ]
+    },
+    "facts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "fact": {
+            "type": "string"
+          },
+          "source": {
+            "type": "string",
+            "enum": [
+              "explicit_customer_text"
+            ]
+          },
+          "source_quote": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "fact",
+          "source",
+          "source_quote"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "missing_information": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "conflicts": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "risk_flags": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "security_concern",
+          "conflicting_reports",
+          "multiple_issues",
+          "unauthorized_action_requested",
+          "sensitive_credentials",
+          "insufficient_information"
+        ]
+      }
+    },
+    "security_concern": {
+      "type": "boolean"
+    },
+    "human_requested": {
+      "type": "boolean"
+    },
+    "multiple_issues": {
+      "type": "boolean"
+    },
+    "uncertainty_notes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "customer_goal",
+    "issue_summary",
+    "high_level_issue",
+    "facts",
+    "missing_information",
+    "conflicts",
+    "risk_flags",
+    "security_concern",
+    "human_requested",
+    "multiple_issues",
+    "uncertainty_notes"
+  ],
+  "additionalProperties": false
+}

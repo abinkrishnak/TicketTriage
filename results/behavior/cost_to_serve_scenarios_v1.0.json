@@ -1,0 +1,48 @@
+{
+  "measured_source": "results/fm/fm_evaluation_summary_v1.0.json",
+  "formula": "FM + local/runtime + review_minutes * hourly_labor / 60 + escalation_probability * incremental_escalation_cost",
+  "all_non_FM_inputs": "illustrative assumptions, not observed operating data",
+  "currency": "USD",
+  "actual_savings_claimed": false,
+  "scenarios": [
+    {
+      "scenario": "low_review",
+      "measured_fm_usd_per_ticket": "0.00064629",
+      "assumed_local_runtime_usd_per_ticket": "0.002",
+      "assumed_review_minutes": "1",
+      "assumed_hourly_labor_usd": "18",
+      "assumed_escalation_probability": "0.05",
+      "assumed_incremental_escalation_usd": "2",
+      "derived_review_cost_usd": "0.3",
+      "derived_expected_escalation_cost_usd": "0.10",
+      "derived_total_usd_per_ticket": "0.40264629",
+      "derived_total_usd_per_1000_tickets": "402.64629000"
+    },
+    {
+      "scenario": "moderate_review",
+      "measured_fm_usd_per_ticket": "0.00064629",
+      "assumed_local_runtime_usd_per_ticket": "0.010",
+      "assumed_review_minutes": "3",
+      "assumed_hourly_labor_usd": "24",
+      "assumed_escalation_probability": "0.15",
+      "assumed_incremental_escalation_usd": "6",
+      "derived_review_cost_usd": "1.2",
+      "derived_expected_escalation_cost_usd": "0.90",
+      "derived_total_usd_per_ticket": "2.11064629",
+      "derived_total_usd_per_1000_tickets": "2110.64629000"
+    },
+    {
+      "scenario": "high_review",
+      "measured_fm_usd_per_ticket": "0.00064629",
+      "assumed_local_runtime_usd_per_ticket": "0.030",
+      "assumed_review_minutes": "6",
+      "assumed_hourly_labor_usd": "30",
+      "assumed_escalation_probability": "0.30",
+      "assumed_incremental_escalation_usd": "12",
+      "derived_review_cost_usd": "3",
+      "derived_expected_escalation_cost_usd": "3.60",
+      "derived_total_usd_per_ticket": "6.63064629",
+      "derived_total_usd_per_1000_tickets": "6630.64629000"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "guardrail_version": "1.0",
+  "status": "FROZEN_BEFORE_BEHAVIOR_SCORING",
+  "frozen_at_utc": "2026-10-02T05:31:27.196516+00:00",
+  "known_development_fixture_failure": "F17 unsupported airline request -> clarify instead of abstain; retained",
+  "no_post_score_tuning": true,
+  "sha256": {
+    "src/guardrails/__init__.py": "6ae0a32e504c21bf1efe3a9d6b0e73acb5895e010754530da8f2b0857fdd8b4a",
+    "src/guardrails/engine.py": "f8eb90f51043867d91947992c270c341d8a7a498ac1cd9f4e310479fd223b380",
+    "docs/guardrail_spec.md": "865191568742d1b74d18c8fd7adaa679ec5a27a023e2b42e3c6412dc80249de6",
+    "tools/stage9_evaluate.py": "b8ba7c1b6a6ca80e9ab3cbfd18b8309d0299b44ef54a19b1eeaa2a905252e078",
+    "results/behavior/local_fixtures_v1.0.json": "6b9e12a746a1e7745e3203db5b0f3e47b4ca5fe780e7ded61c1196385f2780ef",
+    "results/behavior/behavior_check_contract_v1.0.json": "c31b037e04286faf694a0a70fd0cfb4f033335eb1560ccf5900ba65f3ea897b3",
+    "data/evaluation/ambiguous_unsupported_v1.0.csv": "a4fce7d1ef9998c1165704fe9f84029e5f000d89a7053693f54b028f2a64acc1",
+    "data/playbook/demoretail_policies.v1.1.json": "aec6e23fa1975c0a11e39b92fb4ed1eae83454b457011072356fbd9ae1d04ac4",
+    "data/evaluation/fm_extraction_schema_v1.json": "e799d072200f88b7d2fd7da0449efafed006b6cf9ac232e8adf6936e7deb812e",
+    "data/evaluation/fm_generation_schema_v1.json": "5ffa5f2ea0fe8274ec16d0b1b4572b450bef3d6e9ca0e4aa9dc1f9770b100866"
+  }
+}

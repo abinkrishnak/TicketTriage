@@ -1,0 +1,1060 @@
+{
+  "company": "DemoRetail",
+  "academic_synthetic_only": true,
+  "playbook_version": "1.1",
+  "status": "frozen",
+  "created_date": "2026-10-01",
+  "effective_date": "2026-10-01",
+  "business_conventions": {
+    "fictional_scope": "DemoRetail directly sold ordinary physical goods, paid by card. No live backend access and no autonomous transaction actions.",
+    "timezone": "Asia/Singapore",
+    "calendar_days": "Consecutive local dates including weekends. Event date is day zero; the next date is day one. A window includes its final day and expires at the end of that day.",
+    "business_days": "Monday through Friday, with no holiday calendar in this fictional benchmark. Event date is excluded, next eligible weekday is day one; deadline expires at end of final business day.",
+    "unknown_dates": "Ask for the relevant date; never infer that a deadline passed. Do not block urgent security or missing-parcel review on missing optional dates.",
+    "dispatch": "First physical carrier acceptance; label creation is not dispatch.",
+    "refund_approval": "An authorized reviewer explicitly approves a refund; request, return authorization and warehouse receipt are not approval.",
+    "refund_receipt_business_days": 5,
+    "authorization_review_business_days": 5,
+    "ordinary_return_request_calendar_days": 14,
+    "damage_report_calendar_days": 7,
+    "authorized_return_dispatch_calendar_days": 7,
+    "inspection_review_business_days": 3,
+    "late_delivery_investigation_business_days": 3,
+    "tracking_review_business_days": 2,
+    "human_first_response_target_business_days": 2,
+    "recovery_message_check_minutes": 15,
+    "amounts": "Pre-dispatch confirmed cancellation: full order payment including delivery. Verified duplicate capture: extra captured amount. Ordinary compliant return: paid item price excluding original delivery; customer pays return postage. Item-problem remedy amount is set explicitly by the authorized reviewer; prepaid return if required. The assistant never calculates, approves or transfers money.",
+    "priority": "Security and high-risk action controls first; policy conflicts stop advice. Specific state overrides general tracking/delay/return handling. Missing decisive facts prompt clarification. Multiple clearly applicable issues permit reviewed multi-card guidance, not forced single-card answers.",
+    "review": "All outputs are drafts. No generated response is automatically sent. A human can inspect full cards, uncertainty and version and reject the guidance."
+  },
+  "policies": [
+    {
+      "policy_id": "DR-ACC-001",
+      "title": "Password and login recovery",
+      "high_level_category": "account_access",
+      "supported_issue": "Unable to sign in or reset a forgotten password.",
+      "short_description": "Ordinary access recovery when there is no reported security restriction or unfamiliar activity.",
+      "policy_text": "For a forgotten password or ordinary sign-in failure, guide the customer to the password-recovery option on the DemoRetail sign-in page. The customer completes recovery privately using the registered contact channel. Check the exact error and whether that channel is accessible before suggesting another recovery attempt. If a requested recovery message has not arrived after 15 minutes, suggest checking filtered mail once; if still absent, refer for access review rather than repeated attempts. A reported security lock or unfamiliar access takes priority over ordinary recovery.",
+      "eligibility_conditions": [
+        "The customer describes a sign-in or password problem.",
+        "No security lock or suspected compromise is reported.",
+        "The registered contact channel is accessible for self-service recovery."
+      ],
+      "required_information": [
+        {
+          "name": "error_description",
+          "purpose": "Distinguish ordinary login failure from a security restriction.",
+          "mandatory_for_specific_guidance": true,
+          "sensitivity_note": "Use a safe description or masked reference only; never request passwords, one-time codes, full payment-card details or bank credentials."
+        },
+        {
+          "name": "registered_channel_accessible",
+          "purpose": "Determine whether self-service recovery is possible.",
+          "mandatory_for_specific_guidance": true,
+          "sensitivity_note": "Use a safe description or masked reference only; never request passwords, one-time codes, full payment-card details or bank credentials."
+        },
+        {
+          "name": "security_concern",
+          "purpose": "Check for unfamiliar access or security warning.",
+          "mandatory_for_specific_guidance": true,
+          "sensitivity_note": "Use a safe description or masked reference only; never request passwords, one-time codes, full payment-card details or bank credentials."
+        },
+        {
+          "name": "recovery_request_time",
+          "purpose": "Apply the 15-minute message check only if a message was requested.",
+          "mandatory_for_specific_guidance": false,
+          "sensitivity_note": "Use a safe description or masked reference only; never request passwords, one-time codes, full payment-card details or bank credentials."
+        }
+      ],
+      "exceptions": [
+        "If the registered channel is inaccessible, hand off for identity review instead of trying to change it in chat."
+      ],
+      "exclusions": [
+        "Security-related account locks or suspected takeover.",
+        "New-account creation, deletion, profile editing or subscription changes."
+      ],
+      "agent_actions": [
+        "Explain the private recovery route.",
+        "Ask for the error wording and channel availability, not the password.",
+        "Prepare a handoff if self-service is unavailable."
+      ],
+      "prohibited_actions": [
+        "Never ask the customer to share a reset link, password or one-time code.",
+        "Do not reset credentials or change the registered contact channel.",
+        "Do not claim a backend check or completed action; this prototype can only prepare guidance for human review."
+      ],
+      "escalation_conditions": [
+        "Security warning or unfamiliar access.",
+        "Registered channel inaccessible.",
+        "Recovery message still missing after the stated check or repeated recovery failure."
+      ],
+      "customer_facing_guidance": "If this is an ordinary sign-in problem and you can access your registered contact channel, use the recovery option on the DemoRetail sign-in page. Complete the steps privately; do not send us a password or reset code. A security warning or inaccessible contact channel needs a representative's review.",
+      "policy_owner": "Account Security",
+      "version": "1.0",
+      "effective_date": "2026-10-01",
+      "review_status": "approved_for_academic_demo",
+      "approval_assumption": "Fictional academic rules only. The user approved the taxonomy and authorized authoring, QA and freeze. Codex performed the content/structural review; the user has not separately reviewed each full card. No real-company approval is claimed.",
+      "reviewed_by": "Codex — assistant content and structural QA under user-authorized release",
+      "reviewed_at": "2026-10-01T10:56:37.498736+00:00",
+      "review_due_date": "2027-01-01"
+    },
+    {
+      "policy_id": "DR-ACC-002",
+      "title": "Locked account or suspected compromise",
+      "high_level_category": "account_access",
+      "supported_issue": "An account is security-locked or may have been accessed by someone else.",
+      "short_description": "Security review takes precedence over routine login recovery when a lock or compromise is reported.",
+      "policy_text": "Treat a reported security lock, unfamiliar sign-in or unauthorized account change as a security-review case. Pause ordinary recovery guidance that could bypass the restriction and direct the customer to a human security review through the existing DemoRetail support channel. A reviewer must establish identity through the approved private process before any account change. The assistant may explain the review route but cannot verify identity, confirm a breach or unlock access. Do not impose a waiting period before reporting a security concern.",
+      "eligibility_conditions": [
+        "A security-related lock, unfamiliar activity or possible takeover is reported.",
+        "The concern relates to the customer's DemoRetail account."
+      ],
+      "required_information": [
+        {
+          "name": "security_signal",
+          "purpose": "Record the warning or unfamiliar activity without credentials.",
+          "mandatory_for_specific_guidance": true,
+          "sensitivity_note": "Use a safe description or masked reference only; never request passwords, one-time codes, full payment-card details or bank credentials."
+        },
+        {
+          "name": "approximate_event_time",
+          "purpose": "Give the reviewer context; an unknown time must not block security handoff.",
+          "mandatory_for_specific_guidance": false,
+          "sensitivity_note": "Use a safe description or masked reference only; never request passwords, one-time codes, full payment-card details or bank credentials."
+        },
+        {
+          "name": "safe_contact_availability",
+          "purpose": "Identify whether the usual contact channel is accessible; do not require access before handoff.",
+          "mandatory_for_specific_guidance": false,
+          "sensitivity_note": "Use a safe description or masked reference only; never request passwords, one-time codes, full payment-card details or bank credentials."
+        }
+      ],
+      "exceptions": [
+        "An ordinary forgotten password with no security signal uses the routine recovery procedure.",
+        "Uncertain ownership does not block reporting; it blocks account changes until identity review."
+      ],
+      "exclusions": [
+        "Routine sign-in help without a security signal.",
+        "Promises about fraud reimbursement or legal responsibility."
+      ],
+      "agent_actions": [
+        "Prioritize a security handoff.",
+        "Ask for a safe description of the event.",
+        "Explain that account changes require private identity verification."
+      ],
+      "prohibited_actions": [
+        "Do not declare an account safe or compromised from a message alone.",
+        "Do not unlock an account, change identity details or request secret credentials.",
+        "Do not claim a backend check or completed action; this prototype can only prepare guidance for human review."
+      ],
+      "escalation_conditions": [
+        "Every suspected compromise or security lock requires human security review.",
+        "Any request to bypass verification."
+      ],
+      "customer_facing_guidance": "A security warning or unfamiliar activity needs a security representative's review. Do not share passwords or one-time codes here. I can help prepare a description for review, but cannot verify identity or unlock the account.",
+      "policy_owner": "Account Security",
+      "version": "1.0",
+      "effective_date": "2026-10-01",
+      "review_status": "approved_for_academic_demo",
+      "approval_assumption": "Fictional academic rules only. The user approved the taxonomy and authorized authoring, QA and freeze. Codex performed the content/structural review; the user has not separately reviewed each full card. No real-company approval is claimed.",
+      "reviewed_by": "Codex — assistant content and structural QA under user-authorized release",
+      "reviewed_at": "2026-10-01T10:56:37.498736+00:00",
+      "review_due_date": "2027-01-01"
+    },
+    {
+      "policy_id": "DR-CAN-001",
+      "title": "Cancellation before dispatch",
+      "high_level_category": "cancellation",
+      "supported_issue": "A customer wants to stop an order before it leaves the retailer.",
+      "short_description": "A cancellation request is reviewable before carrier acceptance; a shipping label alone does not prove dispatch.",
+      "policy_text": "An order may be submitted for cancellation while it has not been accepted by a carrier. Dispatch means the carrier's first physical acceptance, not label creation. The representative must check current dispatch state before confirming cancellation; a customer report alone is not confirmation. If cancellation is confirmed before handoff, a captured payment is referred for a full order-payment refund, including any original delivery charge. An authorization that is still pending is handled as a hold, not as a captured-payment refund. Once the refund is formally approved, the standard 5-business-day receipt window applies. Cancellation is never guaranteed while verification is pending.",
+      "eligibility_conditions": [
+        "The request is to stop an existing order.",
+        "Carrier acceptance has not occurred and must be verified before cancellation confirmation."
+      ],
+      "required_information": [
+        {
+          "name": "order_reference",
+          "purpose": "Locate the order through an authorized representative.",
+          "mandatory_for_specific_guidance": true,
+          "sensitivity_note": "Use a safe description or masked reference only; never request passwords, one-time codes, full payment-card details or bank credentials."
+        },
+        {
+          "name": "reported_dispatch_state",
+          "purpose": "Distinguish label creation from carrier acceptance.",
+          "mandatory_for_specific_guidance": true,
+          "sensitivity_note": "Use a safe description or masked reference only; never request passwords, one-time codes, full payment-card details or bank credentials."
+        },
+        {
+          "name": "payment_state",
+          "purpose": "Distinguish captured funds from a pending hold before discussing reimbursement.",
+          "mandatory_for_specific_guidance": true,
+          "sensitivity_note": "Use a safe description or masked reference only; never request passwords, one-time codes, full payment-card details or bank credentials."
+        }
+      ],
+      "exceptions": [
+        "If carrier acceptance occurs before cancellation confirmation, use the post-dispatch procedure.",
+        "An unknown dispatch state requires clarification or human status verification."
+      ],
+      "exclusions": [
+        "Orders already accepted by a carrier.",
+        "A new return request for an item already delivered."
+      ],
+      "agent_actions": [
+        "Collect the order reference and reported state.",
+        "Prepare a cancellation review request.",
+        "Explain conditional refund versus authorization-hold handling."
+      ],
+      "prohibited_actions": [
+        "Do not promise or execute cancellation.",
+        "Do not describe a pending authorization as a completed refund.",
+        "Do not claim a backend check or completed action; this prototype can only prepare guidance for human review."
+      ],
+      "escalation_conditions": [
+        "Dispatch state uncertain or contradictory.",
+        "Order dispatches while the request is under review.",
+        "Captured-payment reversal or any cancellation execution requires an authorized representative."
+      ],
+      "customer_facing_guidance": "If the carrier has not accepted the parcel, a representative can check whether cancellation is still possible. A shipping label alone does not settle that question. Please provide the order reference and current status; cancellation and any refund remain subject to verification.",
+      "policy_owner": "Support Operations",
+      "version": "1.0",
+      "effective_date": "2026-10-01",
+      "review_status": "approved_for_academic_demo",
+      "approval_assumption": "Fictional academic rules only. The user approved the taxonomy and authorized authoring, QA and freeze. Codex performed the content/structural review; the user has not separately reviewed each full card. No real-company approval is claimed.",
+      "reviewed_by": "Codex — assistant content and structural QA under user-authorized release",
+      "reviewed_at": "2026-10-01T10:56:37.498736+00:00",
+      "review_due_date": "2027-01-01"
+    },
+    {
+      "policy_id": "DR-CAN-002",
+      "title": "Cancellation requested after dispatch",
+      "high_level_category": "cancellation",
+      "supported_issue": "A customer asks to cancel an order already handed to the carrier.",
+      "short_description": "After dispatch, explain the return route rather than promising to stop the shipment.",
+      "policy_text": "Once a carrier has physically accepted the parcel, standard cancellation is unavailable. Do not promise interception or advise refusal of delivery as a guaranteed refund route. If the customer still wants to return an ordinary item after receipt, explain that a separate eligibility review can take place within 14 calendar days after delivery, with the delivery day excluded from the count. That future return remains subject to the ordinary condition requirements; this card does not itself approve it. A parcel that never arrives or an item arriving damaged needs its corresponding delivery or item-remedy review.",
+      "eligibility_conditions": [
+        "The primary request is cancellation.",
+        "Carrier acceptance has occurred."
+      ],
+      "required_information": [
+        {
+          "name": "order_reference",
+          "purpose": "Identify the order for a representative.",
+          "mandatory_for_specific_guidance": true,
+          "sensitivity_note": "Use a safe description or masked reference only; never request passwords, one-time codes, full payment-card details or bank credentials."
+        },
+        {
+          "name": "carrier_acceptance_state",
+          "purpose": "Confirm the applicable cancellation stage.",
+          "mandatory_for_specific_guidance": true,
+          "sensitivity_note": "Use a safe description or masked reference only; never request passwords, one-time codes, full payment-card details or bank credentials."
+        },
+        {
+          "name": "delivery_state",
+          "purpose": "Distinguish in-transit cancellation from a delivered-item return.",
+          "mandatory_for_specific_guidance": true,
+          "sensitivity_note": "Use a safe description or masked reference only; never request passwords, one-time codes, full payment-card details or bank credentials."
+        }
+      ],
+      "exceptions": [
+        "If only a label was created and no carrier acceptance occurred, review pre-dispatch cancellation.",
+        "If delivered already and the primary question is refund eligibility, use the standard return review."
+      ],
+      "exclusions": [
+        "Ordinary refund eligibility decisions after delivery.",
+        "Missing parcels, damaged contents or incorrect items as the primary issue."
+      ],
+      "agent_actions": [
+        "Explain that post-dispatch cancellation is unavailable.",
+        "Describe a possible return review after receipt without granting eligibility.",
+        "Seek clarification if shipment and delivery states conflict."
+      ],
+      "prohibited_actions": [
+        "Do not promise interception, cancellation or automatic refund.",
+        "Do not state that refusing delivery secures a refund.",
+        "Do not claim a backend check or completed action; this prototype can only prepare guidance for human review."
+      ],
+      "escalation_conditions": [
+        "Customer disputes the dispatch state.",
+        "Customer requests an exception to post-dispatch cancellation.",
+        "Delivery loss or item damage is also reported."
+      ],
+      "customer_facing_guidance": "If the parcel has already been accepted by the carrier, it cannot use the standard cancellation route. After receipt, an ordinary return may be reviewed within the return window and subject to item condition. This does not approve a return or promise that the shipment can be stopped.",
+      "policy_owner": "Support Operations",
+      "version": "1.0",
+      "effective_date": "2026-10-01",
+      "review_status": "approved_for_academic_demo",
+      "approval_assumption": "Fictional academic rules only. The user approved the taxonomy and authorized authoring, QA and freeze. Codex performed the content/structural review; the user has not separately reviewed each full card. No real-company approval is claimed.",
+      "reviewed_by": "Codex — assistant content and structural QA under user-authorized release",
+      "reviewed_at": "2026-10-01T10:56:37.498736+00:00",
+      "review_due_date": "2027-01-01"
+    },
+    {
+      "policy_id": "DR-DEL-001",
+      "title": "Delivery later than the promised window",
+      "high_level_category": "delivery",
+      "supported_issue": "A parcel has not arrived by the end of its promised delivery window.",
+      "short_description": "Review confirmed lateness without assuming the parcel is lost.",
+      "policy_text": "Use the order's latest mutually confirmed promised delivery window, not an estimated date invented by the assistant. After that window ends, a representative may request a carrier status check. If there is still no delivery by the end of 3 business days after the promised window's final date, escalate for a delivery investigation. Lateness alone does not establish loss or grant a refund. A reported carrier loss or a delivered scan disputed by the recipient goes directly to missing-parcel review without waiting for the 3-business-day threshold.",
+      "eligibility_conditions": [
+        "The promised delivery window has ended.",
+        "The parcel has not been received.",
+        "No confirmed-loss report or disputed delivered scan is the primary known state."
+      ],
+      "required_information": [
+        {
+          "name": "order_reference",
+          "purpose": "Identify the shipment.",
+          "mandatory_for_specific_guidance": true,
+          "sensitivity_note": "Use a safe description or masked reference only; never request passwords, one-time codes, full payment-card details or bank credentials."
+        },
+        {
+          "name": "promised_window_end",
+          "purpose": "Establish whether and how long delivery is late.",
+          "mandatory_for_specific_guidance": true,
+          "sensitivity_note": "Use a safe description or masked reference only; never request passwords, one-time codes, full payment-card details or bank credentials."
+        },
+        {
+          "name": "latest_tracking_state",
+          "purpose": "Distinguish delay from reported loss or disputed delivery.",
+          "mandatory_for_specific_guidance": true,
+          "sensitivity_note": "Use a safe description or masked reference only; never request passwords, one-time codes, full payment-card details or bank credentials."
+        },
+        {
+          "name": "receipt_status",
+          "purpose": "Confirm whether any parcel has arrived.",
+          "mandatory_for_specific_guidance": true,
+          "sensitivity_note": "Use a safe description or masked reference only; never request passwords, one-time codes, full payment-card details or bank credentials."
+        }
+      ],
+      "exceptions": [
+        "A loss report or disputed delivered scan overrides ordinary delay waiting.",
+        "If no promised window is known, seek it before stating that delivery is late."
+      ],
+      "exclusions": [
+        "Tracking unavailable when lateness is not established.",
+        "Confirmed loss or delivered-but-not-received reports.",
+        "Damage to goods that have arrived."
+      ],
+      "agent_actions": [
+        "Explain the distinction between late and missing.",
+        "Prepare a status-check request after the window ends.",
+        "Prepare an investigation handoff once the 3-business-day threshold has passed."
+      ],
+      "prohibited_actions": [
+        "Do not invent a new delivery date.",
+        "Do not declare loss or award compensation from elapsed time alone.",
+        "Do not claim a backend check or completed action; this prototype can only prepare guidance for human review."
+      ],
+      "escalation_conditions": [
+        "No delivery after the 3-business-day threshold.",
+        "Carrier reports loss or customer disputes a delivered scan.",
+        "Conflicting promised dates or tracking states."
+      ],
+      "customer_facing_guidance": "Please share the promised delivery window and latest tracking state. If the window has ended, a representative can check the delay. Continued non-delivery beyond 3 business days after that window calls for investigation; it does not by itself confirm loss or a refund.",
+      "policy_owner": "Fulfilment Operations",
+      "version": "1.0",
+      "effective_date": "2026-10-01",
+      "review_status": "approved_for_academic_demo",
+      "approval_assumption": "Fictional academic rules only. The user approved the taxonomy and authorized authoring, QA and freeze. Codex performed the content/structural review; the user has not separately reviewed each full card. No real-company approval is claimed.",
+      "reviewed_by": "Codex — assistant content and structural QA under user-authorized release",
+      "reviewed_at": "2026-10-01T10:56:37.498736+00:00",
+      "review_due_date": "2027-01-01"
+    },
+    {
+      "policy_id": "DR-DEL-002",
+      "title": "Missing parcel or delivered but not received",
+      "high_level_category": "delivery",
+      "supported_issue": "A parcel is reported lost or shows delivered although the recipient has not received it.",
+      "short_description": "Missing-parcel investigation depends on the reported outcome, not simply an old tracking scan.",
+      "policy_text": "Refer a carrier loss report or delivered-but-not-received report for a missing-parcel investigation immediately. Ask whether household members or an agreed safe location have been checked only where safe and relevant; do not require the customer to confront neighbours or obtain sensitive evidence. Record the discrepancy and the delivery reference for an authorized reviewer. No waiting period is required before opening this review. Neither a delivered scan nor a customer's use of the word lost alone proves liability, final loss or refund eligibility. Any replacement or reimbursement is a separate human decision after investigation.",
+      "eligibility_conditions": [
+        "There is a reported carrier loss, or tracking says delivered and receipt is disputed.",
+        "The report concerns a DemoRetail parcel."
+      ],
+      "required_information": [
+        {
+          "name": "order_reference",
+          "purpose": "Identify the shipment.",
+          "mandatory_for_specific_guidance": true,
+          "sensitivity_note": "Use a safe description or masked reference only; never request passwords, one-time codes, full payment-card details or bank credentials."
+        },
+        {
+          "name": "tracking_outcome",
+          "purpose": "Record reported loss or delivered scan and its date if available.",
+          "mandatory_for_specific_guidance": true,
+          "sensitivity_note": "Use a safe description or masked reference only; never request passwords, one-time codes, full payment-card details or bank credentials."
+        },
+        {
+          "name": "receipt_discrepancy",
+          "purpose": "Describe what the recipient did or did not receive.",
+          "mandatory_for_specific_guidance": true,
+          "sensitivity_note": "Use a safe description or masked reference only; never request passwords, one-time codes, full payment-card details or bank credentials."
+        },
+        {
+          "name": "safe_location_check",
+          "purpose": "Optional context only; do not make unsafe checks a condition.",
+          "mandatory_for_specific_guidance": false,
+          "sensitivity_note": "Use a safe description or masked reference only; never request passwords, one-time codes, full payment-card details or bank credentials."
+        }
+      ],
+      "exceptions": [
+        "If the only evidence is lateness or a stale scan, clarify the state and use the delay or tracking procedure.",
+        "Uncertain scan details do not block a representative from reviewing the discrepancy."
+      ],
+      "exclusions": [
+        "An ordinary delay without a loss report or disputed delivery.",
+        "Damage or wrong contents in a received parcel."
+      ],
+      "agent_actions": [
+        "Prepare an immediate missing-parcel review.",
+        "Record customer and tracking statements separately.",
+        "Explain that the reviewer determines any remedy."
+      ],
+      "prohibited_actions": [
+        "Do not promise replacement or refund before investigation.",
+        "Do not treat a scan as conclusive proof against the customer.",
+        "Do not claim a backend check or completed action; this prototype can only prepare guidance for human review."
+      ],
+      "escalation_conditions": [
+        "Every loss or disputed-delivery report requires investigation.",
+        "Unsafe evidence requests, threats or inconsistent delivery evidence."
+      ],
+      "customer_facing_guidance": "A reported loss or a delivered scan for a parcel you did not receive needs investigation. I can help summarize the discrepancy for a representative. The scan and your report both need review; I cannot confirm loss or promise reimbursement from this message alone.",
+      "policy_owner": "Fulfilment Operations",
+      "version": "1.0",
+      "effective_date": "2026-10-01",
+      "review_status": "approved_for_academic_demo",
+      "approval_assumption": "Fictional academic rules only. The user approved the taxonomy and authorized authoring, QA and freeze. Codex performed the content/structural review; the user has not separately reviewed each full card. No real-company approval is claimed.",
+      "reviewed_by": "Codex — assistant content and structural QA under user-authorized release",
+      "reviewed_at": "2026-10-01T10:56:37.498736+00:00",
+      "review_due_date": "2027-01-01"
+    },
+    {
+      "policy_id": "DR-DEL-003",
+      "title": "Tracking unavailable or not updating",
+      "high_level_category": "delivery",
+      "supported_issue": "Tracking is unavailable, invalid or has stopped updating.",
+      "short_description": "Resolve missing shipment information when late delivery or loss has not been established.",
+      "policy_text": "Check whether the reference is an order number or a carrier tracking reference and whether the carrier has accepted the parcel. A shipping label without acceptance may have no movement history. If carrier acceptance is reported and tracking remains unavailable or unchanged through 2 business days after acceptance or the latest movement scan, refer for tracking review. If the promised delivery window has already ended, prioritize the delayed-delivery procedure; if loss or disputed delivery is reported, prioritize missing-parcel review. A lack of scans does not establish loss or a guaranteed arrival date.",
+      "eligibility_conditions": [
+        "The primary problem is unusable or unchanged tracking.",
+        "Lateness, reported loss and disputed delivery have not already established a more specific delivery case."
+      ],
+      "required_information": [
+        {
+          "name": "reference_type",
+          "purpose": "Distinguish an order number from tracking information.",
+          "mandatory_for_specific_guidance": true,
+          "sensitivity_note": "Use a safe description or masked reference only; never request passwords, one-time codes, full payment-card details or bank credentials."
+        },
+        {
+          "name": "acceptance_or_last_scan",
+          "purpose": "Apply the 2-business-day tracking review threshold.",
+          "mandatory_for_specific_guidance": true,
+          "sensitivity_note": "Use a safe description or masked reference only; never request passwords, one-time codes, full payment-card details or bank credentials."
+        },
+        {
+          "name": "promised_window_end",
+          "purpose": "Check whether delivery is already late.",
+          "mandatory_for_specific_guidance": true,
+          "sensitivity_note": "Use a safe description or masked reference only; never request passwords, one-time codes, full payment-card details or bank credentials."
+        },
+        {
+          "name": "tracking_problem",
+          "purpose": "Record invalid, unavailable or unchanged status.",
+          "mandatory_for_specific_guidance": true,
+          "sensitivity_note": "Use a safe description or masked reference only; never request passwords, one-time codes, full payment-card details or bank credentials."
+        }
+      ],
+      "exceptions": [
+        "Unknown acceptance or promised date requires clarification, not a claim that the parcel is on time.",
+        "A passed promised window or reported loss takes precedence over the tracking-only timer."
+      ],
+      "exclusions": [
+        "Confirmed late delivery as the primary issue.",
+        "Reported loss or a disputed delivered scan."
+      ],
+      "agent_actions": [
+        "Explain the difference between label creation and physical acceptance.",
+        "Check the type of reference described by the customer.",
+        "Prepare tracking review when the stated threshold is exceeded."
+      ],
+      "prohibited_actions": [
+        "Do not claim to have queried a carrier.",
+        "Do not infer loss from a lack of scans.",
+        "Do not claim a backend check or completed action; this prototype can only prepare guidance for human review."
+      ],
+      "escalation_conditions": [
+        "No usable update after the 2-business-day threshold.",
+        "Reference cannot be identified by ordinary clarification.",
+        "Delivery becomes late or a loss/disputed-delivery report appears."
+      ],
+      "customer_facing_guidance": "Please describe the tracking problem and the latest acceptance or movement scan. A label alone may not show movement. If tracking stays unavailable or unchanged beyond 2 business days from acceptance or the last scan, a representative should review it; a late or missing parcel follows its separate procedure.",
+      "policy_owner": "Fulfilment Operations",
+      "version": "1.0",
+      "effective_date": "2026-10-01",
+      "review_status": "approved_for_academic_demo",
+      "approval_assumption": "Fictional academic rules only. The user approved the taxonomy and authorized authoring, QA and freeze. Codex performed the content/structural review; the user has not separately reviewed each full card. No real-company approval is claimed.",
+      "reviewed_by": "Codex — assistant content and structural QA under user-authorized release",
+      "reviewed_at": "2026-10-01T10:56:37.498736+00:00",
+      "review_due_date": "2027-01-01"
+    },
+    {
+      "policy_id": "DR-PAY-001",
+      "title": "Failed payment attempt",
+      "high_level_category": "payment",
+      "supported_issue": "Checkout reports that a payment attempt failed.",
+      "short_description": "Review a failed attempt while checking whether funds are pending or captured before another attempt.",
+      "policy_text": "A failed checkout message does not prove that no funds were reserved. Ask the customer to distinguish failed, pending and posted payment status using a safe description from their payment record. If no authorization or captured payment is shown and no order confirmation exists, basic checks of entered non-secret billing information and a single later checkout attempt may be suggested. Do not advise repeated retries. If there is a pending hold, use authorization guidance; if funds are posted or an order confirmation exists despite the failure message, obtain payment review before suggesting another payment.",
+      "eligibility_conditions": [
+        "A payment attempt is reported failed.",
+        "Pending or captured funds and order confirmation must be checked before any suggestion to retry."
+      ],
+      "required_information": [
+        {
+          "name": "checkout_error",
+          "purpose": "Understand the failure message.",
+          "mandatory_for_specific_guidance": true,
+          "sensitivity_note": "Use a safe description or masked reference only; never request passwords, one-time codes, full payment-card details or bank credentials."
+        },
+        {
+          "name": "payment_state",
+          "purpose": "Distinguish no transaction, pending or posted funds.",
+          "mandatory_for_specific_guidance": true,
+          "sensitivity_note": "Use a safe description or masked reference only; never request passwords, one-time codes, full payment-card details or bank credentials."
+        },
+        {
+          "name": "order_confirmation_present",
+          "purpose": "Avoid a second payment for an existing order.",
+          "mandatory_for_specific_guidance": true,
+          "sensitivity_note": "Use a safe description or masked reference only; never request passwords, one-time codes, full payment-card details or bank credentials."
+        }
+      ],
+      "exceptions": [
+        "A pending authorization follows the pending-payment procedure.",
+        "A posted payment with a failure message requires reconciliation by a representative."
+      ],
+      "exclusions": [
+        "Two confirmed captured payments.",
+        "A refund already approved but not received."
+      ],
+      "agent_actions": [
+        "Ask for safe error/status descriptions.",
+        "Suggest basic non-secret billing checks.",
+        "Suggest at most one later attempt only when no funds or confirmed order are indicated."
+      ],
+      "prohibited_actions": [
+        "Do not collect full card details or codes.",
+        "Do not recommend another payment while an existing hold or capture remains unresolved.",
+        "Do not claim a backend check or completed action; this prototype can only prepare guidance for human review."
+      ],
+      "escalation_conditions": [
+        "Posted funds or order confirmation contradict the failure message.",
+        "A second attempt fails.",
+        "The customer cannot determine payment state."
+      ],
+      "customer_facing_guidance": "A failed checkout can still leave a pending authorization. Please check whether the transaction is absent, pending or posted and whether an order confirmation exists. Do not pay again while the status is unclear; a representative can review a mismatch.",
+      "policy_owner": "Payments Operations",
+      "version": "1.0",
+      "effective_date": "2026-10-01",
+      "review_status": "approved_for_academic_demo",
+      "approval_assumption": "Fictional academic rules only. The user approved the taxonomy and authorized authoring, QA and freeze. Codex performed the content/structural review; the user has not separately reviewed each full card. No real-company approval is claimed.",
+      "reviewed_by": "Codex — assistant content and structural QA under user-authorized release",
+      "reviewed_at": "2026-10-01T10:56:37.498736+00:00",
+      "review_due_date": "2027-01-01"
+    },
+    {
+      "policy_id": "DR-PAY-002",
+      "title": "Pending payment or authorization hold",
+      "high_level_category": "payment",
+      "supported_issue": "A payment is pending or a temporary authorization is still visible.",
+      "short_description": "An unsettled payment hold is not the same as a duplicate captured charge or an approved refund.",
+      "policy_text": "For a card authorization still marked pending, explain that a reservation is not a confirmed captured payment. In this fictional service, a pending authorization is expected to clear or update within 5 business days after its authorization date. If it remains pending after that window, refer to an authorized payment reviewer; actual release depends on the payment provider and must not be guaranteed. When one entry is captured and another pending, review the pending entry as a hold rather than automatically declaring a duplicate capture. A refund approved by DemoRetail uses the refund-approval date and refund-status procedure instead.",
+      "eligibility_conditions": [
+        "At least one transaction is reported pending rather than posted/captured.",
+        "The customer is asking about the original payment authorization, not an approved refund."
+      ],
+      "required_information": [
+        {
+          "name": "transaction_state",
+          "purpose": "Verify the distinction from a captured payment.",
+          "mandatory_for_specific_guidance": true,
+          "sensitivity_note": "Use a safe description or masked reference only; never request passwords, one-time codes, full payment-card details or bank credentials."
+        },
+        {
+          "name": "authorization_date",
+          "purpose": "Start the 5-business-day review clock.",
+          "mandatory_for_specific_guidance": true,
+          "sensitivity_note": "Use a safe description or masked reference only; never request passwords, one-time codes, full payment-card details or bank credentials."
+        },
+        {
+          "name": "order_reference_or_confirmation",
+          "purpose": "Associate the hold with the intended purchase.",
+          "mandatory_for_specific_guidance": true,
+          "sensitivity_note": "Use a safe description or masked reference only; never request passwords, one-time codes, full payment-card details or bank credentials."
+        },
+        {
+          "name": "other_transaction_states",
+          "purpose": "Distinguish one posted plus one pending entry from two posted entries.",
+          "mandatory_for_specific_guidance": true,
+          "sensitivity_note": "Use a safe description or masked reference only; never request passwords, one-time codes, full payment-card details or bank credentials."
+        }
+      ],
+      "exceptions": [
+        "Two captured entries for one order require duplicate-payment review.",
+        "Unknown transaction state requires clarification; do not assume that the bank's word pending refers to a refund."
+      ],
+      "exclusions": [
+        "A merchant-approved refund awaiting receipt.",
+        "Two established captured payments for the same purchase."
+      ],
+      "agent_actions": [
+        "Explain the hold/capture distinction.",
+        "Calculate the fictional review window only from a known authorization date.",
+        "Prepare a review when the hold persists beyond the window."
+      ],
+      "prohibited_actions": [
+        "Do not promise a bank release date.",
+        "Do not describe an authorization release as a refund already issued.",
+        "Do not claim a backend check or completed action; this prototype can only prepare guidance for human review."
+      ],
+      "escalation_conditions": [
+        "Pending status persists after 5 business days.",
+        "Payment states conflict or cannot be established.",
+        "Customer reports possible unauthorized activity."
+      ],
+      "customer_facing_guidance": "A pending entry may be a payment authorization rather than a completed charge. The review window is 5 business days from authorization; if it remains pending after that, a representative should investigate. This is not a guarantee of when your payment provider will release funds.",
+      "policy_owner": "Payments Operations",
+      "version": "1.1",
+      "effective_date": "2026-10-01",
+      "review_status": "approved_for_academic_demo",
+      "approval_assumption": "Fictional academic rules only. The user approved the taxonomy and authorized authoring, QA and freeze. Codex performed the content/structural review; the user has not separately reviewed each full card. No real-company approval is claimed.",
+      "reviewed_by": "Codex — assistant content and structural QA under user-authorized release",
+      "reviewed_at": "2026-10-01T10:58:49.559318+00:00",
+      "review_due_date": "2027-01-01"
+    },
+    {
+      "policy_id": "DR-PAY-003",
+      "title": "Suspected duplicate captured payment",
+      "high_level_category": "payment",
+      "supported_issue": "Two posted payments appear to relate to one order.",
+      "short_description": "Review possible duplicate capture instead of assuming every second bank entry is a completed charge.",
+      "policy_text": "A suspected duplicate-payment case requires two posted or captured entries for the same DemoRetail purchase. An authorized representative checks order and transaction records before confirming duplication. If a duplicate capture is verified, the reviewer can approve reversal of the extra captured amount only; the assistant does not issue it. After formal refund approval, allow the standard 5-business-day receipt window. One posted entry plus a pending hold is not sufficient to confirm a duplicate capture and belongs to pending-payment review. Two distinct valid orders are not automatically duplicates.",
+      "eligibility_conditions": [
+        "Two posted/captured payments are reported.",
+        "They appear to relate to the same single order.",
+        "Duplication must be verified before any refund approval."
+      ],
+      "required_information": [
+        {
+          "name": "order_reference",
+          "purpose": "Identify whether there is one order or two.",
+          "mandatory_for_specific_guidance": true,
+          "sensitivity_note": "Use a safe description or masked reference only; never request passwords, one-time codes, full payment-card details or bank credentials."
+        },
+        {
+          "name": "entry_dates_and_amounts",
+          "purpose": "Compare the reported transactions without full card details.",
+          "mandatory_for_specific_guidance": true,
+          "sensitivity_note": "Use a safe description or masked reference only; never request passwords, one-time codes, full payment-card details or bank credentials."
+        },
+        {
+          "name": "status_of_each_entry",
+          "purpose": "Distinguish two posted entries from a pending hold.",
+          "mandatory_for_specific_guidance": true,
+          "sensitivity_note": "Use a safe description or masked reference only; never request passwords, one-time codes, full payment-card details or bank credentials."
+        },
+        {
+          "name": "masked_transaction_references",
+          "purpose": "Help an authorized reviewer identify the entries.",
+          "mandatory_for_specific_guidance": false,
+          "sensitivity_note": "Use a safe description or masked reference only; never request passwords, one-time codes, full payment-card details or bank credentials."
+        }
+      ],
+      "exceptions": [
+        "One posted plus one pending entry follows pending-payment guidance.",
+        "A second valid order must be investigated as a separate order, not presumed duplicate billing."
+      ],
+      "exclusions": [
+        "Pending authorizations without two captures.",
+        "A failed attempt with no posted funds.",
+        "Status of a refund that is already approved."
+      ],
+      "agent_actions": [
+        "Collect masked references and transaction-state descriptions.",
+        "Prepare a duplicate-charge verification request.",
+        "Explain that any approved reversal is limited to the verified extra capture."
+      ],
+      "prohibited_actions": [
+        "Do not confirm duplication from amounts alone.",
+        "Do not promise or execute a refund.",
+        "Do not claim a backend check or completed action; this prototype can only prepare guidance for human review."
+      ],
+      "escalation_conditions": [
+        "Every suspected duplicate capture needs payment-record verification.",
+        "Transactions relate to different orders or evidence conflicts.",
+        "Possible unauthorized payment."
+      ],
+      "customer_facing_guidance": "Please confirm whether both entries are posted and whether they concern the same order. A representative must verify duplication before approving a reversal. One posted charge and one pending hold are different from two captured payments.",
+      "policy_owner": "Payments Operations",
+      "version": "1.0",
+      "effective_date": "2026-10-01",
+      "review_status": "approved_for_academic_demo",
+      "approval_assumption": "Fictional academic rules only. The user approved the taxonomy and authorized authoring, QA and freeze. Codex performed the content/structural review; the user has not separately reviewed each full card. No real-company approval is claimed.",
+      "reviewed_by": "Codex — assistant content and structural QA under user-authorized release",
+      "reviewed_at": "2026-10-01T10:56:37.498736+00:00",
+      "review_due_date": "2027-01-01"
+    },
+    {
+      "policy_id": "DR-REF-001",
+      "title": "Standard return and refund eligibility",
+      "high_level_category": "refund",
+      "supported_issue": "A customer wants to know whether an ordinary delivered item can be returned for a refund.",
+      "short_description": "Standard return eligibility depends on receipt date and item condition, not simply the refund category.",
+      "policy_text": "An ordinary change-of-mind return can be requested within 14 calendar days after delivery, excluding the delivery day and including the final day. The item must be unused, unaltered and complete with its original packaging and accessories. After a representative authorizes the return, the customer must dispatch it within 7 calendar days after authorization, excluding that day. Standard return postage is the customer's responsibility. A compliant return refunds the paid item price, not the original delivery charge. Refund approval follows inspection, targeted within 3 business days after warehouse receipt; missing inspection beyond that point requires review, not automatic approval. After approval, the receipt window is 5 business days.",
+      "eligibility_conditions": [
+        "Ordinary delivered goods are being returned for change of mind.",
+        "The request is within 14 calendar days after delivery.",
+        "The item is unused, unaltered and complete with original packaging and accessories.",
+        "Dispatch occurs within 7 calendar days after return authorization."
+      ],
+      "required_information": [
+        {
+          "name": "order_and_item_reference",
+          "purpose": "Identify the item and paid price for a reviewer.",
+          "mandatory_for_specific_guidance": true,
+          "sensitivity_note": "Use a safe description or masked reference only; never request passwords, one-time codes, full payment-card details or bank credentials."
+        },
+        {
+          "name": "delivery_date",
+          "purpose": "Check the 14-calendar-day request window.",
+          "mandatory_for_specific_guidance": true,
+          "sensitivity_note": "Use a safe description or masked reference only; never request passwords, one-time codes, full payment-card details or bank credentials."
+        },
+        {
+          "name": "item_condition_and_completeness",
+          "purpose": "Assess ordinary eligibility.",
+          "mandatory_for_specific_guidance": true,
+          "sensitivity_note": "Use a safe description or masked reference only; never request passwords, one-time codes, full payment-card details or bank credentials."
+        },
+        {
+          "name": "return_authorization_and_dispatch_dates",
+          "purpose": "Required when checking an already authorized return.",
+          "mandatory_for_specific_guidance": false,
+          "sensitivity_note": "Use a safe description or masked reference only; never request passwords, one-time codes, full payment-card details or bank credentials."
+        }
+      ],
+      "exceptions": [
+        "Damage or incorrect contents use the item-remedy procedure rather than ordinary condition restrictions.",
+        "A missed deadline or unusual circumstance needs human exception review; the assistant cannot grant or finally deny it."
+      ],
+      "exclusions": [
+        "Damage or incorrect items as the primary reason.",
+        "A refund already approved but delayed.",
+        "An order that has not yet been delivered."
+      ],
+      "agent_actions": [
+        "Explain the ordinary conditions and safe information needed.",
+        "Prepare a return-eligibility review.",
+        "Explain customer-paid return postage without creating a shipping label."
+      ],
+      "prohibited_actions": [
+        "Do not approve or deny a refund autonomously.",
+        "Do not treat a return request or warehouse receipt as formal refund approval.",
+        "Do not claim a backend check or completed action; this prototype can only prepare guidance for human review."
+      ],
+      "escalation_conditions": [
+        "Request or return-dispatch window missed.",
+        "Condition, receipt date or item identity disputed.",
+        "No inspection decision within 3 business days after warehouse receipt."
+      ],
+      "customer_facing_guidance": "For an ordinary return, the request must be within 14 calendar days after delivery and the item unused, unaltered and complete. A representative must authorize the return; standard return postage is customer-paid. Refund approval follows inspection, so a request alone does not mean payment is on its way.",
+      "policy_owner": "Support Operations",
+      "version": "1.0",
+      "effective_date": "2026-10-01",
+      "review_status": "approved_for_academic_demo",
+      "approval_assumption": "Fictional academic rules only. The user approved the taxonomy and authorized authoring, QA and freeze. Codex performed the content/structural review; the user has not separately reviewed each full card. No real-company approval is claimed.",
+      "reviewed_by": "Codex — assistant content and structural QA under user-authorized release",
+      "reviewed_at": "2026-10-01T10:56:37.498736+00:00",
+      "review_due_date": "2027-01-01"
+    },
+    {
+      "policy_id": "DR-REF-002",
+      "title": "Approved refund not yet received",
+      "high_level_category": "refund",
+      "supported_issue": "A refund was formally approved but the customer has not received it.",
+      "short_description": "Track an existing refund outcome using approval date, not the date a return was requested.",
+      "policy_text": "For a formally approved refund, the expected receipt window is 5 business days after the approval date, excluding that date. Count from the approval notice, not the cancellation request, return dispatch, warehouse receipt or original payment date. Within the window, explain the processing period without claiming that a provider has settled funds. After the window ends, prepare a payment trace for an authorized representative. An approval reference is evidence to verify, not a guarantee of bank receipt. Refunds use the original payment route; a request to redirect funds requires review and is never executed by the assistant.",
+      "eligibility_conditions": [
+        "DemoRetail refund approval is reported and can be identified.",
+        "The primary issue is non-receipt of that refund.",
+        "Approval date is needed before declaring it overdue."
+      ],
+      "required_information": [
+        {
+          "name": "order_or_refund_reference",
+          "purpose": "Identify the existing approval.",
+          "mandatory_for_specific_guidance": true,
+          "sensitivity_note": "Use a safe description or masked reference only; never request passwords, one-time codes, full payment-card details or bank credentials."
+        },
+        {
+          "name": "approval_date",
+          "purpose": "Start the 5-business-day refund receipt clock.",
+          "mandatory_for_specific_guidance": true,
+          "sensitivity_note": "Use a safe description or masked reference only; never request passwords, one-time codes, full payment-card details or bank credentials."
+        },
+        {
+          "name": "approved_amount_and_receipt_status",
+          "purpose": "Support a trace without asking for bank credentials.",
+          "mandatory_for_specific_guidance": true,
+          "sensitivity_note": "Use a safe description or masked reference only; never request passwords, one-time codes, full payment-card details or bank credentials."
+        },
+        {
+          "name": "original_payment_route",
+          "purpose": "Check where the customer is looking for receipt.",
+          "mandatory_for_specific_guidance": true,
+          "sensitivity_note": "Use a safe description or masked reference only; never request passwords, one-time codes, full payment-card details or bank credentials."
+        }
+      ],
+      "exceptions": [
+        "If only a return or cancellation request exists, establish whether approval occurred before applying this timer.",
+        "A provider-confirmed problem can be escalated before the window ends."
+      ],
+      "exclusions": [
+        "New refund eligibility decisions.",
+        "Original payment authorization holds.",
+        "A return still awaiting inspection and approval."
+      ],
+      "agent_actions": [
+        "Explain the approval-based window.",
+        "Request safe approval details.",
+        "Prepare a trace when overdue or when provider failure is reported."
+      ],
+      "prohibited_actions": [
+        "Do not claim a refund was sent or received without authorized verification.",
+        "Do not redirect or reissue funds.",
+        "Do not claim a backend check or completed action; this prototype can only prepare guidance for human review."
+      ],
+      "escalation_conditions": [
+        "Refund remains unreceived after 5 business days.",
+        "Approval details are contradictory or cannot be verified.",
+        "Customer asks to change the payment destination."
+      ],
+      "customer_facing_guidance": "Please provide the refund approval reference and date. The expected window is 5 business days after approval, not after the initial request. If that window has passed, a representative should trace it. I cannot verify bank receipt or redirect the refund.",
+      "policy_owner": "Payments Operations",
+      "version": "1.0",
+      "effective_date": "2026-10-01",
+      "review_status": "approved_for_academic_demo",
+      "approval_assumption": "Fictional academic rules only. The user approved the taxonomy and authorized authoring, QA and freeze. Codex performed the content/structural review; the user has not separately reviewed each full card. No real-company approval is claimed.",
+      "reviewed_by": "Codex — assistant content and structural QA under user-authorized release",
+      "reviewed_at": "2026-10-01T10:56:37.498736+00:00",
+      "review_due_date": "2027-01-01"
+    },
+    {
+      "policy_id": "DR-REF-003",
+      "title": "Damaged or incorrect item remedy",
+      "high_level_category": "refund",
+      "supported_issue": "A delivered item is damaged or differs from what was ordered.",
+      "short_description": "Item-problem review has its own evidence and timing rules, separate from an ordinary unused-item return.",
+      "policy_text": "Ask the customer to report visible damage or incorrect contents within 7 calendar days after delivery, excluding the delivery day. Keep the item and packaging where safe; photographs are optional supporting evidence and must not be a barrier where unavailable or unsafe. An authorized reviewer decides a refund or replacement after checking the order and problem. The ordinary unused-item condition does not disqualify a damage report simply because the item was opened for inspection. If a return is required, the retailer provides a prepaid return route; dispatch is due within 7 calendar days after return authorization. For a refund, approval normally follows inspection within 3 business days after warehouse receipt. The reviewer may explicitly waive the return and approve a remedy earlier. An approved refund follows the 5-business-day receipt window.",
+      "eligibility_conditions": [
+        "The parcel was received and the contents are damaged or incorrect.",
+        "The ordinary reporting window is 7 calendar days after delivery.",
+        "A representative verifies the issue and decides the remedy; no automatic refund is promised."
+      ],
+      "required_information": [
+        {
+          "name": "order_and_item_reference",
+          "purpose": "Compare the received item with the order.",
+          "mandatory_for_specific_guidance": true,
+          "sensitivity_note": "Use a safe description or masked reference only; never request passwords, one-time codes, full payment-card details or bank credentials."
+        },
+        {
+          "name": "delivery_date",
+          "purpose": "Check the reporting window.",
+          "mandatory_for_specific_guidance": true,
+          "sensitivity_note": "Use a safe description or masked reference only; never request passwords, one-time codes, full payment-card details or bank credentials."
+        },
+        {
+          "name": "problem_description",
+          "purpose": "Describe damage or the mismatch.",
+          "mandatory_for_specific_guidance": true,
+          "sensitivity_note": "Use a safe description or masked reference only; never request passwords, one-time codes, full payment-card details or bank credentials."
+        },
+        {
+          "name": "safe_supporting_evidence",
+          "purpose": "Optional photographs or a non-sensitive description; never require unsafe handling.",
+          "mandatory_for_specific_guidance": false,
+          "sensitivity_note": "Use a safe description or masked reference only; never request passwords, one-time codes, full payment-card details or bank credentials."
+        }
+      ],
+      "exceptions": [
+        "A report after 7 calendar days goes to exception review rather than automatic rejection.",
+        "Opened packaging alone does not defeat a damage or wrong-item report.",
+        "If handling or returning the item is unsafe, stop handling and request a reviewer decision; do not require a return.",
+        "A documented return waiver permits remedy approval without warehouse receipt."
+      ],
+      "exclusions": [
+        "An ordinary change-of-mind return without damage or mismatch.",
+        "A parcel never received.",
+        "Warranty or later-life product failure unrelated to a delivery condition report."
+      ],
+      "agent_actions": [
+        "Record the problem without asserting fault.",
+        "Prepare a remedy review and explain optional evidence.",
+        "Describe prepaid return arrangements only if the reviewer requires a return."
+      ],
+      "prohibited_actions": [
+        "Do not require unsafe handling, forced photo evidence or a self-funded damage return.",
+        "Do not grant a remedy or claim a replacement has been sent.",
+        "Do not claim a backend check or completed action; this prototype can only prepare guidance for human review."
+      ],
+      "escalation_conditions": [
+        "Every remedy choice requires human review.",
+        "Unsafe item, late report, disputed evidence or missing inspection after 3 business days.",
+        "Unclear whether the issue is delivery damage or later product failure."
+      ],
+      "customer_facing_guidance": "Please describe the damaged or incorrect item and when it arrived. The ordinary reporting window is 7 calendar days, but later reports can be reviewed as exceptions. Photographs are optional and should never require unsafe handling. A representative decides the remedy and any prepaid return arrangements.",
+      "policy_owner": "Support Operations",
+      "version": "1.0",
+      "effective_date": "2026-10-01",
+      "review_status": "approved_for_academic_demo",
+      "approval_assumption": "Fictional academic rules only. The user approved the taxonomy and authorized authoring, QA and freeze. Codex performed the content/structural review; the user has not separately reviewed each full card. No real-company approval is claimed.",
+      "reviewed_by": "Codex — assistant content and structural QA under user-authorized release",
+      "reviewed_at": "2026-10-01T10:56:37.498736+00:00",
+      "review_due_date": "2027-01-01"
+    },
+    {
+      "policy_id": "DR-HUM-001",
+      "title": "Customer requests a human representative",
+      "high_level_category": "human_support",
+      "supported_issue": "The customer explicitly asks to speak with a representative.",
+      "short_description": "Respect a request for human contact even when an ordinary support procedure could apply.",
+      "policy_text": "When a customer asks for a person, prepare a concise handoff through the existing DemoRetail support channel. Ask for a short issue summary only if it is not already clear; do not require them to repeat the whole conversation. Explain the fictional service target of a first representative response within 2 business days after a case is actually accepted into the support queue. The assistant cannot submit a case or verify queue acceptance, so the target must be conditional and is not a guaranteed appointment. Security concerns use immediate security routing rather than being told to wait for the routine target.",
+      "eligibility_conditions": [
+        "The customer explicitly requests a human representative.",
+        "A handoff preference can be honored without establishing that the substantive issue is unsupported."
+      ],
+      "required_information": [
+        {
+          "name": "request_for_human",
+          "purpose": "Establish the customer's contact preference.",
+          "mandatory_for_specific_guidance": true,
+          "sensitivity_note": "Use a safe description or masked reference only; never request passwords, one-time codes, full payment-card details or bank credentials."
+        },
+        {
+          "name": "issue_summary",
+          "purpose": "Provide existing context to the reviewer; optional when already clear.",
+          "mandatory_for_specific_guidance": false,
+          "sensitivity_note": "Use a safe description or masked reference only; never request passwords, one-time codes, full payment-card details or bank credentials."
+        },
+        {
+          "name": "case_acceptance_date",
+          "purpose": "Needed only when explaining the response target for an existing accepted case.",
+          "mandatory_for_specific_guidance": false,
+          "sensitivity_note": "Use a safe description or masked reference only; never request passwords, one-time codes, full payment-card details or bank credentials."
+        }
+      ],
+      "exceptions": [
+        "Security concerns require immediate security routing.",
+        "An existing case should be continued rather than duplicating the same request."
+      ],
+      "exclusions": [
+        "A substantive policy decision merely because a representative is requested.",
+        "Claims about a live queue or an appointment that has not been confirmed."
+      ],
+      "agent_actions": [
+        "Prepare a concise handoff summary.",
+        "Explain how to use the existing support channel.",
+        "State the response target only conditionally on queue acceptance."
+      ],
+      "prohibited_actions": [
+        "Do not claim that the customer has been transferred or a case submitted.",
+        "Do not invent a phone number, email address, queue status or guaranteed response time.",
+        "Do not claim a backend check or completed action; this prototype can only prepare guidance for human review."
+      ],
+      "escalation_conditions": [
+        "Explicit human preference.",
+        "No response after 2 business days from confirmed queue acceptance.",
+        "Security concern requires the security route."
+      ],
+      "customer_facing_guidance": "I can help prepare a short summary for a representative. Use the DemoRetail support channel already available to you. The service target is a first response within 2 business days after a case is accepted; I cannot submit it here or confirm a response time.",
+      "policy_owner": "Support Operations",
+      "version": "1.0",
+      "effective_date": "2026-10-01",
+      "review_status": "approved_for_academic_demo",
+      "approval_assumption": "Fictional academic rules only. The user approved the taxonomy and authorized authoring, QA and freeze. Codex performed the content/structural review; the user has not separately reviewed each full card. No real-company approval is claimed.",
+      "reviewed_by": "Codex — assistant content and structural QA under user-authorized release",
+      "reviewed_at": "2026-10-01T10:56:37.498736+00:00",
+      "review_due_date": "2027-01-01"
+    },
+    {
+      "policy_id": "DR-HUM-002",
+      "title": "Unsupported, conflicting or complex-case review",
+      "high_level_category": "human_support",
+      "supported_issue": "A reviewer needs a structured handoff for an unresolved case.",
+      "short_description": "Procedural guidance for documenting scope gaps, conflicting facts or multiple unresolved issues; not a substantive answer.",
+      "policy_text": "Use this handoff procedure only after the workflow has established that no substantive approved policy applies, material facts remain contradictory after a safe clarification, or several unresolved issues require coordinated review. Summarize the customer's objective, facts as reported, unresolved questions and any relevant policy boundaries. Keep conflicting statements separate. Refer the summary through the existing support channel for an authorized reviewer; the normal first-response target is 2 business days after confirmed queue acceptance. This procedure supplies no eligibility, payment or delivery rule and must not be substituted for a relevant substantive card solely because it is the nearest text match.",
+      "eligibility_conditions": [
+        "A scope gap, unresolved material contradiction or need for coordinated review has already been identified.",
+        "The requested output is a handoff summary, not an invented substantive policy answer."
+      ],
+      "required_information": [
+        {
+          "name": "review_reason",
+          "purpose": "Name the established procedural reason for handoff.",
+          "mandatory_for_specific_guidance": true,
+          "sensitivity_note": "Use a safe description or masked reference only; never request passwords, one-time codes, full payment-card details or bank credentials."
+        },
+        {
+          "name": "reported_facts_and_unknowns",
+          "purpose": "Preserve facts, contradictions and missing information without inventing a resolution.",
+          "mandatory_for_specific_guidance": true,
+          "sensitivity_note": "Use a safe description or masked reference only; never request passwords, one-time codes, full payment-card details or bank credentials."
+        },
+        {
+          "name": "customer_objective",
+          "purpose": "Explain what decision the reviewer needs to make.",
+          "mandatory_for_specific_guidance": true,
+          "sensitivity_note": "Use a safe description or masked reference only; never request passwords, one-time codes, full payment-card details or bank credentials."
+        }
+      ],
+      "exceptions": [
+        "Ask for a safe, decisive missing fact before treating an otherwise supported request as unresolved.",
+        "A request merely to speak with a person uses the ordinary contact-preference procedure.",
+        "Security concerns bypass routine clarification and use security review."
+      ],
+      "exclusions": [
+        "Substantive eligibility or transaction decisions.",
+        "A replacement for a relevant policy based only on similarity score.",
+        "Automatic assignment of every unrecognized request to a supported business category."
+      ],
+      "agent_actions": [
+        "Prepare a neutral summary and mark unresolved facts.",
+        "Explain the limit of available policy evidence.",
+        "Refer the issue without inventing a remedy."
+      ],
+      "prohibited_actions": [
+        "Do not manufacture a policy or treat handoff as resolution.",
+        "Do not execute transactions or claim the case was submitted.",
+        "Do not select this card as a default nearest-neighbour answer when evidence is weak.",
+        "Do not claim a backend check or completed action; this prototype can only prepare guidance for human review."
+      ],
+      "escalation_conditions": [
+        "The established scope gap, contradiction or coordination need remains unresolved.",
+        "A high-risk action is requested.",
+        "No response after 2 business days from confirmed queue acceptance."
+      ],
+      "customer_facing_guidance": "The available information does not support a definite policy answer yet. I can summarize the issue and the unresolved facts for a representative, without assuming a remedy. A response target applies only after the case is accepted into the support queue.",
+      "policy_owner": "Support Operations",
+      "version": "1.0",
+      "effective_date": "2026-10-01",
+      "review_status": "approved_for_academic_demo",
+      "approval_assumption": "Fictional academic rules only. The user approved the taxonomy and authorized authoring, QA and freeze. Codex performed the content/structural review; the user has not separately reviewed each full card. No real-company approval is claimed.",
+      "reviewed_by": "Codex — assistant content and structural QA under user-authorized release",
+      "reviewed_at": "2026-10-01T10:56:37.498736+00:00",
+      "review_due_date": "2027-01-01"
+    }
+  ]
+}

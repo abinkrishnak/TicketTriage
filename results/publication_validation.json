@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "scope": "Public-copy offline UX validation, not benchmark re-evaluation",
+  "checks": [
+    "All six saved examples and original-policy draft gating work in the public folder",
+    "Edited saved ticket invalidates evidence",
+    "Non-support input warns, hides candidate guidance and forced-category metric, keeps labeled diagnostics",
+    "All three suggestion buttons insert the exact requested examples",
+    "Supported ticket runs real local classification and pinned MiniLM retrieval, without generating a draft",
+    "Missing optional MiniLM weights return a useful error; replay remains independent"
+  ],
+  "outbound_connections": 0,
+  "api_calls": 0,
+  "api_key_required": false,
+  "frozen_files_verified_unchanged": 356,
+  "model_weights": "Existing pinned local cache supplied via process environment; not included in release",
+  "local_preview_smoke_seconds": 42.37996639998164
+}

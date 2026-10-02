@@ -1,0 +1,8 @@
+# Optional new-ticket semantic retrieval; no automatic model downloads.
+-r requirements.txt
+sentence-transformers==6.1.0
+transformers==5.18.0
+torch==2.14.1
+tokenizers==0.23.2
+huggingface-hub==1.33.0
+safetensors==0.8.0

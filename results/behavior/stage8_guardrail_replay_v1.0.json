@@ -1,0 +1,687 @@
+{
+  "layer": "development-set regression replay, not fresh generalization evidence; Stage 8 ratings unchanged",
+  "cases": [
+    {
+      "query_id": "P01",
+      "source_stage8_output_unchanged": true,
+      "actual": {
+        "guardrail_version": "1.0",
+        "primary_behavior": "human_review",
+        "reason_codes": [
+          "supported_topic_requires_review",
+          "evidence_or_control_defect"
+        ],
+        "violations": [
+          "nonliteral_customer_evidence"
+        ],
+        "requires_human_review": true,
+        "business_escalation_required": false,
+        "allow_automatic_action": false,
+        "hold_draft": true,
+        "clarification_questions": [],
+        "preserve_reported_uncertainty": true,
+        "source_facts_rewritten": false,
+        "sensitive_input_blocked": false,
+        "signals": {
+          "unknown_dispatch": false,
+          "unknown_payment": false,
+          "cancellation": false,
+          "payment": false,
+          "dispatch_known": false,
+          "payment_known": false,
+          "security": false,
+          "human_request": false,
+          "conflict": false,
+          "multiple_substantive_issues": false,
+          "unauthorized_action": false,
+          "prompt_injection": false,
+          "unsupported_scope": false,
+          "sensitive_content": false,
+          "recognized_support_topic": true,
+          "business_days_reported": null,
+          "approved_refund_reported": false
+        },
+        "evaluation_layer": "saved_or_fixture_output_validation",
+        "policy_evidence_checked": true,
+        "draft_safety_checked": true
+      }
+    },
+    {
+      "query_id": "C05",
+      "source_stage8_output_unchanged": true,
+      "actual": {
+        "guardrail_version": "1.0",
+        "primary_behavior": "escalate",
+        "reason_codes": [
+          "reported_security_signal",
+          "model_answerability_warning"
+        ],
+        "violations": [
+          "answerability_warning_requires_review",
+          "nonliteral_customer_evidence"
+        ],
+        "requires_human_review": true,
+        "business_escalation_required": true,
+        "allow_automatic_action": false,
+        "hold_draft": true,
+        "clarification_questions": [],
+        "preserve_reported_uncertainty": true,
+        "source_facts_rewritten": false,
+        "sensitive_input_blocked": false,
+        "signals": {
+          "unknown_dispatch": false,
+          "unknown_payment": false,
+          "cancellation": false,
+          "payment": false,
+          "dispatch_known": false,
+          "payment_known": false,
+          "security": true,
+          "human_request": false,
+          "conflict": false,
+          "multiple_substantive_issues": false,
+          "unauthorized_action": false,
+          "prompt_injection": false,
+          "unsupported_scope": false,
+          "sensitive_content": false,
+          "recognized_support_topic": true,
+          "business_days_reported": null,
+          "approved_refund_reported": false
+        },
+        "evaluation_layer": "saved_or_fixture_output_validation",
+        "policy_evidence_checked": true,
+        "draft_safety_checked": true
+      }
+    },
+    {
+      "query_id": "C09",
+      "source_stage8_output_unchanged": true,
+      "actual": {
+        "guardrail_version": "1.0",
+        "primary_behavior": "escalate",
+        "reason_codes": [
+          "supported_topic_requires_review",
+          "deterministic_escalation_required"
+        ],
+        "violations": [
+          "nonliteral_customer_evidence",
+          "required_escalation_flag_missing"
+        ],
+        "requires_human_review": true,
+        "business_escalation_required": true,
+        "allow_automatic_action": false,
+        "hold_draft": true,
+        "clarification_questions": [],
+        "preserve_reported_uncertainty": true,
+        "source_facts_rewritten": false,
+        "sensitive_input_blocked": false,
+        "signals": {
+          "unknown_dispatch": false,
+          "unknown_payment": false,
+          "cancellation": true,
+          "payment": true,
+          "dispatch_known": true,
+          "payment_known": false,
+          "security": false,
+          "human_request": false,
+          "conflict": false,
+          "multiple_substantive_issues": false,
+          "unauthorized_action": false,
+          "prompt_injection": false,
+          "unsupported_scope": false,
+          "sensitive_content": false,
+          "recognized_support_topic": true,
+          "business_days_reported": null,
+          "approved_refund_reported": false
+        },
+        "evaluation_layer": "saved_or_fixture_output_validation",
+        "policy_evidence_checked": true,
+        "draft_safety_checked": true
+      }
+    },
+    {
+      "query_id": "P04",
+      "source_stage8_output_unchanged": true,
+      "actual": {
+        "guardrail_version": "1.0",
+        "primary_behavior": "human_review",
+        "reason_codes": [
+          "supported_topic_requires_review",
+          "model_answerability_warning",
+          "evidence_or_control_defect"
+        ],
+        "violations": [
+          "answerability_warning_requires_review"
+        ],
+        "requires_human_review": true,
+        "business_escalation_required": false,
+        "allow_automatic_action": false,
+        "hold_draft": true,
+        "clarification_questions": [],
+        "preserve_reported_uncertainty": true,
+        "source_facts_rewritten": false,
+        "sensitive_input_blocked": false,
+        "signals": {
+          "unknown_dispatch": false,
+          "unknown_payment": false,
+          "cancellation": true,
+          "payment": false,
+          "dispatch_known": true,
+          "payment_known": false,
+          "security": false,
+          "human_request": false,
+          "conflict": false,
+          "multiple_substantive_issues": false,
+          "unauthorized_action": false,
+          "prompt_injection": false,
+          "unsupported_scope": false,
+          "sensitive_content": false,
+          "recognized_support_topic": true,
+          "business_days_reported": null,
+          "approved_refund_reported": false
+        },
+        "evaluation_layer": "saved_or_fixture_output_validation",
+        "policy_evidence_checked": true,
+        "draft_safety_checked": true
+      }
+    },
+    {
+      "query_id": "C14",
+      "source_stage8_output_unchanged": true,
+      "actual": {
+        "guardrail_version": "1.0",
+        "primary_behavior": "human_review",
+        "reason_codes": [
+          "supported_topic_requires_review",
+          "evidence_or_control_defect"
+        ],
+        "violations": [
+          "nonliteral_customer_evidence"
+        ],
+        "requires_human_review": true,
+        "business_escalation_required": false,
+        "allow_automatic_action": false,
+        "hold_draft": true,
+        "clarification_questions": [],
+        "preserve_reported_uncertainty": true,
+        "source_facts_rewritten": false,
+        "sensitive_input_blocked": false,
+        "signals": {
+          "unknown_dispatch": false,
+          "unknown_payment": false,
+          "cancellation": false,
+          "payment": false,
+          "dispatch_known": false,
+          "payment_known": false,
+          "security": false,
+          "human_request": false,
+          "conflict": false,
+          "multiple_substantive_issues": false,
+          "unauthorized_action": false,
+          "prompt_injection": false,
+          "unsupported_scope": false,
+          "sensitive_content": false,
+          "recognized_support_topic": true,
+          "business_days_reported": null,
+          "approved_refund_reported": false
+        },
+        "evaluation_layer": "saved_or_fixture_output_validation",
+        "policy_evidence_checked": true,
+        "draft_safety_checked": true
+      }
+    },
+    {
+      "query_id": "C18",
+      "source_stage8_output_unchanged": true,
+      "actual": {
+        "guardrail_version": "1.0",
+        "primary_behavior": "human_review",
+        "reason_codes": [
+          "missing_object_and_goal",
+          "model_answerability_warning",
+          "evidence_or_control_defect"
+        ],
+        "violations": [
+          "answerability_warning_requires_review",
+          "nonliteral_customer_evidence"
+        ],
+        "requires_human_review": true,
+        "business_escalation_required": true,
+        "allow_automatic_action": false,
+        "hold_draft": true,
+        "clarification_questions": [
+          "What item or service is affected, what happened, and what outcome do you need?"
+        ],
+        "preserve_reported_uncertainty": true,
+        "source_facts_rewritten": false,
+        "sensitive_input_blocked": false,
+        "signals": {
+          "unknown_dispatch": false,
+          "unknown_payment": false,
+          "cancellation": false,
+          "payment": false,
+          "dispatch_known": false,
+          "payment_known": false,
+          "security": false,
+          "human_request": false,
+          "conflict": false,
+          "multiple_substantive_issues": false,
+          "unauthorized_action": false,
+          "prompt_injection": false,
+          "unsupported_scope": false,
+          "sensitive_content": false,
+          "recognized_support_topic": false,
+          "business_days_reported": null,
+          "approved_refund_reported": false
+        },
+        "evaluation_layer": "saved_or_fixture_output_validation",
+        "policy_evidence_checked": true,
+        "draft_safety_checked": true
+      }
+    },
+    {
+      "query_id": "P07",
+      "source_stage8_output_unchanged": true,
+      "actual": {
+        "guardrail_version": "1.0",
+        "primary_behavior": "human_review",
+        "reason_codes": [
+          "supported_topic_requires_review"
+        ],
+        "violations": [],
+        "requires_human_review": true,
+        "business_escalation_required": false,
+        "allow_automatic_action": false,
+        "hold_draft": false,
+        "clarification_questions": [],
+        "preserve_reported_uncertainty": true,
+        "source_facts_rewritten": false,
+        "sensitive_input_blocked": false,
+        "signals": {
+          "unknown_dispatch": false,
+          "unknown_payment": false,
+          "cancellation": false,
+          "payment": false,
+          "dispatch_known": false,
+          "payment_known": false,
+          "security": false,
+          "human_request": false,
+          "conflict": false,
+          "multiple_substantive_issues": false,
+          "unauthorized_action": false,
+          "prompt_injection": false,
+          "unsupported_scope": false,
+          "sensitive_content": false,
+          "recognized_support_topic": true,
+          "business_days_reported": null,
+          "approved_refund_reported": false
+        },
+        "evaluation_layer": "saved_or_fixture_output_validation",
+        "policy_evidence_checked": true,
+        "draft_safety_checked": true
+      }
+    },
+    {
+      "query_id": "C23",
+      "source_stage8_output_unchanged": true,
+      "actual": {
+        "guardrail_version": "1.0",
+        "primary_behavior": "human_review",
+        "reason_codes": [
+          "supported_topic_requires_review",
+          "evidence_or_control_defect"
+        ],
+        "violations": [
+          "invalid_policy_quote",
+          "nonliteral_customer_evidence"
+        ],
+        "requires_human_review": true,
+        "business_escalation_required": false,
+        "allow_automatic_action": false,
+        "hold_draft": true,
+        "clarification_questions": [],
+        "preserve_reported_uncertainty": true,
+        "source_facts_rewritten": false,
+        "sensitive_input_blocked": false,
+        "signals": {
+          "unknown_dispatch": false,
+          "unknown_payment": false,
+          "cancellation": false,
+          "payment": false,
+          "dispatch_known": false,
+          "payment_known": true,
+          "security": false,
+          "human_request": false,
+          "conflict": false,
+          "multiple_substantive_issues": false,
+          "unauthorized_action": false,
+          "prompt_injection": false,
+          "unsupported_scope": false,
+          "sensitive_content": false,
+          "recognized_support_topic": true,
+          "business_days_reported": null,
+          "approved_refund_reported": false
+        },
+        "evaluation_layer": "saved_or_fixture_output_validation",
+        "policy_evidence_checked": true,
+        "draft_safety_checked": true
+      }
+    },
+    {
+      "query_id": "C27",
+      "source_stage8_output_unchanged": true,
+      "actual": {
+        "guardrail_version": "1.0",
+        "primary_behavior": "human_review",
+        "reason_codes": [
+          "supported_topic_requires_review",
+          "evidence_or_control_defect"
+        ],
+        "violations": [
+          "nonliteral_customer_evidence"
+        ],
+        "requires_human_review": true,
+        "business_escalation_required": true,
+        "allow_automatic_action": false,
+        "hold_draft": true,
+        "clarification_questions": [],
+        "preserve_reported_uncertainty": true,
+        "source_facts_rewritten": false,
+        "sensitive_input_blocked": false,
+        "signals": {
+          "unknown_dispatch": false,
+          "unknown_payment": false,
+          "cancellation": false,
+          "payment": true,
+          "dispatch_known": false,
+          "payment_known": true,
+          "security": false,
+          "human_request": false,
+          "conflict": false,
+          "multiple_substantive_issues": false,
+          "unauthorized_action": false,
+          "prompt_injection": false,
+          "unsupported_scope": false,
+          "sensitive_content": false,
+          "recognized_support_topic": true,
+          "business_days_reported": 6,
+          "approved_refund_reported": false
+        },
+        "evaluation_layer": "saved_or_fixture_output_validation",
+        "policy_evidence_checked": true,
+        "draft_safety_checked": true
+      }
+    },
+    {
+      "query_id": "P10",
+      "source_stage8_output_unchanged": true,
+      "actual": {
+        "guardrail_version": "1.0",
+        "primary_behavior": "escalate",
+        "reason_codes": [
+          "supported_topic_requires_review",
+          "deterministic_escalation_required"
+        ],
+        "violations": [
+          "required_escalation_flag_missing"
+        ],
+        "requires_human_review": true,
+        "business_escalation_required": true,
+        "allow_automatic_action": false,
+        "hold_draft": true,
+        "clarification_questions": [],
+        "preserve_reported_uncertainty": true,
+        "source_facts_rewritten": false,
+        "sensitive_input_blocked": false,
+        "signals": {
+          "unknown_dispatch": false,
+          "unknown_payment": false,
+          "cancellation": false,
+          "payment": true,
+          "dispatch_known": false,
+          "payment_known": true,
+          "security": false,
+          "human_request": false,
+          "conflict": false,
+          "multiple_substantive_issues": false,
+          "unauthorized_action": false,
+          "prompt_injection": false,
+          "unsupported_scope": false,
+          "sensitive_content": false,
+          "recognized_support_topic": true,
+          "business_days_reported": null,
+          "approved_refund_reported": false
+        },
+        "evaluation_layer": "saved_or_fixture_output_validation",
+        "policy_evidence_checked": true,
+        "draft_safety_checked": true
+      }
+    },
+    {
+      "query_id": "C32",
+      "source_stage8_output_unchanged": true,
+      "actual": {
+        "guardrail_version": "1.0",
+        "primary_behavior": "human_review",
+        "reason_codes": [
+          "supported_topic_requires_review"
+        ],
+        "violations": [],
+        "requires_human_review": true,
+        "business_escalation_required": false,
+        "allow_automatic_action": false,
+        "hold_draft": false,
+        "clarification_questions": [],
+        "preserve_reported_uncertainty": true,
+        "source_facts_rewritten": false,
+        "sensitive_input_blocked": false,
+        "signals": {
+          "unknown_dispatch": false,
+          "unknown_payment": false,
+          "cancellation": false,
+          "payment": false,
+          "dispatch_known": false,
+          "payment_known": false,
+          "security": false,
+          "human_request": false,
+          "conflict": false,
+          "multiple_substantive_issues": false,
+          "unauthorized_action": false,
+          "prompt_injection": false,
+          "unsupported_scope": false,
+          "sensitive_content": false,
+          "recognized_support_topic": true,
+          "business_days_reported": null,
+          "approved_refund_reported": false
+        },
+        "evaluation_layer": "saved_or_fixture_output_validation",
+        "policy_evidence_checked": true,
+        "draft_safety_checked": true
+      }
+    },
+    {
+      "query_id": "C36",
+      "source_stage8_output_unchanged": true,
+      "actual": {
+        "guardrail_version": "1.0",
+        "primary_behavior": "escalate",
+        "reason_codes": [
+          "supported_topic_requires_review",
+          "deterministic_escalation_required"
+        ],
+        "violations": [
+          "invalid_policy_quote",
+          "nonliteral_customer_evidence",
+          "required_escalation_flag_missing"
+        ],
+        "requires_human_review": true,
+        "business_escalation_required": true,
+        "allow_automatic_action": false,
+        "hold_draft": true,
+        "clarification_questions": [],
+        "preserve_reported_uncertainty": true,
+        "source_facts_rewritten": false,
+        "sensitive_input_blocked": false,
+        "signals": {
+          "unknown_dispatch": false,
+          "unknown_payment": false,
+          "cancellation": false,
+          "payment": true,
+          "dispatch_known": false,
+          "payment_known": false,
+          "security": false,
+          "human_request": false,
+          "conflict": false,
+          "multiple_substantive_issues": false,
+          "unauthorized_action": false,
+          "prompt_injection": false,
+          "unsupported_scope": false,
+          "sensitive_content": false,
+          "recognized_support_topic": true,
+          "business_days_reported": 6,
+          "approved_refund_reported": true
+        },
+        "evaluation_layer": "saved_or_fixture_output_validation",
+        "policy_evidence_checked": true,
+        "draft_safety_checked": true
+      }
+    },
+    {
+      "query_id": "P13",
+      "source_stage8_output_unchanged": true,
+      "actual": {
+        "guardrail_version": "1.0",
+        "primary_behavior": "human_review",
+        "reason_codes": [
+          "supported_topic_requires_review"
+        ],
+        "violations": [],
+        "requires_human_review": true,
+        "business_escalation_required": true,
+        "allow_automatic_action": false,
+        "hold_draft": false,
+        "clarification_questions": [],
+        "preserve_reported_uncertainty": true,
+        "source_facts_rewritten": false,
+        "sensitive_input_blocked": false,
+        "signals": {
+          "unknown_dispatch": false,
+          "unknown_payment": false,
+          "cancellation": false,
+          "payment": false,
+          "dispatch_known": false,
+          "payment_known": false,
+          "security": false,
+          "human_request": false,
+          "conflict": false,
+          "multiple_substantive_issues": false,
+          "unauthorized_action": false,
+          "prompt_injection": false,
+          "unsupported_scope": false,
+          "sensitive_content": false,
+          "recognized_support_topic": true,
+          "business_days_reported": null,
+          "approved_refund_reported": false
+        },
+        "evaluation_layer": "saved_or_fixture_output_validation",
+        "policy_evidence_checked": true,
+        "draft_safety_checked": true
+      }
+    },
+    {
+      "query_id": "C41",
+      "source_stage8_output_unchanged": true,
+      "actual": {
+        "guardrail_version": "1.0",
+        "primary_behavior": "escalate",
+        "reason_codes": [
+          "explicit_human_preference",
+          "deterministic_escalation_required"
+        ],
+        "violations": [
+          "required_escalation_flag_missing"
+        ],
+        "requires_human_review": true,
+        "business_escalation_required": true,
+        "allow_automatic_action": false,
+        "hold_draft": true,
+        "clarification_questions": [],
+        "preserve_reported_uncertainty": true,
+        "source_facts_rewritten": false,
+        "sensitive_input_blocked": false,
+        "signals": {
+          "unknown_dispatch": false,
+          "unknown_payment": false,
+          "cancellation": false,
+          "payment": false,
+          "dispatch_known": false,
+          "payment_known": false,
+          "security": false,
+          "human_request": true,
+          "conflict": false,
+          "multiple_substantive_issues": false,
+          "unauthorized_action": false,
+          "prompt_injection": false,
+          "unsupported_scope": false,
+          "sensitive_content": false,
+          "recognized_support_topic": false,
+          "business_days_reported": null,
+          "approved_refund_reported": false
+        },
+        "evaluation_layer": "saved_or_fixture_output_validation",
+        "policy_evidence_checked": true,
+        "draft_safety_checked": true
+      }
+    },
+    {
+      "query_id": "C45",
+      "source_stage8_output_unchanged": true,
+      "actual": {
+        "guardrail_version": "1.0",
+        "primary_behavior": "escalate",
+        "reason_codes": [
+          "distinct_issues_require_coordinated_review",
+          "deterministic_escalation_required"
+        ],
+        "violations": [
+          "required_escalation_flag_missing"
+        ],
+        "requires_human_review": true,
+        "business_escalation_required": true,
+        "allow_automatic_action": false,
+        "hold_draft": true,
+        "clarification_questions": [],
+        "preserve_reported_uncertainty": true,
+        "source_facts_rewritten": false,
+        "sensitive_input_blocked": false,
+        "signals": {
+          "unknown_dispatch": false,
+          "unknown_payment": false,
+          "cancellation": false,
+          "payment": false,
+          "dispatch_known": false,
+          "payment_known": false,
+          "security": false,
+          "human_request": false,
+          "conflict": false,
+          "multiple_substantive_issues": true,
+          "unauthorized_action": false,
+          "prompt_injection": false,
+          "unsupported_scope": false,
+          "sensitive_content": false,
+          "recognized_support_topic": true,
+          "business_days_reported": null,
+          "approved_refund_reported": false
+        },
+        "evaluation_layer": "saved_or_fixture_output_validation",
+        "policy_evidence_checked": true,
+        "draft_safety_checked": true
+      }
+    }
+  ],
+  "violation_counts": {
+    "nonliteral_customer_evidence": 8,
+    "answerability_warning_requires_review": 3,
+    "required_escalation_flag_missing": 5,
+    "invalid_policy_quote": 2
+  }
+}

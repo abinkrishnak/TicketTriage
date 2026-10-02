@@ -1,0 +1,99 @@
+{
+  "type": "object",
+  "properties": {
+    "policy_id": {
+      "type": "string"
+    },
+    "policy_version": {
+      "type": "string"
+    },
+    "answerable_from_policy": {
+      "type": "boolean"
+    },
+    "missing_information": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "requires_human_review": {
+      "type": "boolean",
+      "enum": [
+        true
+      ]
+    },
+    "business_escalation_required": {
+      "type": "boolean"
+    },
+    "risk_flags": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "policy_mismatch",
+          "security_concern",
+          "conflicting_reports",
+          "multiple_issues",
+          "unauthorized_action_requested",
+          "sensitive_credentials",
+          "insufficient_information",
+          "extraction_disagreement"
+        ]
+      }
+    },
+    "draft_status": {
+      "type": "string",
+      "enum": [
+        "draft_for_human_review"
+      ]
+    },
+    "draft_response": {
+      "type": "string"
+    },
+    "grounding_notes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "policy_field": {
+            "type": "string",
+            "enum": [
+              "supported_issue",
+              "short_description",
+              "policy_text",
+              "eligibility_conditions",
+              "required_information",
+              "exceptions",
+              "exclusions",
+              "agent_actions",
+              "prohibited_actions",
+              "escalation_conditions",
+              "customer_facing_guidance"
+            ]
+          },
+          "evidence_quote": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "policy_field",
+          "evidence_quote"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "policy_id",
+    "policy_version",
+    "answerable_from_policy",
+    "missing_information",
+    "requires_human_review",
+    "business_escalation_required",
+    "risk_flags",
+    "draft_status",
+    "draft_response",
+    "grounding_notes"
+  ],
+  "additionalProperties": false
+}
