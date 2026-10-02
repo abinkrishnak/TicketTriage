@@ -12,7 +12,26 @@ TicketTriage is a **fixed human-reviewed workflow**, not an agent. It combines c
 
 ## Architecture
 
-**Ticket → classifier hint → retrieval candidates → verified policy → extraction → grounded draft → guardrails → human review**
+```mermaid
+flowchart TD
+    T["Customer Ticket"] --> P["Privacy / Scope Checks"]
+    P --> C["Broad Classifier Hint<br/>Hint only; no retrieval filtering"]
+    C --> R["Semantic Policy Candidates<br/>Evidence discovery"]
+    R --> V["Verified Policy Selection<br/>Control point"]
+    V --> E["Structured Extraction"]
+    E --> D["Grounded Draft"]
+    D --> G["Deterministic Guardrails"]
+    G --> H["Mandatory Human Review<br/>Control point"]
+    H --> A["Final Human Action<br/>Outside the app"]
+    classDef hint fill:#fff3cd,stroke:#856404,color:#332600;
+    classDef discovery fill:#e7f1ff,stroke:#2458a6,color:#102b50;
+    classDef control fill:#dcfce7,stroke:#166534,color:#12351e,stroke-width:3px;
+    class C hint;
+    class R discovery;
+    class V,H control;
+```
+
+Amber = classifier hint; blue = evidence discovery; green = policy/human control points. This is the conceptual workflow: the offline MVP replays saved extraction/drafts, privacy/scope checks are limited, and the final human action occurs outside the app.
 
 Classifier, retriever and LLM are not policy authorities. **Verified policy + human reviewer are the control points.** [Architecture](docs/architecture.md)
 
@@ -38,6 +57,25 @@ The public, synthetic [Bitext support dataset](https://huggingface.co/datasets/b
 | Guardrails | Ten frozen behavior cases, local fixtures and saved-output replay |
 
 Gold-card conditioning separates extraction/drafting weaknesses from retrieval mistakes. These tests have different targets: **there is no combined overall accuracy.** [Evaluation explainer](docs/evaluation.md)
+
+## Evaluation journey
+
+```mermaid
+flowchart TD
+    C["Broad classifier<br/>99.65% accuracy on cleaned Bitext holdout"]
+    R["Exact semantic policy retrieval<br/>63.33% Recall@1<br/>96.67% Recall@3"]
+    F["Human-reviewed generation<br/>2 PASS / 6 PARTIAL / 7 FAIL"]
+    G["Guardrails<br/>10/10 frozen behavior cases<br/>17/18 local fixtures"]
+    H["Human review"]
+    C -->|Harder task| R
+    R -->|Correct policy deliberately supplied| F
+    F -->|Independent controls| G
+    G -->|Final control| H
+    classDef control fill:#dcfce7,stroke:#166534,color:#12351e,stroke-width:3px;
+    class H control;
+```
+
+**Different tests, not one end-to-end accuracy metric.** The arrows explain the evaluation journey, not a shared test population or cascading success rate. Generation used the gold policy deliberately, not the retriever's output; guardrail scores measure separate finite checks, not production safety.
 
 ## Metrics
 
@@ -93,6 +131,17 @@ Open **http://127.0.0.1:8502**. If you already created an environment in this re
 ## Repository structure
 
 `app.py` presents the workflow; `src/` holds offline adapters, prompt/schema builders and frozen guardrails; `data/` holds policies, benchmarks and replay evidence; `results/` holds final layer-specific evidence; `docs/` explains the project; `assets/` illustrates it. Development diaries, raw API logs, confidential sources and caches are excluded. [Evidence inventory](docs/evidence_inventory.md)
+
+## Course concepts demonstrated
+
+| Class | TicketTriage design choice |
+|---|---|
+| 1 — Choose and test AI techniques | Narrow classification supplies a hint; a foundation model extracts/drafts. Measured baselines and human evaluation test capability rather than assume it. |
+| 2 — AI system stack and RAG | Retrieval discovers authored policy evidence in a RAG workflow; versioned data, governance and a human reviewer connect the layers. |
+| 3 — Foundation-model practice | Fixed prompts, token/context limits, strict structured output and separate evaluations expose quality, cost and latency tradeoffs. |
+| 4 — Workflow versus agent | A fixed sequence with explicit policy selection has no autonomous planning, tool execution or business actions. |
+| 5 — Business and operating model | Cost-to-serve scenarios include human-review labor, runtime and escalation; business value remains a hypothesis, not a measured savings claim. |
+| 6 — Failures and oversight | Preserved failures, policy versions/review dates, guardrails and mandatory human review support governance; monitoring/regression and policy-update procedures are documented, not claimed as production-proven. |
 
 ## Future work
 
