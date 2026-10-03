@@ -63,3 +63,17 @@ Linux/Python 3.13 base dependency resolution succeeded using compatible wheels. 
 - The public-file scan found no `.env`, credentials, private documents or workstation paths. Placeholder `.env.example` and fictional policy/security terminology are intentional; the scan is not a comprehensive compliance certification.
 
 An earlier 45-second UI-test timeout occurred during first-use SciPy/scikit-learn imports in the fresh environment. The resumed test passed with a longer harness timeout; classifier behavior and frozen artifacts were not changed. Cold-start delay remains possible on a shared cloud host. The local smoke summary is retained outside the public repository at development-relative `.local_runtime/cloud-demo-smoke.json`; it is deployment evidence, not a new scored experiment.
+
+## Cross-platform integrity correction — 4 October 2026
+
+The deployed error for `data/demo/saved_examples.json` was reproduced from the committed Git blob: the historical manifest hash covers Windows CRLF bytes, while Git stored LF bytes (`core.autocrlf=true`, no repository attribute override). The working tree contained 793 CRLF line endings; the committed blob contained LF endings. Parsed JSON was identical, and all byte differences were explained by newline representation.
+
+- Historical expected hash, also the unchanged Windows working-tree hash: `dc609b09872923be04a9c00121eac51b1f7658739e41796a6f3f1e6ad10c1a63`.
+- Committed Git/LF hash: `a858186c835bb3e5a955cfaa3959d9eaab193b1a142954a3a39935329d3d3ede`.
+- The same representation mismatch affected `data/demo/semantic_model_assets.json`; other checked runtime artifacts matched their committed-byte hashes.
+
+The verifier still tries the exact byte hash first. For only four explicitly allowlisted runtime text files (saved examples, semantic asset manifest, policy JSON and guardrail Python source), a mismatch additionally checks UTF-8 bytes represented with LF or CRLF against the **unchanged historical expected hash**. Conversion is in memory only: CRLF pairs become LF, then an alternate candidate expands LF to CRLF. No JSON parsing/reserialization, whitespace trimming, BOM removal, lone-CR conversion or Unicode normalization is used. Escaped JSON string characters are untouched. Model weights, classifier and embedding binaries retain exact-byte validation. Optional model-cache verification also retains exact-byte validation.
+
+This preserves detection of substantive changes without depending on checkout newline settings. No evidence file, manifest hash, output, policy, model, prompt, label or result was replaced. No Git renormalization was performed. This is a deployment portability correction, not a new experiment or integrity-check bypass.
+
+Validation passed for the Windows working tree and a disposable checkout of exact committed LF blobs: all six runtime manifest entries verified, all six examples loaded, all four stored drafts (including P13 and C36) and their control evidence displayed unchanged, and stale-policy confirmation/draft blocking remained enforced under a simulated expired date. Modified JSON content, added whitespace, a BOM, bare-CR text and binary newline alteration were rejected in disposable test fixtures. Keys were absent, external connections blocked and zero outbound attempts observed. All 356 protected development artifacts and public evidence bytes remained unchanged. The LF test simulates checkout bytes locally; deployment of the correction still requires an owner-approved commit/push and cloud restart.

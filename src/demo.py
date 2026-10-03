@@ -29,14 +29,28 @@ def rows(relative):
         with (ROOT/relative).open(encoding='utf-8-sig',newline='') as f:return list(csv.DictReader(f))
     except (OSError,ValueError):raise DemoError(f'Cannot read {relative}. Restore the project file and restart the app.') from None
 
-def verify(relative,expected):
-    try:actual=hashlib.sha256((ROOT/relative).read_bytes()).hexdigest()
+def verify(relative,expected,*,allow_platform_newlines=False):
+    try:raw=(ROOT/relative).read_bytes()
     except OSError:raise DemoError(f'Missing local file: {relative}. Restore it; this app never downloads models.') from None
-    if actual!=expected:raise DemoError(f'Integrity check failed: {relative}. Restore the frozen original; do not retrain or overwrite it.')
+    if hashlib.sha256(raw).hexdigest()==expected:return
+    if allow_platform_newlines:
+        # Historical hashes include Windows CRLF text; Git may check it out as LF.
+        # No JSON parsing/reserialization, trimming, BOM removal or Unicode normalization.
+        try:raw.decode('utf-8')
+        except UnicodeDecodeError:pass
+        else:
+            lf=raw.replace(b'\r\n',b'\n')
+            if any(hashlib.sha256(candidate).hexdigest()==expected
+                   for candidate in (lf,lf.replace(b'\n',b'\r\n'))):return
+    raise DemoError(f'Integrity check failed: {relative}. Restore the frozen original; do not retrain or overwrite it.')
 
 def runtime_verify(relative):
     manifest=json_file('data/demo/runtime_manifest.json')
-    verify(relative,manifest['sha256'][relative])
+    text_files={
+        'data/demo/saved_examples.json','data/demo/semantic_model_assets.json',
+        'data/playbook/demoretail_policies.v1.1.json','src/guardrails/engine.py',
+    }
+    verify(relative,manifest['sha256'][relative],allow_platform_newlines=relative in text_files)
 
 @lru_cache(maxsize=1)
 def cards():
