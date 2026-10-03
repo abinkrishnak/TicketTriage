@@ -1,4 +1,5 @@
-# Optional new-ticket semantic retrieval; no automatic model downloads.
+# Optional desktop semantic preview, NOT installed by the Community Cloud profile.
+# Requires the verified pinned MiniLM cache; no automatic model downloads.
 -r requirements.txt
 sentence-transformers==6.1.0
 transformers==5.18.0

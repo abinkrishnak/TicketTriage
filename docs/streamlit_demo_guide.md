@@ -1,6 +1,6 @@
 # Running and exploring TicketTriage
 
-From the repository folder, use the README's Python 3.14 environment commands, then run `python -m streamlit run app.py` with that environment active. The server binds to `http://127.0.0.1:8502`; no deployment or public exposure is required. Opening it makes no API calls, needs no key and defaults to saved evidence.
+From the repository folder, use the README's Python 3.14 environment commands, then run `python -m streamlit run app.py` with that environment active. For a laptop-only run, add `--server.address 127.0.0.1`; open the URL printed by Streamlit (normally port 8501). The shared configuration leaves the bind address and port to the hosting platform. Opening it makes no API calls, needs no key and defaults to saved evidence.
 
 ## Saved examples
 
@@ -25,6 +25,11 @@ For “What is your name?”, the UI warns that the input does not appear to mat
 
 ## Troubleshooting and boundaries
 
-Restore a named missing/corrupt artifact instead of rerunning experiments. An absent API key has no effect. The small trusted classifier is included, while large MiniLM weights, raw datasets and virtual environments are excluded. Dependencies need one-time installation; offline does not mean installation without local packages. Use a different local port if 8502 is busy. Effective/review dates use the actual laptop date; do not alter frozen policies to bypass stale-evidence checks.
+Restore a named missing/corrupt artifact instead of rerunning experiments. An absent API key has no effect. The small trusted classifier is included, while large MiniLM weights, raw datasets and virtual environments are excluded. Dependencies need one-time installation; offline does not mean installation without local packages. Use `--server.port` if the default local port is busy. Effective/review dates use the running server date; do not alter frozen policies to bypass stale-evidence checks.
 
 No send/action buttons or persistent reviewer decisions exist. Final human authority and finite-check limitations remain visible. This guide describes operation, not a scripted final presentation or production deployment.
+
+
+## Community Cloud profile
+
+See [deployment setup](community_cloud_deployment.md). Root requirements support saved replay, classification and input checks. MiniLM is optional and not installed/downloaded in this profile. New text travels from the browser to the running demo server; it is not sent by the app to an external inference API. Use only fictional/generalized input. No API key is used. Host access/operational logging is outside the app's no-ticket-file-write behavior.

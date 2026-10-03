@@ -2,8 +2,7 @@
 gatherUsageStats = false
 
 [server]
-address = "127.0.0.1"
-port = 8502
+# Let Community Cloud control the bind address and port.
 headless = true
 fileWatcherType = "none"
 

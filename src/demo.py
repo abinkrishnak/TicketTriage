@@ -2,6 +2,7 @@
 from pathlib import Path
 from functools import lru_cache
 import csv,hashlib,json,os
+from importlib.util import find_spec
 
 ROOT=Path(__file__).resolve().parents[1]
 REV='1110a243fdf4706b3f48f1d95db1a4f5529b4d41'
@@ -74,10 +75,15 @@ def saved_rankings(case_id):
 
 @lru_cache(maxsize=1)
 def local_encoder():
+    available,message=semantic_availability()
+    if not available:raise DemoError(message)
     path=Path(os.environ.get('TICKETTRIAGE_MODEL_DIR',str(ROOT/'.local_runtime/models/all-MiniLM-L6-v2'/REV)))
     runtime_verify('data/demo/semantic_model_assets.json')
     assets=json_file('data/demo/semantic_model_assets.json')
-    for name,meta in assets['files'].items():verify(str(path/name),meta['sha256'])
+    try:
+        for name,meta in assets['files'].items():verify(str(path/name),meta['sha256'])
+    except DemoError:
+        raise DemoError('The optional semantic model files failed integrity checks. Use saved evidence replay; no model was substituted or downloaded.') from None
     try:
         import torch
         from sentence_transformers import SentenceTransformer
@@ -86,6 +92,16 @@ def local_encoder():
         model.max_seq_length=512;model.eval()
         return model
     except Exception:raise DemoError('Local MiniLM could not load. Use saved replay or restore the pinned local model and requirements-local.txt. No download was attempted.') from None
+
+def semantic_availability():
+    """Cheap capability check; never import torch, download weights or inspect user text."""
+    if any(find_spec(name) is None for name in ['torch','sentence_transformers']):
+        return False,'New-ticket semantic retrieval is unavailable in this lightweight deployment. Classification and input checks still work; choose a saved example to inspect recorded semantic candidates and GPT outputs.'
+    path=Path(os.environ.get('TICKETTRIAGE_MODEL_DIR',str(ROOT/'.local_runtime/models/all-MiniLM-L6-v2'/REV)))
+    assets=json_file('data/demo/semantic_model_assets.json')
+    if not all((path/name).is_file() for name in assets['files']):
+        return False,'The pinned MiniLM cache is not installed here. New-ticket semantic retrieval is unavailable; saved rankings and drafts still work. No download or live LLM call will occur.'
+    return True,'Pinned local MiniLM files are present; their hashes are checked before loading.'
 
 def local_candidates(query):
     # Reuse the exact saved policy vectors; no corpus edits or benchmark reruns.

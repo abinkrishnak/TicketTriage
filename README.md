@@ -118,9 +118,19 @@ Public/generalized data, fictional policies, minimal safe information, ignored c
 
 Synthetic-data generalization; no true classifier OOD class; state/temporal retrieval errors; only 15 human-reviewed FM cases; finite guardrails with one preserved novel-domain failure; incomplete PII/OOD detection; no production traffic or measured handling-time savings. Offline mode does not generate new GPT drafts. The UI scope heuristic is not a validated OOD detector.
 
+## Live demo
+
+**Streamlit URL:** pending deployment; no live URL is claimed yet.
+
+Portfolio context: This project demonstrates evaluation-driven AI system design, RAG/retrieval, foundation-model evaluation, deterministic guardrails, governance and cost analysis.
+
+The public profile supports all six saved examples, recorded classifier/ranking evidence, explicit verified-policy selection, saved extraction/drafts, guardrail diagnostics and final human-review notes. P13/P04/C05/C36 have GPT evidence; A03/A01 are behavior-only. New fictional tickets receive server-local classification and deterministic input checks. **New-ticket semantic retrieval is unavailable in the lightweight cloud profile** because optional MiniLM dependencies/weights are excluded. Saved semantic candidates remain visible. No live GPT generation, customer sending or business actions exist.
+
+Deploy the repository's `app.py` with **Python 3.13** and root `requirements.txt`; leave secrets empty. The source is [abinkrishnak/TicketTriage](https://github.com/abinkrishnak/TicketTriage). [Deployment audit and setup](docs/community_cloud_deployment.md)
+
 ## Run locally
 
-Tested with Python 3.14 on Windows. From this repository folder:
+Deployment dependencies resolve for Linux/Python 3.13; local smoke tests use Python 3.14 on Windows. A Community Cloud runtime test is still required after deployment. From this repository folder:
 
 ```powershell
 python -m venv .venv
@@ -128,7 +138,7 @@ python -m venv .venv
 .\.venv\Scripts\python.exe -m streamlit run app.py
 ```
 
-Open **http://127.0.0.1:8502**. If you already created an environment for this repository, use only the last command. Saved replay works offline after installation, without a key. New-ticket semantic preview also needs `requirements-local.txt` and pinned local MiniLM weights. **Weights are not bundled or automatically downloaded.** [Setup](docs/streamlit_demo_guide.md)
+Open the local URL printed by Streamlit (normally **http://localhost:8501**). If you already created an environment for this repository, use only the last command. Saved replay works offline after installation, without a key. New-ticket semantic preview also needs `requirements-local.txt` and pinned local MiniLM weights. **Weights are not bundled or automatically downloaded.** [Setup](docs/streamlit_demo_guide.md)
 
 The clone contains saved evidence and the small classifier, not installed packages or large MiniLM weights. After installing `requirements.txt`, saved replay works offline. Optional new-ticket semantic preview needs `requirements-local.txt` and the verified local model cache. Fresh GPT drafting would require a separately implemented, approved live mode, provider access and a key; adding a key alone does not enable it. This repository supports replay and evidence inspection, not complete retraining from bundled raw data.
 

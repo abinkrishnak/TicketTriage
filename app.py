@@ -9,14 +9,27 @@ from src.guardrails import assess
 from src.guardrails.engine import policy_checks
 
 st.set_page_config(page_title='TicketTriage · DemoRetail',page_icon='📋',layout='wide')
-st.title('TicketTriage')
-st.write('An academic AI prototype that helps an e-commerce support employee find relevant verified policy guidance and prepare information for human review.')
-st.caption('Fictional DemoRetail · Offline only · No API key needed')
-st.markdown('**How to use it**\n\n1. Choose a saved example to see previously evaluated AI outputs and human review.\n2. Choose Local ticket preview to try a new support ticket with local classification and semantic policy retrieval.')
-st.info('No customer messages are sent. No refunds, cancellations or account changes are performed. New local tickets do not generate new GPT responses. Verified policy + human review remain the control points.')
-with st.expander('How this works'):
-    st.write('Ticket → broad classifier hint → semantic policy candidates → verified policy → structured extraction → grounded draft → guardrails → human review')
-    st.write('Classifier is not policy authority. Retriever is not policy authority. LLM is not policy authority. Verified policy + human reviewer are the control points.')
+st.title('TicketTriage — Human-reviewed AI support decision prototype')
+st.write('For Raj, a Tier-1 e-commerce support employee: find relevant policy guidance for unfamiliar tickets and review a draft before deciding what to do.')
+st.info('Portfolio / academic demo. Saved GPT outputs are replayed for reproducibility. New inputs do not trigger live LLM calls or business actions.')
+st.caption('Fictional DemoRetail · No API key needed · No user study or productivity savings measured')
+st.markdown('**Start here:** choose a saved example in the sidebar, inspect the candidates, then select and confirm its original policy to unlock the saved draft.')
+st.markdown('[GitHub / source](https://github.com/abinkrishnak/TicketTriage) · [Evaluation and limitations](https://github.com/abinkrishnak/TicketTriage/blob/main/docs/evaluation.md)')
+with st.expander('Workflow and control points'):
+    st.write('Ticket → privacy / scope checks → classifier hint → policy candidates → verified policy selection → extraction → grounded draft → guardrails → mandatory human review → human action outside the app')
+    st.write('Classifier = hint only. Retrieval = evidence discovery across all 15 cards. Verified policy + human reviewer = control points. The classifier, retriever and LLM are not policy authorities.')
+    st.caption('Saved extraction/drafting is replayed, not generated. This is a fixed workflow with no business-action tools.')
+with st.expander('Evaluation results and limitations'):
+    st.markdown('**Different tests, not one end-to-end accuracy metric.**')
+    st.write('Classifier: 99.65% accuracy on cleaned Bitext six-category holdout only. No ablation proves its end-to-end necessity.')
+    st.write('Retrieval: TF-IDF 35/60 vs semantic 38/60 Recall@1; semantic Recall@3 58/60. Nominal +5-point top-1 gain; the baseline-informed +10-point target was missed.')
+    st.write('Generation: 2 PASS / 6 PARTIAL / 7 FAIL on 15 gold-policy-conditioned cases. One project-author reviewer saw provisional assistant ratings; anchoring and production generalization remain limitations.')
+    st.write('Guardrails: 10/10 declared behavior cases; 17/18 development fixtures. Known failures informed design; the airline out-of-domain failure remains. This is finite coverage, not general safety.')
+    st.caption('No measured handling-time savings, human selection accuracy or production safety. Fictional policies and shared-author benchmark wording limit generalization.')
+with st.expander('Public-demo privacy and available modes'):
+    st.write('Use fictional or generalized text only. User-entered text is processed within the running demo server for local classification and input checks (and retrieval only if the pinned local model is installed). No user text is sent by this app to a live LLM or other external API.')
+    st.caption('On Community Cloud, your browser sends text to the hosted app server; local means server-side, not on your own device. The app does not deliberately write tickets to files. Hosting infrastructure may retain access/operational logs; this is not a zero-retention guarantee.')
+    st.write('Saved evidence works without model downloads. The default lightweight cloud install does not include MiniLM: new tickets get a broad classifier hint and input checks, not semantic candidates or GPT drafts. Optional desktop semantic preview retains the exact approved revision.')
 
 def show_guard(guard,label):
     st.subheader('7 · Guardrails and human review')
@@ -35,7 +48,7 @@ def show_guard(guard,label):
 
 def run():
     mode=st.sidebar.radio('Mode',['Saved evidence replay','Local ticket preview'],key='mode')
-    st.sidebar.markdown('**Saved evidence replay**\n\nFull demo using previously evaluated and saved AI outputs. Behavior-only examples have no saved GPT draft.\n\n**Local ticket preview**\n\nTry a new ticket using the local classifier and semantic retrieval only. No new GPT extraction or draft is generated.')
+    st.sidebar.markdown('**Saved evidence replay**\n\nFull demo using previously evaluated and saved AI outputs. Behavior-only examples have no saved GPT draft.\n\n**Local ticket preview**\n\nTry fictional text using server-local classification and input checks. Semantic retrieval is optional and unavailable without the pinned model cache. No new GPT extraction or draft is generated.')
     if mode=='Saved evidence replay':
         case=st.sidebar.selectbox('Saved example',list(demo.DEMOS),format_func=demo.DEMOS.get,key='example')
         original=demo.saved_query(case)
@@ -53,7 +66,9 @@ def run():
                     st.session_state['local_ticket']=text
                     st.session_state.pop('analyzed_ticket',None)
         ticket=st.text_area('1 · Ticket text',height=130,max_chars=3000,key='local_ticket',placeholder='Use only fictional or generalized support text.')
-        st.caption('New text stays local and is not written to a file. Use no credentials or real customer details.')
+        st.caption('Text is processed in this demo server, not sent to a live LLM API or deliberately saved to a file. Use no credentials or real customer details.')
+        semantic_ready,semantic_message=demo.semantic_availability()
+        if not semantic_ready:st.info(semantic_message)
         if not ticket.strip():st.info('Enter a ticket to preview local routing.');return
         if not st.button('Analyze locally',key='analyze') and st.session_state.get('analyzed_ticket')!=ticket:return
         st.session_state['analyzed_ticket']=ticket
@@ -86,8 +101,13 @@ def run():
             st.caption('Saved Stage 7 ranking · all 15 policies competed · no classifier filtering')
             if not candidates:st.info('This behavior-only example has no saved semantic ranking. No candidate or gold policy is invented.')
         else:
-            with st.spinner('Reading the local pinned MiniLM model…'):candidates=demo.local_candidates(ticket)
-            st.caption('Local preview only; no evaluation scores updated. MiniLM pinned revision, 512-token maximum, saved policy vectors, all policies compete.')
+            available,message=demo.semantic_availability()
+            if available:
+                with st.spinner('Reading the local pinned MiniLM model…'):candidates=demo.local_candidates(ticket)
+                st.caption('Local preview only; no evaluation scores updated. MiniLM pinned revision, 512-token maximum, saved policy vectors, all policies compete.')
+            else:
+                candidates=[]
+                st.info(message)
         if candidates:st.dataframe([{**r,'title':cs[r['policy_id']]['title']} for r in candidates],hide_index=True)
         st.caption('Cosine similarity is not confidence or approval. Inspect candidates; top-1 can be wrong.')
     except demo.DemoError as e:st.warning(str(e))
@@ -102,7 +122,9 @@ def run():
         with st.expander('Inspect complete policy',expanded=True):
             st.write(card['policy_text']);st.write('Eligibility:',card['eligibility_conditions']);st.write('Escalation:',card['escalation_conditions']);st.json(card,expanded=False)
         problems=policy_checks(card,cs,date.today().isoformat())
-        if problems:st.error('Policy cannot support current drafting: '+', '.join(problems))
+        if problems:
+            st.error('Policy cannot support current drafting: '+', '.join(problems))
+            st.caption('This frozen academic card has not been renewed. Recorded evidence remains historical; the app does not bypass review dates or silently update policy.')
         else:confirmed=st.checkbox('I reviewed this policy and selected it for this ticket.',key='confirm_'+identity+'_'+selected)
     st.subheader('5 · Structured extraction')
     matching=evidence and evidence['extraction'] is not None

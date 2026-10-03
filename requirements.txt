@@ -1,4 +1,6 @@
-# Saved replay + local classifier. Optional MiniLM: requirements-local.txt.
+# Community Cloud: saved replay, local classifier and deterministic input checks.
+# Keep the classifier's training-library versions; do not silently reload under other versions.
+# Optional desktop MiniLM stack is deliberately excluded: requirements-local.txt.
 streamlit==1.64.0
 jsonschema==4.26.0
 numpy==2.5.3
