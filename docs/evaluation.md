@@ -49,6 +49,15 @@ The recorded classifier configuration has no tuning search. Semantic retrieval u
 
 Freeze records and hashes support version identity and the documented sequence. A hash alone does not independently prove chronological preregistration, unseen labels, or freedom from prior exposure. No external preregistration is claimed. Historical publication manifests describe a snapshot; later documentation changes do not refresh frozen evaluation records. [Plan versus delivered](plan_vs_delivered.md)
 
+## Additional report evidence and authority
+
+- [Historical data/leakage audit](data_audit_summary.md) explains the diagnostic overlap and how scope selection and deduplication produced the corrected final split. The diagnostic split was not the final evaluation split; zero normalized overlap does not establish semantic independence.
+- [Exploratory prompt-v2 findings](../results/fm_exploratory/prompt_v2/findings.v1.0.md) reproduces the existing findings verbatim from a separate run on the same exposed cases. Only the SYSTEM message changed in the submitted requests. Five known missed escalations were corrected, but four unnecessary escalations and other control-field errors prevent a claim of overall improvement. The provider fingerprint changed, limiting causal attribution.
+
+**Evidence hierarchy:** official Stage 8 human-adjudicated results remain authoritative and unchanged: generation 2 PASS / 6 PARTIAL / 7 FAIL. Prompt-v2 findings are assistant-assessed exploratory evidence only, not a replacement official benchmark or new human adjudication. The findings' historical stop-point instructions describe the original run, not current publication status. Its referenced raw requests, outputs and checklist records remain in the separate development archive; this publication adds the findings document only.
+
+Source findings SHA-256: `68bc28d736c5e25cf1d8368107788b73354a380d7072f8bdcfffa17601b6a84b`. The public copy preserves the source bytes. No experiment was rerun and no prompt, label, policy or saved output was changed by this documentation update.
+
 ## Not yet evaluated end to end
 
 No user study with Raj or real support employees was conducted. The project does not measure manual versus assisted handling time, human policy-selection accuracy, total task success, real-customer satisfaction, production generalization, or reviewer friction introduced by candidate selection. There is also no classifier ablation proving its end-to-end necessity. Better shortlist recall is a product hypothesis, not demonstrated productivity.

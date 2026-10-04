@@ -1,6 +1,8 @@
 # TicketTriage
 
-An academic AI prototype for **Raj, a Tier-1 e-commerce support employee**, who needs to interpret unfamiliar tickets, find applicable policy guidance and review a response. Raj is a design persona; no user study with Raj or real support employees was conducted.
+[Try the live portfolio demo](https://tickettriage.streamlit.app/)
+
+An academic AI prototype for **Raj, a Tier-1 e-commerce support employee**, who needs to interpret unfamiliar tickets, find applicable policy guidance and review a response. Raj is a fictional Tier-1 support persona used for this academic prototype; no user study with Raj or real support employees was conducted.
 
 **Demo mode:** saved GPT extraction/draft examples are replayed offline. New tickets can run local classification and semantic retrieval when the dependencies and pinned model cache are available. They do not produce a fresh GPT draft: **no live API mode is implemented**. Opening the app needs no key and makes no API calls.
 
@@ -120,7 +122,7 @@ Synthetic-data generalization; no true classifier OOD class; state/temporal retr
 
 ## Live demo
 
-**Streamlit URL:** pending deployment; no live URL is claimed yet.
+**Streamlit URL:** [tickettriage.streamlit.app](https://tickettriage.streamlit.app/)
 
 Portfolio context: This project demonstrates evaluation-driven AI system design, RAG/retrieval, foundation-model evaluation, deterministic guardrails, governance and cost analysis.
 
